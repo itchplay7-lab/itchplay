@@ -3,24 +3,22 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ModxPlay - Download Best Games For Mobile Unlocked & Free</title>
+    <title>ItchPlay - Download Best Hidden Anime Games, Wallpapers & Mobile Emulators For Android/Ios</title>
     <link rel="icon" type="image/png" href="https://i.ibb.co/Gv5pp9hD/Untitled-design-1.png">
-    <meta name="description" content="Download the best Games and Emulators for Android & iOS. Get unlimited resources at modxplay.online.">
+    <meta name="description" content="Download the best Hidden Gems, Live Wallpapers, and Emulators for Android & Ios at ItchPlay.com.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"> 
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
 
     <style>
         *, *::before, *::after { box-sizing: border-box; }
 
         :root {
-            --cyan: #0088cc;
-            --cyan-glow: rgba(0, 243, 255, 0.3);
-            --pink: #e11d48;
-            --purple: #9333ea;
+            --cyan: #00f3ff;
+            --pink: #ff007f;
+            --purple: #a855f7;
             --bg: #f8fafc;
             --card: #ffffff;
             --card2: #f1f5f9;
@@ -29,12 +27,10 @@
             --muted: #64748b;
             --header-bg: rgba(255, 255, 255, 0.85);
             --header-scrolled: rgba(255, 255, 255, 0.95);
-            --cf-border: #cbd5e1;
         }
 
         .dark {
             --cyan: #00f3ff;
-            --cyan-glow: rgba(0, 243, 255, 0.3);
             --pink: #ff007f;
             --purple: #a855f7;
             --bg: #0d1322; 
@@ -45,7 +41,6 @@
             --muted: #9ca3af;
             --header-bg: rgba(13, 19, 34, 0.85);
             --header-scrolled: rgba(13, 19, 34, 0.98);
-            --cf-border: #333333;
         }
 
         html, body { height: 100%; scroll-behavior: smooth; }
@@ -66,11 +61,12 @@
             content: '';
             position: fixed; 
             top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(ellipse at top, rgba(0, 243, 255, 0.12) 0%, rgba(27, 43, 153, 0.05) 40%, transparent 80%);
+            background: radial-gradient(ellipse at top, rgba(0, 243, 255, 0.1) 0%, rgba(255, 0, 127, 0.05) 40%, transparent 80%);
             z-index: -1;
             pointer-events: none;
         }
 
+        /* ── Header Hide/Show Logic ── */
         #main-header {
             position: fixed; top: 0; left: 0; right: 0; z-index: 50;
             transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
@@ -78,7 +74,7 @@
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
         }
-        #main-header.scrolled { background: var(--header-scrolled); box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        #main-header.scrolled { background: var(--header-scrolled); box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
         #main-header.hide { transform: translateY(-100%); }
 
         .logo { font-size: 22px; font-weight: 900; letter-spacing: -0.02em; color: var(--text); }
@@ -87,147 +83,167 @@
         .icon-btn { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--border); background: var(--card2); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; color: var(--text); }
         .icon-btn:hover { background: var(--border); }
 
-        #searchContainer { overflow: hidden; max-height: 0; opacity: 0; transition: max-height 0.35s ease, opacity 0.3s ease, padding 0.3s ease; }
-        #searchContainer.open { max-height: 80px; opacity: 1; padding: 10px 0; }
-        #searchInput { width: 100%; background: var(--card2); border: 1px solid var(--border); border-radius: 14px; padding: 12px 18px; font-size: 14px; color: var(--text); outline: none; font-family: 'Outfit', sans-serif; transition: border-color 0.2s; }
-        #searchInput:focus { border-color: var(--cyan); }
-        #searchInput::placeholder { color: var(--muted); }
-
-        .slider-wrap { position: relative; border-radius: 28px; overflow: hidden; aspect-ratio: 16/7; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid var(--border); }
-        .slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.7s ease; }
-        .slide.active { opacity: 1; z-index: 2; }
-        .slide-bg { width: 100%; height: 100%; object-fit: cover; border-radius: 28px; }
-        .slide-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(13,19,34,0.9) 0%, rgba(13,19,34,0.3) 60%, transparent 100%); }
-        .slide-content { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 28px 32px; z-index: 10; }
-        .slide-dots { display: flex; gap: 6px; margin-bottom: 12px; }
-        .dot { width: 24px; height: 3px; border-radius: 2px; background: rgba(255,255,255,0.4); transition: all 0.3s; cursor: pointer; }
-        .dot.active { background: var(--cyan); width: 40px; }
-
-        .filters { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
-        .filters::-webkit-scrollbar { display: none; }
-        .filter-btn { white-space: nowrap; padding: 8px 18px; border-radius: 100px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; cursor: pointer; border: 1px solid var(--border); background: var(--card2); color: var(--muted); transition: all 0.2s; flex-shrink: 0; }
-        .filter-btn:hover { background: var(--border); color: var(--text); }
-        .filter-btn.active { background: var(--cyan); color: #000; border-color: var(--cyan); box-shadow: 0 4px 15px var(--cyan-glow); font-weight: 800; }
-
-        .toolbar { display: flex; align-items: center; gap: 10px; }
-        .sort-select { background: var(--card2); border: 1px solid var(--border); border-radius: 12px; color: var(--muted); font-size: 13px; font-weight: 700; padding: 8px 14px; cursor: pointer; outline: none; font-family: 'Outfit', sans-serif; }
-        .sort-select:hover { border-color: var(--cyan); }
-
-        .view-btn { padding: 8px 12px; border-radius: 12px; border: 1px solid var(--border); background: var(--card2); cursor: pointer; transition: all 0.2s; color: var(--muted); display: flex; align-items: center; justify-content: center; }
-        .view-btn.active { background: var(--border); color: var(--text); border-color: var(--cyan); }
-
-        /* ── Game Cards — Grid & List ── */
-        #gameGrid.list-view { display: flex; flex-direction: column; gap: 14px; max-width: 700px; margin: 0 auto; }
-        .game-card-list { display: flex; align-items: center; gap: 0; border-radius: 20px; background: var(--card); border: 1px solid var(--border); overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; }
-        .game-card-list:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); border-color: var(--cyan); }
+        /* ── Hero Swiper ── */
+        .hero-swiper-container { margin: 10px -20px 20px; padding: 10px 20px; }
+        .hero-swiper { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -ms-overflow-style: none; padding-bottom: 10px; }
+        .hero-swiper::-webkit-scrollbar { display: none; }
         
-        .card-thumb { width: 140px; height: 135px; flex-shrink: 0; overflow: hidden; position: relative; padding: 8px; }
-        .card-thumb img { width: 100%; height: 100%; object-fit: cover; border-radius: 14px; transition: transform 0.4s; }
-        .game-card-list:hover .card-thumb img { transform: scale(1.06); }
+        .hero-slide { flex: 0 0 88%; scroll-snap-align: center; border-radius: 24px; overflow: hidden; position: relative; aspect-ratio: 16/9; box-shadow: 0 10px 25px rgba(0,0,0,0.15); cursor: pointer; transition: transform 0.2s; }
+        .hero-slide:active { transform: scale(0.98); }
         
-        .card-rating { position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.7); color: #fff; padding: 2px 6px; border-radius: 8px; font-size: 10px; font-weight: 800; font-family: 'DM Mono', monospace; z-index: 10; }
-        .card-body { flex: 1; padding: 12px 16px; display: flex; flex-direction: column; gap: 4px; }
-        .card-cat { font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; text-align: center; }
-        .card-title { font-size: 17px; font-weight: 800; color: var(--text); line-height: 1.2; letter-spacing: -0.01em; text-align: center; margin-bottom: 4px; }
-        .card-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; justify-content: center; }
-        .tag { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; padding: 3px 8px; border-radius: 6px; background: var(--card2); color: var(--muted); }
-        .new-badge { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; padding: 3px 8px; border-radius: 6px; background: rgba(0,243,255,0.15); color: var(--cyan); }
-        .card-action { padding: 12px 16px 12px 0; flex-shrink: 0; }
-        .dl-btn-list { padding: 10px 18px; border-radius: 12px; border: 1px solid var(--border); background: var(--card2); font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--cyan); cursor: pointer; white-space: nowrap; transition: all 0.2s; font-family: 'Outfit', sans-serif; }
-        .dl-btn-list:hover { background: var(--cyan); color: #000; transform: translateY(-2px); border-color: transparent;}
+        .slide-bg { width: 100%; height: 100%; object-fit: cover; }
+        .slide-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(13,19,34,0.95) 0%, rgba(13,19,34,0.3) 60%, transparent 100%); pointer-events: none; }
+        .slide-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 24px; display: flex; flex-direction: column; align-items: flex-start; pointer-events: none; }
 
-        #gameGrid.grid-view { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-        @media (max-width: 480px) {
-            #gameGrid.grid-view { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-        }
+        /* ── Big Nav Cards ── */
+        .big-nav-cards { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 10px; }
+        @media(min-width: 640px) { .big-nav-cards { grid-template-columns: 1fr 1fr; } }
+        
+        .nav-card { position: relative; border-radius: 18px; padding: 16px 20px; text-decoration: none; transition: all 0.3s ease; display: flex; flex-direction: row; align-items: center; justify-content: flex-start; gap: 16px; background: var(--card); border: 1px solid var(--border); overflow: hidden; }
+        .nav-card.games { border-left: 4px solid var(--cyan); }
+        .nav-card.games:hover { box-shadow: 0 10px 25px rgba(0, 243, 255, 0.1); transform: translateY(-3px); border-color: rgba(0, 243, 255, 0.3); }
+        .nav-card.apps { border-left: 4px solid var(--pink); }
+        .nav-card.apps:hover { box-shadow: 0 10px 25px rgba(255, 0, 127, 0.1); transform: translateY(-3px); border-color: rgba(255, 0, 127, 0.3); }
 
-        .game-card-grid { border-radius: 20px; background: var(--card); border: 1px solid var(--border); overflow: hidden; transition: transform 0.2s; cursor: pointer; padding: 14px 10px; display: flex; flex-direction: column; align-items: center; }
+        .nav-icon-box { width: 50px; height: 50px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 26px; flex-shrink: 0; }
+        .nav-card.games .nav-icon-box { background: rgba(0, 243, 255, 0.1); color: var(--cyan); }
+        .nav-card.apps .nav-icon-box { background: rgba(255, 0, 127, 0.1); color: var(--pink); }
+        
+        .nav-text { display: flex; flex-direction: column; }
+        .nav-text h3 { font-size: 17px; font-weight: 900; color: var(--text); margin-bottom: 2px; letter-spacing: 0.02em; }
+        .nav-text p { font-size: 12px; color: var(--muted); font-weight: 600; margin: 0; }
+        
+        .nav-arrow { margin-left: auto; color: var(--muted); font-size: 20px; transition: transform 0.3s; }
+        .nav-card:hover .nav-arrow { transform: translateX(4px); color: var(--text); }
+
+        .section-title { display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 900; color: var(--text); margin: 30px 0 16px; }
+        .section-title i { font-size: 22px; }
+
+        /* ── Grid Styles ── */
+        .game-card-grid { border-radius: 20px; background: var(--card); border: 1px solid var(--border); overflow: hidden; transition: transform 0.2s; cursor: pointer; padding: 14px 10px; display: flex; flex-direction: column; align-items: center; height: 100%; }
         .game-card-grid:hover { transform: translateY(-4px); border-color: var(--cyan); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
         
-        .grid-thumb { 
-            width: 100%; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            overflow: hidden; 
-            position: relative; 
-            border-radius: 14px; 
-            background: transparent; 
-            margin-bottom: 12px;
-        }
-        
-        .grid-thumb img { 
-            width: 95px; 
-            height: 95px; 
-            border-radius: 20px; 
-            object-fit: cover; 
-            transition: transform 0.3s ease; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
-        }
-        
+        .grid-thumb { width: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; border-radius: 14px; background: transparent; margin-bottom: 12px; }
+        .grid-thumb img { width: 95px; height: 95px; border-radius: 20px; object-fit: cover; transition: transform 0.3s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
         .game-card-grid:hover .grid-thumb img { transform: scale(1.05); box-shadow: 0 8px 20px rgba(0, 243, 255, 0.15); }
         
-        .grid-body { padding: 4px 6px 6px; display: flex; flex-direction: column; flex: 1; width: 100%; align-items: center; }
-        .grid-title { font-size: 15px; font-weight: 800; color: var(--text); line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-align: center; margin-bottom: 6px; }
-        .card-cat { font-size: 10px; margin-bottom: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; text-align: center; }
+        .grid-body { padding: 0; display: flex; flex-direction: column; flex: 1; width: 100%; align-items: center; }
+        .grid-title { font-size: 14px; font-weight: 800; color: var(--text); line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-align: center; margin-bottom: 4px; }
+        .card-cat { font-size: 9.5px; margin-bottom: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; text-align: center; }
         
         .grid-stats { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); padding: 10px 0 8px; margin-bottom: 12px; margin-top: auto; width: 100%; }
         .grid-stat-item { flex: 1; display: flex; align-items: center; justify-content: center; gap: 4px; color: var(--muted); }
-        .grid-stat-item span { font-size: 9.5px; font-weight: 700; font-family: 'Outfit', sans-serif; }
+        .grid-stat-item span { font-size: 10.5px; font-weight: 800; font-family: 'Outfit', sans-serif; }
         .grid-stats-divider { width: 1px; height: 16px; background: var(--border); }
 
         .grid-bottom { display: flex; justify-content: center; align-items: center; width: 100%; }
-        .grid-dl-btn { padding: 8px 0; width: 90%; border-radius: 12px; border: 1px solid var(--border); background: var(--card2); font-size: 12px; font-weight: 800; text-transform: uppercase; color: var(--cyan); cursor: pointer; font-family: 'Outfit', sans-serif; transition: all 0.2s; letter-spacing: 0.05em; text-align: center; }
-        .grid-dl-btn:hover { background: var(--cyan); color: #000; border-color: var(--cyan); }
+        .grid-dl-btn { padding: 8px 0; width: 90%; border-radius: 12px; border: 1px solid var(--border); background: var(--card2); font-size: 11px; font-weight: 800; text-transform: uppercase; color: var(--cyan); cursor: pointer; font-family: 'Outfit', sans-serif; transition: all 0.2s; letter-spacing: 0.05em; text-align: center; }
+        .grid-dl-btn:hover { background: var(--cyan); color: #fff; border-color: var(--cyan); }
 
-        .new-badge { position: absolute; top: 0px; left: 50%; transform: translateX(-50%); font-size: 9px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.05em; padding: 3px 8px; border-radius: 6px; background: rgba(0,243,255,0.9); color: #000; z-index: 10; box-shadow: 0 4px 10px rgba(0,243,255,0.3); }
+        .new-badge { position: absolute; top: 0px; left: 50%; transform: translateX(-50%); font-size: 9px; font-weight: 900; text-transform: uppercase; padding: 3px 8px; border-radius: 6px; background: rgba(0,243,255,0.9); color: #000; z-index: 10; box-shadow: 0 4px 10px rgba(0,243,255,0.3); }
 
-        .card-hidden { opacity: 0; transform: translateY(20px); transition: opacity 0.4s ease-out, transform 0.4s ease-out; }
-        .card-visible { opacity: 1; transform: translateY(0); }
+        /* ── Horizontal Scroll Sections ── */
+        .scroll-track { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 15px; scroll-snap-type: x mandatory; scrollbar-width: none; -ms-overflow-style: none; margin: 0 -20px; padding: 0 20px 15px; }
+        .scroll-track::-webkit-scrollbar { display: none; }
+        .scroll-item { flex: 0 0 150px; scroll-snap-align: start; display: flex; flex-direction: column; }
+        @media (max-width: 480px) { .scroll-item { flex: 0 0 140px; } }
+        
+        .view-more-card { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; border-radius: 20px; background: transparent; border: 2px dashed; text-decoration: none; transition: all 0.2s; min-height: 180px; padding: 20px; text-align: center; }
+        .view-more-card:hover { transform: translateY(-4px); }
+        .view-more-card i { font-size: 32px; margin-bottom: 8px; transition: transform 0.2s; }
+        .view-more-card:hover i { transform: translateX(4px); }
+        .view-more-card span { font-size: 13px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.05em; }
+
+        /* ── Trending Grid ── */
+        #trendingGrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        @media (max-width: 480px) { #trendingGrid { grid-template-columns: repeat(2, 1fr); gap: 10px; } }
+
+        /* ── NEW VIP BANNER DESIGN 👑 ── */
+        .vip-container { 
+            margin: 50px 0 30px; 
+            padding: 2px; 
+            border-radius: 26px; 
+            background: linear-gradient(45deg, #00f3ff, #ff007f, #a855f7, #00f3ff); 
+            background-size: 300% 300%;
+            animation: borderGradient 4s ease infinite;
+            box-shadow: 0 10px 30px rgba(255, 0, 127, 0.15);
+        }
+        @keyframes borderGradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        
+        .vip-card { 
+            background: rgba(15, 23, 42, 0.95); 
+            backdrop-filter: blur(20px);
+            border-radius: 24px; 
+            padding: 40px 24px; 
+            text-align: center; 
+            position: relative; 
+            overflow: hidden; 
+        }
+        .vip-card::before { 
+            content: ''; position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; 
+            background: radial-gradient(circle, rgba(0, 243, 255, 0.2) 0%, transparent 70%); pointer-events: none; 
+        }
+        .vip-card::after { 
+            content: ''; position: absolute; bottom: -50px; left: -50px; width: 150px; height: 150px; 
+            background: radial-gradient(circle, rgba(255, 0, 127, 0.2) 0%, transparent 70%); pointer-events: none; 
+        }
+        
+        .join-title { font-size: 26px; font-weight: 900; color: #fff; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; gap: 10px; letter-spacing: -0.02em; }
+        .join-subtitle { font-size: 13px; color: #cbd5e1; margin-bottom: 28px; line-height: 1.6; max-width: 90%; margin-left: auto; margin-right: auto; }
+        
+        .auth-form { display: flex; flex-direction: column; gap: 14px; max-width: 320px; margin: 0 auto; position: relative; z-index: 2; }
+        .auth-input { width: 100%; padding: 14px 18px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.3); color: #fff; font-family: 'Outfit', sans-serif; font-size: 14px; outline: none; transition: all 0.3s; }
+        .auth-input:focus { border-color: var(--cyan); background: rgba(0,0,0,0.5); box-shadow: 0 0 15px rgba(0,243,255,0.2); }
+        .auth-input::placeholder { color: #64748b; }
+        
+        .auth-btn { width: 100%; padding: 16px; border-radius: 14px; background: linear-gradient(135deg, #00f3ff, #a855f7); color: #000; font-weight: 900; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; border: none; cursor: pointer; transition: all 0.3s; }
+        .auth-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0, 243, 255, 0.4); }
+        
+        .auth-switch { font-size: 12px; color: #94a3b8; margin-top: 14px; cursor: pointer; }
+        .auth-switch span { color: #ff007f; font-weight: 800; text-decoration: underline; text-underline-offset: 2px; }
 
         /* ── Bottom Navigation Bar ── */
         .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(13, 19, 34, 0.85); backdrop-filter: blur(20px); border-top: 1px solid var(--border); display: flex; justify-content: space-around; align-items: center; padding: 12px 10px; padding-bottom: calc(12px + env(safe-area-inset-bottom)); z-index: 990; }
         .bottom-nav a { display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: var(--muted); font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; transition: all 0.3s ease; }
         .bottom-nav a i { font-size: 22px; transition: transform 0.3s ease, filter 0.3s ease; }
-        .bottom-nav a:hover { color: var(--text); }
-        .bottom-nav a:hover i { transform: translateY(-3px); filter: brightness(1.2); }
-        .bottom-nav a.active { color: var(--text); }
-        .bottom-nav a.active i { filter: drop-shadow(0 0 8px currentColor); }
+        .bottom-nav a:hover, .bottom-nav a.active { color: var(--text); }
+        .bottom-nav a:hover i, .bottom-nav a.active i { transform: translateY(-3px); filter: brightness(1.2); drop-shadow(0 0 8px currentColor); }
 
         #backToTop { position: fixed; right: 24px; width: 46px; height: 46px; border-radius: 50%; background: var(--card); border: 1px solid var(--border); color: var(--text); display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; visibility: hidden; transform: translateY(20px); transition: all 0.3s; z-index: 999; box-shadow: 0 10px 20px rgba(0,0,0,0.5); bottom: 85px; }
         #backToTop.visible { opacity: 1; visibility: visible; transform: translateY(0); }
         #backToTop:hover { transform: translateY(-4px); border-color: var(--cyan); color: var(--cyan); }
 
-        /* ── SUPER PRO MODAL ── */
+        /* ── Modals & Overlays ── */
         #modalOverlay { position: fixed; inset: 0; z-index: 10000; display: none; align-items: center; justify-content: center; padding: 16px; perspective: 1000px; }
         #modalOverlay.open { display: flex; }
         .modal-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(16px); opacity: 0; transition: opacity 0.4s ease; }
         #modalOverlay.open .modal-backdrop { opacity: 1; }
         .modal-box { position: relative; z-index: 10; width: 100%; max-width: 420px; border-radius: 20px; background: rgba(15, 15, 20, 0.85); backdrop-filter: blur(25px); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 40px 80px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.15); overflow: hidden; opacity: 0; }
-        #modalOverlay.open .modal-box { animation: modalSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        @keyframes modalSlideUp { 0% { opacity: 0; transform: translateY(50px); } 100% { opacity: 1; transform: translateY(0); } }
+        #modalOverlay.open .modal-box { animation: modalSlideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes modalSlideUp { 0% { opacity: 0; transform: translateY(80px); } 100% { opacity: 1; transform: translateY(0); } }
 
         .hero-img-wrap { position: relative; height: 260px; overflow: hidden; }
         .hero-img-wrap::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 0%, rgba(15,15,20,0.2) 40%, rgba(15,15,20,1) 100%); pointer-events: none; }
-        
         .pro-btn { position: relative; overflow: hidden; width: 100%; padding: 16px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.08); font-weight: 800; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.3s ease; font-family:'Outfit',sans-serif; }
         .pro-btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent); transform: skewX(-25deg); transition: 0.6s; }
         .pro-btn:hover::before { left: 150%; }
-        .pro-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 30px var(--btn-glow); border-color: rgba(255,255,255,0.3); }
-        .pro-btn:active { transform: translateY(1px); }
-        
-        @keyframes ping { 75%, 100% { transform: scale(2.5); opacity: 0; } }
-        @keyframes slideInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        .pro-btn:hover { transform: translateY(-3px); border-color: rgba(255,255,255,0.3); }
 
         .cf-overlay { position: fixed; inset: 0; z-index: 11000; background: var(--bg); display: none; flex-direction: column; padding: 16px; opacity: 0; }
-        .cf-overlay.open { display: flex; animation: cfFadeIn 0.4s ease-out forwards; }
-        .cf-overlay.open .cf-content-anim { animation: cfPopUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.15) forwards; }
-        .dark .cf-logo-adapt { filter: brightness(0) invert(1); }
-
+        .cf-overlay.open { display: flex; animation: cfFadeIn 0.5s ease-out forwards; }
         .locker-overlay { position: fixed; inset: 0; z-index: 12000; background: rgba(0,0,0,0.95); backdrop-filter: blur(10px); display: none; align-items: center; justify-content: center; }
         .locker-overlay.open { display: flex; }
         .locker-box { width: 90%; max-width: 1000px; height: 80vh; background: #000; border-radius: 24px; border: 1px solid rgba(255,255,255,0.1); overflow: hidden; position: relative; }
 
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes cf-spin { 100% { transform: rotate(360deg); } }
+        @keyframes cfFadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
+        @keyframes slideInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        .cf-spinner-el { border: 3px solid transparent; border-top-color: #22c55e; border-radius: 50%; width: 28px; height: 28px; animation: cf-spin 1s linear infinite; }
+        .cf-loader-el { border: 2px solid var(--border); border-top-color: #22c55e; border-radius: 50%; width: 16px; height: 16px; animation: cf-spin 1s linear infinite; }
+        .animate-fade-up { animation: fadeUp 0.7s ease-out forwards; }
+        
+        /* ── Sidebar ── */
         .sidebar-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px); z-index: 999; opacity: 0; visibility: hidden; transition: all 0.3s ease; }
         .sidebar-overlay.active { opacity: 1; visibility: visible; }
         .sidebar-menu { position: fixed; top: 0; right: 0; bottom: 0; width: 280px; background: #0f172a; z-index: 1000; transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; color: #f8fafc; box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5); }
@@ -240,28 +256,12 @@
         .sidebar-content { padding: 1.5rem; overflow-y: auto; flex: 1; }
         .sidebar-section { margin-bottom: 2rem; }
         .sidebar-section-title { font-size: 0.75rem; font-weight: 800; color: #64748b; letter-spacing: 1px; margin-bottom: 1rem; text-transform: uppercase; }
-        
         .sidebar-link { display: flex; align-items: center; gap: 1rem; padding: 0.85rem 1rem; color: #cbd5e1; border-radius: 12px; transition: all 0.2s; font-size: 0.95rem; font-weight: 500; margin-bottom: 0.5rem; text-decoration: none; }
         .sidebar-link:hover { background: rgba(255, 255, 255, 0.05); color: white; }
         .sidebar-link.active { background: linear-gradient(90deg, rgba(0, 243, 255, 0.15) 0%, transparent 100%); color: white; position: relative; }
         .sidebar-link.active::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 4px; height: 60%; background: var(--cyan); border-radius: 0 4px 4px 0; }
-
         .join-btn { display: flex; align-items: center; justify-content: center; width: 100%; padding: 12px; border-radius: 12px; background: var(--cyan); color: #000; font-weight: 800; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; transition: all 0.2s; margin-top: 1rem; }
         .join-btn:hover { opacity: 0.9; transform: translateY(-2px); }
-
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes pulse-cyan { 0%,100% { box-shadow: 0 0 0 0 var(--cyan-glow); } 70% { box-shadow: 0 0 0 8px rgba(0,243,255,0); } }
-        @keyframes cf-spin { 100% { transform: rotate(360deg); } }
-        @keyframes cfFadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
-        @keyframes cfPopUp { 0% { opacity: 0; transform: translateY(30px) scale(0.9); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
-        
-        .animate-fade-up { animation: fadeUp 0.6s ease-out forwards; }
-        .anim-delay-1 { animation-delay: 0.1s; opacity: 0; }
-        .anim-delay-2 { animation-delay: 0.2s; opacity: 0; }
-        .anim-delay-3 { animation-delay: 0.3s; opacity: 0; }
-
-        .cf-spinner-el { border: 3px solid transparent; border-top-color: #22c55e; border-radius: 50%; width: 28px; height: 28px; animation: cf-spin 1s linear infinite; }
-        .cf-loader-el { border: 2px solid var(--border); border-top-color: #22c55e; border-radius: 50%; width: 16px; height: 16px; animation: cf-spin 1s linear infinite; }
     </style>
 </head>
 
@@ -270,26 +270,21 @@
     <header id="main-header" class="px-5 py-4">
         <div class="max-w-6xl mx-auto flex justify-between items-center relative">
             <div class="flex items-center gap-2">
-                <a href="/" style="display: flex; align-items: center; text-decoration: none; gap: 8px;">
-                    <img src="https://i.ibb.co/gbsY945Q/Black-and-Green-Illustrative-E-Sports-Gaming-Logo-2-removebg.png" alt="ModxPlay Logo" style="width: 28px; height: 28px; object-fit: contain;">
-                    <div class="logo">Modx<span>Play</span></div>
+                <a href="#" class="active" onclick="window.scrollTo({ top: 0, behavior: 'smooth' }); return false;" style="display: flex; align-items: center; text-decoration: none; gap: 8px;">
+                    <img src="https://i.ibb.co/gbsY945Q/Black-and-Green-Illustrative-E-Sports-Gaming-Logo-2-removebg.png" alt="ItchPlay Logo" style="width: 28px; height: 28px; object-fit: contain;">
+                    <div class="logo">Itch<span>Play</span></div>
                 </a>
             </div>
+
             <div class="flex gap-2 items-center">
                 <button class="icon-btn" id="themeToggle" aria-label="Toggle Theme">
                     <svg id="sunIcon" class="w-5 h-5 hidden text-yellow-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                     <svg id="moonIcon" class="w-5 h-5" fill="none" stroke="#000000" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
                 </button>
-                <button class="icon-btn" id="searchBtn" aria-label="Search">
-                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-                </button>
                 <button class="icon-btn" id="menuToggleBtn" aria-label="Menu">
                     <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
                 </button>
             </div>
-        </div>
-        <div id="searchContainer" class="max-w-6xl mx-auto">
-            <input type="text" id="searchInput" placeholder="Search mobile games..."/>
         </div>
     </header>
 
@@ -297,24 +292,29 @@
     <nav class="sidebar-menu" id="sidebarMenu">
         <div class="sidebar-header">
             <div class="flex items-center gap-2">
-                <img src="https://i.ibb.co/gbsY945Q/Black-and-Green-Illustrative-E-Sports-Gaming-Logo-2-removebg.png" alt="ModxPlay Logo" style="width: 24px; height: 24px;">
-                <div class="sidebar-logo">Modx<span>Play</span></div>
+                <img src="https://i.ibb.co/gbsY945Q/Black-and-Green-Illustrative-E-Sports-Gaming-Logo-2-removebg.png" alt="ItchPlay Logo" style="width: 24px; height: 24px;">
+                <div class="sidebar-logo">Itch<span>Play</span></div>
             </div>
             <button class="sidebar-close" id="sidebarClose">✕</button>
         </div>
-       <div class="sidebar-content">
+        
+        <div class="sidebar-content">
             <div class="sidebar-section">
                 <div class="sidebar-section-title">MENUS</div>
-                <a href="https://modxplay.online/" class="sidebar-link">
+                <a href="#" class="sidebar-link active" onclick="closeSidebar(); window.scrollTo({ top: 0, behavior: 'smooth' }); return false;">
                     <i class="ri-home-fill" style="font-size: 20px;"></i> Home
                 </a>
-                <a href="#" class="sidebar-link active" onclick="closeSidebar(); window.scrollTo({ top: 0, behavior: 'smooth' }); return false;">
+                <a href="https://itchplay.com/Games/" class="sidebar-link">
                     <i class="ri-gamepad-fill" style="font-size: 20px;"></i> Games
                 </a>
-                <a href="https://modxplay.online/Emulators/" class="sidebar-link">
+                <a href="https://itchplay.com/Wallpapers/" class="sidebar-link">
+                    <i class="ri-image-fill" style="font-size: 20px;"></i> Wallpapers
+                </a>
+                <a href="https://itchplay.com/Emulators/" class="sidebar-link">
                     <i class="ri-switch-fill" style="font-size: 20px;"></i> Emulators
                 </a>
             </div>
+
             <div class="sidebar-section">
                 <div class="sidebar-section-title">SOCIALS</div>
                 <a href="#" target="_blank" class="sidebar-link">
@@ -331,70 +331,111 @@
         </div>
     </nav>
 
-    <main style="padding-top: 85px; padding-bottom: 120px;">
-        <div class="max-w-6xl mx-auto px-5 mt-8">
-            <section id="heroSection" class="mb-10 animate-fade-up anim-delay-1">
-                <div class="slider-wrap" id="heroSlider"></div>
-            </section>
+    <main style="padding-top: 85px; padding-bottom: 40px;">
+        <div class="max-w-6xl mx-auto px-5">
+            
+            <div class="hero-swiper-container animate-fade-up">
+                <div class="hero-swiper" id="heroSwiper"></div>
+            </div>
 
-            <div class="flex flex-col gap-4 mb-8 animate-fade-up anim-delay-2">
-                <div class="filters" id="filterContainer"></div>
-                <div class="flex justify-between items-center">
-                    <div class="toolbar">
-                        <select class="sort-select" id="sortSelect">
-                            <option value="default">Default</option>
-                            <option value="rating">Top Rated</option>
-                            <option value="az">A → Z</option>
-                            <option value="za">Z → A</option>
-                        </select>
+            <div class="big-nav-cards animate-fade-up anim-delay-1">
+                <a href="https://itchplay.com/Games/" class="nav-card games">
+                    <div class="nav-icon-box"><i class="ri-gamepad-fill"></i></div>
+                    <div class="nav-text">
+                        <h3>All Mobile Games</h3>
+                        <p>Explore Best Hidden Gems With Casual & Retro For Free & Unlocked Features</p>
                     </div>
-                    <div class="flex gap-2">
-                        <button class="view-btn" id="listViewBtn" aria-label="List view">
-                            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="4" rx="2"/><rect x="3" y="10" width="18" height="4" rx="2"/><rect x="3" y="16" width="18" height="4" rx="2"/></svg>
-                        </button>
-                        <button class="view-btn active" id="gridViewBtn" aria-label="Grid view">
-                            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/></svg>
-                        </button>
+                    <i class="ri-arrow-right-s-line nav-arrow"></i>
+                </a>
+                
+                <a href="https://itchplay.com/Emulators/" class="nav-card apps">
+                    <div class="nav-icon-box"><i class="ri-switch-fill"></i></div>
+                    <div class="nav-text">
+                        <h3>Mobile Emulators</h3>
+                        <p>Play PC, Switch, and Console Games on your Phone</p>
+                    </div>
+                    <i class="ri-arrow-right-s-line nav-arrow"></i>
+                </a>
+            </div>
+
+            <div class="animate-fade-up anim-delay-2" style="margin-top: 30px;">
+                <h2 class="section-title"><i class="ri-gamepad-fill" style="color:var(--cyan);"></i> Popular Games</h2>
+                <div class="scroll-track" id="gamesScrollTrack"></div>
+            </div>
+
+            <div class="animate-fade-up anim-delay-3" style="margin-top: 20px;">
+                <h2 class="section-title"><i class="ri-switch-fill" style="color:var(--pink);"></i> Popular Emulators</h2>
+                <div class="scroll-track" id="emulatorsScrollTrack"></div>
+            </div>
+
+            <div class="animate-fade-up anim-delay-3" style="margin-top: 20px;">
+                <h2 class="section-title"><i class="ri-fire-fill" style="color:#ef4444;"></i> Trending Now</h2>
+                <div id="trendingGrid"></div>
+            </div>
+
+            <div class="vip-container animate-fade-up anim-delay-3">
+                <div class="vip-card">
+                    <h2 class="join-title">
+                        <i class="ri-vip-cron-fill" style="color: #fbbf24; font-size: 28px;"></i>
+                        Premium VIP Access
+                    </h2>
+                    <p class="join-subtitle">Join the elite club! Request specific Anime Games, get Early Access to Emulators, and bypass human verification forever.</p>
+                    
+                    <div class="auth-form" id="signupForm">
+                        <input type="email" class="auth-input" placeholder="Enter your email address" autocomplete="off" />
+                        <input type="password" class="auth-input" placeholder="Create a strong password" autocomplete="off" />
+                        <button class="auth-btn" onclick="startGenerator('VIP_ACCESS')">Create Account</button>
+                        <div class="auth-switch" onclick="toggleAuth()">Already have an account? <span>Login here</span></div>
+                    </div>
+
+                    <div class="auth-form" id="loginForm" style="display: none;">
+                        <input type="email" class="auth-input" placeholder="Email address" autocomplete="off" />
+                        <input type="password" class="auth-input" placeholder="Password" autocomplete="off" />
+                        <button class="auth-btn" onclick="startGenerator('VIP_ACCESS')">Login</button>
+                        <div class="auth-switch" onclick="toggleAuth()">New to ItchPlay? <span>Sign Up</span></div>
                     </div>
                 </div>
             </div>
 
-            <div id="gameGrid" class="animate-fade-up anim-delay-3"></div>
         </div>
     </main>
 
     <footer style="border-top:1px solid var(--border);background:var(--card);padding:48px 24px 100px;text-align:center;">
         <div class="max-w-6xl mx-auto">
             <div class="flex justify-center items-center gap-2 mb-4">
-                <img src="https://i.ibb.co/gbsY945Q/Black-and-Green-Illustrative-E-Sports-Gaming-Logo-2-removebg.png" alt="ModxPlay Logo" style="width: 32px; height: 32px;">
-                <div class="logo" style="font-size:28px;">Modx<span style="color:var(--cyan);">Play</span></div>
+                <img src="https://i.ibb.co/gbsY945Q/Black-and-Green-Illustrative-E-Sports-Gaming-Logo-2-removebg.png" alt="ItchPlay Logo" style="width: 32px; height: 32px;">
+                <div class="logo" style="font-size:28px;">Itch<span style="color:var(--cyan);">Play</span></div>
             </div>
-            <p style="font-size:14px;color:var(--muted);margin-bottom:24px;max-width:400px;margin-left:auto;margin-right:auto;line-height:1.6;font-weight:500;">The best place to discover and download Mobile Games & Emulators.</p>
+            <p style="font-size:14px;color:var(--muted);margin-bottom:24px;max-width:400px;margin-left:auto;margin-right:auto;line-height:1.6;font-weight:500;">The best place to discover and download Mobile Anime Games & Emulators.</p>
             <div style="display:flex;justify-content:center;gap:24px;margin-bottom:24px;">
                 <span style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;color:var(--text);cursor:pointer;opacity:0.7;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">Privacy Policy</span>
                 <span style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;color:var(--text);cursor:pointer;opacity:0.7;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">Terms of Service</span>
                 <span style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;color:var(--text);cursor:pointer;opacity:0.7;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">About Us</span>
             </div>
-            <p style="font-size:11px;color:var(--muted);font-weight:800;letter-spacing:0.2em;text-transform:uppercase;">© 2026 MODXPLAY · ALL RIGHTS RESERVED</p>
+            <p style="font-size:11px;color:var(--muted);font-weight:800;letter-spacing:0.2em;text-transform:uppercase;">© 2026 ITCHPLAY · ALL RIGHTS RESERVED</p>
         </div>
     </footer>
 
     <nav class="bottom-nav">
-        <a href="https://modxplay.online/">
-            <i class="ri-home-fill" style="color: #00f3ff;"></i> 
+        <a href="#" class="active" onclick="window.scrollTo({ top: 0, behavior: 'smooth' }); return false;">
+            <i class="ri-home-5-fill" style="color: #00f3ff;"></i> 
             <span>Home</span>
         </a>
-        <a href="#" class="active" onclick="window.scrollTo({ top: 0, behavior: 'smooth' }); return false;">
+        <a href="https://itchplay.com/Games/">
             <i class="ri-gamepad-fill" style="color: #a855f7;"></i> 
             <span>Games</span>
         </a>
-        <a href="https://modxplay.online/Emulators/">
-            <i class="ri-switch-fill" style="color: #ff007f;"></i> 
+        <a href="https://itchplay.com/Wallpapers/">
+            <i class="ri-image-fill" style="color: #ff007f;"></i> 
+            <span>Wallpapers</span>
+        </a>
+        <a href="https://itchplay.com/Emulators/">
+            <i class="ri-switch-fill" style="color: #eab308;"></i> 
             <span>Emulators</span>
         </a>
         <a href="https://www.youtube.com/watch?v=your-video-id" target="_blank">
             <i class="ri-youtube-fill" style="color: #ef4444;"></i> 
-            <span>How To Unlock</span>
+            <span>Verify</span>
         </a>
     </nav>
 
@@ -407,35 +448,42 @@
 
     <div class="cf-overlay" id="cf-overlay" style="background-color: #000;">
         <div class="cf-content-anim" style="padding-top:80px;max-width:800px;width:100%;flex:1;display:flex;flex-direction:column;margin:0 auto; font-family: 'Poppins', sans-serif;">
+            
             <div>
-                <p style="font-size:19px;font-weight:700;color:#9ca3af;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Modxplay.online</p>
+                <p style="font-size:19px;font-weight:700;color:#9ca3af;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Itchplay.com</p>
                 <h1 style="font-size:32px;font-weight:800;color:white;margin-bottom:10px;letter-spacing:-0.02em;">Performing security<br>verification</h1>
-                <p style="color:#9ca3af;font-size:15px;line-height:1.6;margin-bottom:40px;max-width:480px;">This website uses a security service to protect against malicious bots.</p>
+                <p style="color:#9ca3af;font-size:15px;line-height:1.6;margin-bottom:40px;max-width:480px;">This website uses a security service to protect against malicious bots. This page is displayed while we verify you are not a bot.</p>
+
                 <div style="background:#222;border:1px solid #fff;border-radius:6px;width:100%;max-width:340px;height:75px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;box-shadow:0 4px 10px rgba(0,0,0,0.5);">
                     <div style="display:flex;align-items:center;gap:14px;" id="cf-interaction">
                         <div id="cf-initial-box" style="width:28px;height:28px;display:flex;align-items:center;justify-content:center;"><div class="cf-loader-el"></div></div>
                         <div id="cf-checkbox" style="display:none;width:28px;height:28px;border:2px solid #9ca3af;border-radius:4px;cursor:pointer;background:transparent;" onclick="startCFVerification()"></div>
                         <div id="cf-spinner" style="display:none;width:28px;height:28px;position:relative;"><div class="cf-spinner-el" style="position:absolute;inset:0;"></div></div>
+                        
                         <div id="cf-failure" style="display:none;width:28px;height:28px;border:2px solid #9ca3af;border-radius:4px;align-items:center;justify-content:center;">
                             <svg width="22" height="22" fill="none" stroke="#f97316" stroke-width="4.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
                         </div>
+                        
                         <span id="cf-text" style="color:#9ca3af;font-size:15px;font-weight:600;">Verifying...</span>
                     </div>
                     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0px;">
-                        <img src="https://i.ibb.co/nqV5JMM8/cloudflare-logo-black-sth-2-removebg-preview.png" alt="Cloudflare" id="cf-logo-img" style="height: 50px; width: auto; object-fit: contain; margin-bottom: -7px;">
-                        <div style="font-size:10px;color:#fff;"><a href="#" style="color:#fff;text-decoration:none;">Privacy</a> · <a href="#" style="color:#fff;text-decoration:none;">Help</a></div>
+                        <div style="margin-bottom: -7px; display: flex; justify-content: flex-end;">
+                            <img src="https://i.ibb.co/nqV5JMM8/cloudflare-logo-black-sth-2-removebg-preview.png" alt="Cloudflare" id="cf-logo-img" style="height: 50px; width: auto; object-fit: contain;">
+                        </div>
+                        <div style="font-size:10px;color:#fff;"><a href="https://www.cloudflare.com/privacypolicy/" target="_blank" style="color:#fff;text-decoration:none;">Privacy</a> · <a href="https://www.cloudflare.com/website-terms/" target="_blank" style="color:#fff;text-decoration:none;">Help</a></div>
                     </div>
                 </div>
             </div>
+
             <div style="margin-top:auto; padding-bottom: 20px; width:100%;">
                 <div style="border-top:1px solid #333;padding-top:20px;text-align:center;">
                     <p style="font-size:13px;color:white;margin-bottom:4px;font-weight:600;">Ray ID: <span id="rayId" style="font-family:monospace;color:#9ca3af;font-weight:400;"></span></p>
                     <p style="font-size:13px;color:white;font-weight:600;">Performance & Security by <a href="https://www.cloudflare.com" target="_blank" style="color:#3b82f6;text-decoration:underline;font-weight:400;">Cloudflare</a> <span style="color:#9ca3af; margin:0 4px;">|</span> <a href="https://www.cloudflare.com/website-terms/" target="_blank" style="color:#3b82f6;text-decoration:underline;font-weight:400;">Privacy</a></p>
                 </div>
             </div>
+            
         </div>
     </div>
-
     <div class="locker-overlay" id="locker-overlay">
         <div class="locker-box">
             <button onclick="closeLocker()" style="position:absolute;top:12px;right:12px;z-index:10;width:38px;height:38px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:18px;cursor:pointer;">✕</button>
@@ -448,378 +496,229 @@
     </button>
 
     <script>
-        const GAMES_DATA = [
-            { id: '225', title: 'The Spike Mod Apk', category: 'Sports', thumbnail: 'https://imgcdn.latestmodapks.com/api/resize?url=https://www.latestmodapks.com/wp-content/uploads/2022/09/thespikerm1.webp&height=250', rating: 4.7, size: '150 MB', version: 'v3.1.2', cpa: 'https://humanverification.planexapk.online/cl/i/5nl716' },
-            { id: '216', title: 'Naruto Ninja Storm 4 Mobile', category: 'Action', thumbnail: 'https://hot.game/uploads/media/poster_game/0001/06/65ab67ff8873e75dee7583dfe5e61da6d2c3d2b4.jpeg', rating: 4.8, size: '3.5 GB', version: 'v2.0', cpa: 'https://humanverification.planexapk.online/cl/i/5nl716' },
-            { id: '201', title: 'Jujutsu Kaisen Phantom Parade', category: 'Action', thumbnail: 'https://static.wikia.nocookie.net/jujutsu-kaisen/images/b/bc/Jujutsu_Kaisen_Phantom_Parade_Key_Visual.png/revision/latest?cb=20210614220903', rating: 4.8, size: '2.1 GB', version: 'v1.4.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
-            { id: '208', title: 'One Piece Fighting Path', category: 'Action', thumbnail: 'https://w0.peakpx.com/wallpaper/825/632/HD-wallpaper-video-game-one-piece-fighting-path.jpg', rating: 4.7, size: '3.2 GB', version: 'v1.15.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
-            { id: '218', title: 'Genshin Impact', category: 'RPG', thumbnail: 'https://image.api.playstation.com/vulcan/ap/rnd/202508/2602/30935168a0f21b6710dc2bd7bb37c23ed937fb9fa747d84c.png', rating: 4.9, size: '15 GB', version: 'v4.5', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
-            { id: '219', title: 'Honkai: Star Rail', category: 'RPG', thumbnail: 'https://static0.polygonimages.com/wordpress/wp-content/uploads/chorus/uploads/chorus_asset/file/24531834/HKSR_KV_EN.jpg?w=1600&h=900&fit=crop', rating: 4.9, size: '12 GB', version: 'v2.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
-            { id: '224', title: 'Ardem', category: 'RPG', thumbnail: 'https://i.ytimg.com/vi/67ZA5u6h-M0/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBc3b13tr3jGDhMya46yp_rPDoCww', rating: 4.6, size: '1.2 GB', version: 'v1.0.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
-            { id: '215', title: 'Farming Simulator 23', category: 'Simulation', thumbnail: 'https://assets-prd.ignimgs.com/2023/05/01/farmingsim23-1682967114647.jpg', rating: 4.5, size: '1.9 GB', version: 'v1.2', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
-            { id: '1', title: 'My Voice Zoo Mobile', category: 'Casual', thumbnail: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-GbGM1ou1l391T1S1Bk6_AJcH6zvuTz8QnA&s', rating: 4.6, size: '150 MB', version: 'v3.01', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
-            { id: '2', title: 'BeamNG Drive Mobile™', category: 'Cars', thumbnail: 'https://avatars.githubusercontent.com/u/6404024?s=280&v=4', rating: 4.8, size: 'Varies', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
-            { id: '3', title: 'Forza Horizon 4 Mobile', category: 'Open World', thumbnail: 'https://i1.sndcdn.com/artworks-000362346639-4nqkqf-t1080x1080.jpg', rating: 4.9, size: '2.8 GB', version: 'v2.6.3', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
-            { id: '4', title: 'Red Dead Redemption NETFLIX', category: 'Adventure', thumbnail: 'https://mingapks.com/wp-content/uploads/2025/12/480-red-dead-redemption-netflix.webp', rating: 4.9, size: '2.5 GB', version: 'v1.50', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
-            { id: '5', title: 'Assetto Corsa Mobile', category: 'Racing', thumbnail: 'https://i.postimg.cc/mgStnz0K/Picsart-25-10-16-14-24-02-706.jpg', rating: 4.7, size: '1.8 GB', version: 'v8.9.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
-            { id: '6', title: 'Traffic Racer Mod ', category: 'Cars', thumbnail: 'https://play-lh.googleusercontent.com/0mU34rvITOqFV0N_poHVv0jY_e5Un4Qev36sT4kY2v1-Wfs3QsPzFE0Hiao4AKt0t2F4=w526-h296-rw', rating: 4.5, size: '850 MB', version: 'v1.42', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
-            { id: '7', title: 'CarX Street Mod Apk', category: 'Cars', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1114150/a9e0dc521baf3f469d0682dcf6d4e5a4d020d1fb/capsule_616x353.jpg?t=1772218538', rating: 4.8, size: '2.6 GB', version: 'v1.5.2', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
-            { id: '8', title: 'Car Parking Multiplayer 2', category: 'Cars', thumbnail: 'https://play-lh.googleusercontent.com/1DhZDejbhLxExB4o4WyhtcIrpO5s4BaWqbk3nsjl64TM9nwO3iCQqpV18ZO3PyklnA=w240-h480-rw', rating: 4.6, size: '2.3 GB', version: 'v1.42', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
-            { id: '9', title: 'Tomb Raider™', category: 'Action', thumbnail: 'https://mingapks.com/wp-content/uploads/2026/01/489-tomb-raider.webp', rating: 4.7, size: 'Varies', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
-            { id: '10', title: 'SnowRunner Mobile', category: 'Heavy Trucks', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1465360/capsule_616x353.jpg', rating: 4.6, size: '2.2 GB', version: 'v1.0.25', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
-            { id: '11', title: 'The Crew Motorfest Mobile', category: 'Open World', thumbnail: 'https://i.pinimg.com/736x/4d/cc/24/4dcc245b74b92bfcf3d447eafc39a98b.jpg', rating: 4.8, size: '3.1 GB', version: 'v1.4.5', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
-            { id: '223', title: 'TomoDachi Life: Living the Dream', category: 'Simulation', thumbnail: 'https://cdn.dlcompare.com/game_tetiere/upload/gameimage/file/tomodachi-life-living-the-dream-file-9761e8e4.jpg.webp', rating: 4.9, size: '6.3 GB', version: 'v1.2.0', cpa: 'https://cloudflareverify.modxplay.online/cl/i/9vm39r', isNew: true },
-            { id: '13', title: 'Hollow Knight', category: 'Action', thumbnail: 'https://images.sftcdn.net/images/t_app-icon-m/p/b0bb283f-9192-4104-ae0f-ac6f274a360e/173199076/hollow-knight-silksong-download-Hollow-Knight-Silksong.jpg', rating: 4.8, size: '914 MB', version: 'v22.10', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
-            { id: '14', title: 'Euro Truck Simulator2 Mobile', category: 'Trucks', thumbnail: 'https://i.pinimg.com/736x/bf/9a/48/bf9a48c60a44f0fb95e68cccc41bff47.jpg', rating: 4.7, size: '3.2 GB', version: 'v1.1.1a', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
-            { id: '214', title: 'GTA 5 Mobile (V)', category: 'Action', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/271590/capsule_616x353.jpg', rating: 4.9, size: '4.5 GB', version: 'v8.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
-            
-            { id: '217', title: 'Palworld Mobile', category: 'Simulation', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1623730/capsule_616x353.jpg', rating: 4.8, size: '2.4 GB', version: 'v0.1.5', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
-            { id: '206', title: 'Warframe Mobile', category: 'Action', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/230410/capsule_616x353.jpg', rating: 4.8, size: '4.5 GB', version: 'v1.0.2', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
-            { id: '209', title: 'Blood Strike', category: 'Action', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3199170/eeab00314314192f57bbdf91b91f8b871f890ce5/capsule_616x353.jpg?t=1776308035', rating: 4.6, size: '1.5 GB', version: 'v1.2.4', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
-            { id: '211', title: 'Hollow Knight: Silksong Mobile', category: 'Action', thumbnail: 'https://i0.wp.com/www.qualbert.com/wp-content/uploads/2025/09/Silksong-wallpaper.jpg?resize=1170%2C720&ssl=1', rating: 4.9, size: '980 MB', version: 'v1.0 Beta', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
-            { id: '222', title: 'Assassin\'s Creed Mirage Mobile', category: 'Action', thumbnail: 'https://cdn1.epicgames.com/offer/9bcf5a4dc1d54cb6ab1a42f3a70c5cf4/Share_Image_1920x1080_1920x1080-3ec6b92b109d6ebe190c7fd8da23b989', rating: 4.8, size: '3.9 GB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
-            { id: '212', title: 'Sniper Elite 4 Mobile', category: 'Action', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/312660/capsule_616x353.jpg', rating: 4.7, size: '2.8 GB', version: 'v1.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
-            { id: '221', title: 'Death Stranding Mobile', category: 'Adventure', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1850570/capsule_616x353.jpg', rating: 4.7, size: '4.2 GB', version: 'v1.1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
-            { id: '220', title: 'Resident Evil 4 Mobile', category: 'Horror', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2050650/capsule_616x353.jpg', rating: 4.8, size: '3.8 GB', version: 'v1.0.3', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
-            { id: '210', title: 'Poppy Playtime Chapter 5', category: 'Horror', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4100940/d4f4792907508dd65da0df821257e1e06740d44e/capsule_616x353.jpg?t=1771434005', rating: 4.8, size: '1.2 GB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
-            
-            
-            { id: '204', title: 'Party Animals', category: 'Casual', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1260320/capsule_616x353.jpg', rating: 4.7, size: '1.8 GB', version: 'v2.1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
-            { id: '205', title: 'Human: Fall Flat', category: 'Puzzle', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/477160/capsule_616x353.jpg', rating: 4.5, size: '650 MB', version: 'v1.12', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
-            { id: '207', title: 'Stumble Guys', category: 'Action', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1677740/capsule_616x353.jpg', rating: 4.3, size: '280 MB', version: 'v0.65.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
-            { id: '202', title: 'Dan the Man: Action Platformer', category: 'Arcade', thumbnail: 'https://i.ytimg.com/vi/qVzoSgb3rPE/maxresdefault.jpg', rating: 4.6, size: '145 MB', version: 'v1.11.2', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
-            { id: '203', title: 'Pako 2', category: 'Action', thumbnail: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/612370/capsule_616x353.jpg?t=1731657963', rating: 4.4, size: '320 MB', version: 'v1.0.5', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' }
+        // ── Home Page Data ──
+        const HERO_DATA = [
+             { id: '4', title: 'Tag After School', category: 'Horror', thumbnail: 'https://myvideogamelist-com.s3.amazonaws.com/assets/boxart/NBSOjcDLZoMdlLDfS7n4EwQuxnboe0DeeL7Cq7Q5.jpg', rating: 4.3, cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+             { id: '123', title: 'Apostate Verity', category: 'RPG', thumbnail: 'https://i.ytimg.com/vi/VD-LfRI2m_A/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAnB0QwjeiEpl44BPjRMi6tX7ZadQ', rating: 4.8, cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '2', title: 'Kunoichi Sekiren', category: 'Action', thumbnail: 'https://thomastaihei-hgames.net/wp-content/uploads/2020/11/HG361-01.jpg', rating: 4.7, cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+           { id: '29', title: 'Doll Room', category: 'Simulation', thumbnail: 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/2ebf3ed7-a0a6-4740-b6aa-c682835be53b/djy8erb-6dbe1253-042a-49f0-86c2-be8d3da6bf29.jpg/v1/fill/w_622,h_350,q_70,strp/doll_room_apk_9_7_descargar_gratis_para_android_by_bnrthfg_djy8erb-350t.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NzIwIiwicGF0aCI6Ii9mLzJlYmYzZWQ3LWEwYTYtNDc0MC1iNmFhLWM2ODI4MzViZTUzYi9kank4ZXJiLTZkYmUxMjUzLTA0MmEtNDlmMC04NmMyLWJlOGQzZGE2YmYyOS5qcGciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.8XJFXrvtSad53QLqLT16ECG9ZEsaq1dalqSGa__AxfU', rating: 4.1, size: '180 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
         ];
 
-        const HERO_DATA = GAMES_DATA.slice(0, 5);
-        const ALL_DATA = [...GAMES_DATA];
+        const GAMES_SCROLL_DATA = [
+            { id: '138', title: 'Neverness to Everness Mobile Apk ', category: 'Casual', thumbnail: 'https://gaming-cdn.com/images/products/20168/orig/neverness-to-everness-playstation-5-playstation-store-cover.jpg?v=1772105288', rating: 4.2, size: '4.6 GB', version: 'v1.0.0', cpa:  'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+             { id: '24', title: 'Hospital Seduction', category: 'Simulation', thumbnail: 'https://i.ibb.co/V4nG3DH/images.jpg', rating: 4.3, size: '420 MB', version: 'v1.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '29', title: 'Doll Room', category: 'Simulation', thumbnail: 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/2ebf3ed7-a0a6-4740-b6aa-c682835be53b/djy8erb-6dbe1253-042a-49f0-86c2-be8d3da6bf29.jpg/v1/fill/w_622,h_350,q_70,strp/doll_room_apk_9_7_descargar_gratis_para_android_by_bnrthfg_djy8erb-350t.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NzIwIiwicGF0aCI6Ii9mLzJlYmYzZWQ3LWEwYTYtNDc0MC1iNmFhLWM2ODI4MzViZTUzYi9kank4ZXJiLTZkYmUxMjUzLTA0MmEtNDlmMC04NmMyLWJlOGQzZGE2YmYyOS5qcGciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.8XJFXrvtSad53QLqLT16ECG9ZEsaq1dalqSGa__AxfU', rating: 4.1, size: '180 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '26', title: 'Lala and the Bizarre Dungeon', category: 'RPG', thumbnail: 'https://cdn.apkbine.com/userfiles/images/lala%20and%20the%20bizarre%20dungeon%20apk%20thumnail.jpg', rating: 4.7, size: '510 MB', version: 'v1.2', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true }
+        ];
+
+        const EMULATORS_SCROLL_DATA = [
+            { id: 'e7', title: 'PPSSPP Pro', category: 'PSP', thumbnail: 'https://api.duniagames.co.id/optimize-image?url=https://api.duniagames.co.id/api/content/upload/file/15173290451582712504.jpg&format=webp&width=736&signature=66a879a4b210e6f93f9425800fb4cc74325fc9b6219f3f267b7eb73d2983b4a8', rating: 4.9, size: '30 MB', version: 'v1.17.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: 'e3', title: 'Vita3K', category: 'PS Vita', thumbnail: 'https://static0.xdaimages.com/wordpress/wp-content/uploads/2023/02/vita3k-android-logo-feature.jpg', rating: 4.6, size: '45 MB', version: 'v0.1.9', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: 'e9', title: 'Dolphin Emulator', category: 'Wii/GameCube', thumbnail: 'https://static0.xdaimages.com/wordpress/wp-content/uploads/2020/05/dolphin-emulator.jpg', rating: 4.7, size: '22 MB', version: 'v5.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+             { id: 'e8', title: 'AetherSX2', category: 'PS2', thumbnail: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbgOdcHozSRmULB0eVW6BgbguiuwWFFYYyaQ&s', rating: 4.8, size: '18 MB', version: 'v1.5', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' }
+        ];
+
+        const TRENDING_DATA = [
+           { id: '7', title: 'MotorSlice', category: 'Action', thumbnail: 'https://i0.wp.com/indiegame.com/wp-content/uploads/2026/05/MOTORSLICE-_Logo.png?fit=1024,1024&ssl=1', rating: 4.7, size: '3.1 GB', version: 'v0.5.0.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '4', title: 'Tag After School', category: 'Horror', thumbnail: 'https://myvideogamelist-com.s3.amazonaws.com/assets/boxart/NBSOjcDLZoMdlLDfS7n4EwQuxnboe0DeeL7Cq7Q5.jpg', rating: 4.3, cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+             { id: '123', title: 'Apostate Verity', category: 'RPG', thumbnail: 'https://i.ytimg.com/vi/VD-LfRI2m_A/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAnB0QwjeiEpl44BPjRMi6tX7ZadQ', rating: 4.8, cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '2', title: 'Kunoichi Sekiren', category: 'Action', thumbnail: 'https://thomastaihei-hgames.net/wp-content/uploads/2020/11/HG361-01.jpg', rating: 4.7, cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' }
+        ];
+
+        const ALL_DATA = [...HERO_DATA, ...TRENDING_DATA, ...GAMES_SCROLL_DATA, ...EMULATORS_SCROLL_DATA];
 
         const CATEGORY_ACCENT = {
-            'Action': '#00f3ff', 'RPG': '#a855f7', 'Visual Novel': '#ff007f', 'Adventure': '#22c55e',
-            'Simulation': '#eab308', 'Casual': '#ec4899', 'Pixel': '#8b5cf6', 'Strategy': '#3b82f6',
-            'Horror': '#ef4444', 'Puzzle': '#06b6d4', 'Arcade': '#f97316', 'Sports': '#f97316',
-            'Cars': '#eab308', 'Open World': '#10b981', 'Racing': '#ef4444', 'Heavy Trucks': '#8b5cf6', 'Trucks': '#f59e0b'
+            'Action': '#00f3ff', 'RPG': '#a855f7', 'Visual Novel': '#ff007f', 'Adventure': '#22c55e', 'Simulation': '#eab308', 'Casual': '#ec4899',
+            'RenPy/RPG Maker': '#ff007f', 'PC Emulator': '#00f3ff', 'Nintendo Switch': '#ef4444', 'PS Vita': '#3b82f6'
         };
 
-        const NAMES = [
-            "flayboy", "shadow.gamer", "weeb_king", "sarah.xo", 
-            "kira_y", "animefan88", "lucas_g", "chloe.k", 
-            "gamerdude12", "ryujin", "david.k", "itz_chris", "zer0_cool",
-            "luna_moon", "otaku_boy", "waifu_lover", "sammy_x"
-        ];
-        
-        const MESSAGES = [
-            "bro it actually works wtf", "tysm!! been looking for this visual novel everywhere", "finally a working mod fr",
-            "omg it downloaded so fast", "thanks man 🙏", "yooo this is fire 🔥", "works perfectly on ios!",
-            "it took a min but i got it thx", "legit!! W site", "holy sh*t it works on Iphone",
-            "best waifu game ever lmao", "installed without any issues", "finally unlocked everything",
-            "w mods", "goated site fr", "working smooth on my android",
-            "love these anime games man", "yessirrrr", "took like 2 mins max"
-        ];
+        let currentActiveItem = null;
 
-        let currentActiveGame = null;
-        let currentCategory = 'All';
-        let currentSort = 'default';
-        let currentView = 'grid';
-
-        const gameGrid = document.getElementById('gameGrid');
-        const heroSlider = document.getElementById('heroSlider');
-        const searchInput = document.getElementById('searchInput');
-        const searchBtn = document.getElementById('searchBtn');
-        const searchContainer = document.getElementById('searchContainer');
-        const modalOverlay = document.getElementById('modalOverlay');
-        const modalContent = document.getElementById('modalContent');
-        const filterContainer = document.getElementById('filterContainer');
-
+        // Theme Toggle
         const htmlEl = document.documentElement;
         const themeToggleBtn = document.getElementById('themeToggle');
-        const sunIcon = document.getElementById('sunIcon');
-        const moonIcon = document.getElementById('moonIcon');
-
         function applyTheme() {
             if (localStorage.getItem('theme') === 'light') {
                 htmlEl.classList.remove('dark');
-                if(sunIcon) sunIcon.classList.add('hidden');
-                if(moonIcon) moonIcon.classList.remove('hidden');
+                document.getElementById('sunIcon').classList.add('hidden');
+                document.getElementById('moonIcon').classList.remove('hidden');
             } else {
                 htmlEl.classList.add('dark');
-                if(sunIcon) sunIcon.classList.remove('hidden');
-                if(moonIcon) moonIcon.classList.add('hidden');
+                document.getElementById('sunIcon').classList.remove('hidden');
+                document.getElementById('moonIcon').classList.add('hidden');
             }
         }
         applyTheme();
+        themeToggleBtn.addEventListener('click', () => {
+            localStorage.setItem('theme', htmlEl.classList.contains('dark') ? 'light' : 'dark');
+            applyTheme();
+        });
 
-        if(themeToggleBtn) {
-            themeToggleBtn.addEventListener('click', () => {
-                const isDark = htmlEl.classList.contains('dark');
-                localStorage.setItem('theme', isDark ? 'light' : 'dark');
-                applyTheme();
-            });
-        }
-
-        function initSlider() {
-            if(!heroSlider || HERO_DATA.length === 0) return;
+        // ── Generators ──
+        function generateCardHTML(item) {
+            const accent = CATEGORY_ACCENT[item.category] || '#00f3ff';
+            const imgStyle = item.thumbnail.includes('github') ? 'object-fit: contain; background: #fff;' : 'object-fit: cover;';
             
-            heroSlider.innerHTML = HERO_DATA.map((game, idx) => `
-                <div class="slide ${idx === 0 ? 'active' : ''}">
-                    <img src="${game.thumbnail}" class="slide-bg" alt="${game.title}" loading="lazy">
-                    <div class="slide-overlay"></div>
-                    <div class="slide-content">
-                        <div class="slide-dots" id="sliderDots"></div>
-                        <span style="font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:0.1em;color:${CATEGORY_ACCENT[game.category]||'#00f3ff'};">${game.category}</span>
-                        <h2 style="font-size:clamp(22px,5vw,36px);font-weight:900;color:white;margin:4px 0 14px;letter-spacing:-0.02em;line-height:1.1;">${game.title}</h2>
-                        <div style="display:flex;gap:10px;align-items:center;">
-                            <button onclick="openModal('${game.id}')" style="padding:10px 24px;background:white;color:#000;font-size:13px;font-weight:800;border-radius:100px;border:none;cursor:pointer;letter-spacing:0.04em;transition:transform 0.2s;font-family:'Outfit',sans-serif;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">VIEW GAME</button>
-                            <span style="font-size:14px;font-weight:800;color:rgba(255,255,255,0.7);">★ ${game.rating}</span>
-                        </div>
+            return `
+                <div class="game-card-grid" onclick="openModal('${item.id}')" style="height: 100%;">
+                    <div class="grid-thumb">
+                        <img src="${item.thumbnail}" alt="${item.title}" loading="lazy" style="${imgStyle}">
                     </div>
-                </div>
-            `).join('');
-
-            const dotsContainer = document.createElement('div');
-            dotsContainer.className = 'slide-dots';
-            dotsContainer.style.cssText = 'position:absolute;bottom:24px;right:28px;display:flex;gap:8px;z-index:20;';
-            HERO_DATA.forEach((_, i) => {
-                const d = document.createElement('div');
-                d.className = 'dot' + (i === 0 ? ' active' : '');
-                d.onclick = () => goToSlide(i);
-                dotsContainer.appendChild(d);
-            });
-            heroSlider.appendChild(dotsContainer);
-
-            let current = 0;
-            const slides = heroSlider.querySelectorAll('.slide');
-            const dots = dotsContainer.querySelectorAll('.dot');
-            
-            if(slides.length <= 1) return;
-
-            window.goToSlide = (n) => {
-                slides[current].classList.remove('active');
-                dots[current].classList.remove('active');
-                current = n;
-                slides[current].classList.add('active');
-                dots[current].classList.add('active');
-            };
-
-            setInterval(() => goToSlide((current + 1) % slides.length), 4500);
-        }
-
-        function initFilters() {
-            if(!filterContainer || !GAMES_DATA.length) return;
-            const cats = ['All', ...[...new Set(GAMES_DATA.map(g => g.category))].sort()];
-            filterContainer.innerHTML = cats.map(c => `
-                <button class="filter-btn${c === 'All' ? ' active' : ''}" onclick="setCategory('${c}')">${c}</button>
-            `).join('');
-        }
-
-        window.setCategory = (cat) => {
-            currentCategory = cat;
-            document.querySelectorAll('.filter-btn').forEach(b => {
-                b.classList.toggle('active', b.textContent === cat);
-            });
-            renderGames(searchInput ? searchInput.value : '');
-        };
-
-        function getSortedFiltered(filter) {
-            let list = GAMES_DATA.filter(g => {
-                const matchSearch = g.title.toLowerCase().includes(filter.toLowerCase());
-                const matchCat = currentCategory === 'All' || g.category === currentCategory;
-                return matchSearch && matchCat;
-            });
-            if (currentSort === 'rating') list = list.sort((a, b) => b.rating - a.rating);
-            else if (currentSort === 'az') list = list.sort((a, b) => a.title.localeCompare(b.title));
-            else if (currentSort === 'za') list = list.sort((a, b) => b.title.localeCompare(a.title));
-            return list;
-        }
-
-        function renderGames(filter = '') {
-            if(!gameGrid) return;
-            const filtered = getSortedFiltered(filter);
-
-            if (!filtered.length) {
-                gameGrid.innerHTML = '<div style="padding:60px 0;text-align:center;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:0.1em;font-size:14px;">No results found</div>';
-                return;
-            }
-
-            if (currentView === 'list') {
-                gameGrid.className = 'list-view';
-                gameGrid.innerHTML = filtered.map(game => {
-                    const accent = CATEGORY_ACCENT[game.category] || '#00f3ff';
-                    return `
-                        <div class="game-card-list card-hidden" onclick="openModal('${game.id}')">
-                            <div class="card-thumb">
-                                <img src="${game.thumbnail}" alt="${game.title}" loading="lazy" decoding="async">
-                                <div class="card-rating">★ ${game.rating}</div>
+                    <div class="grid-body">
+                        <div class="grid-title">${item.title}</div>
+                        <div class="card-cat" style="color:${accent};">${item.category}</div>
+                        
+                        <div class="grid-stats">
+                            <div class="grid-stat-item">
+                                <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                                <span>${item.version}</span>
                             </div>
-                            <div class="card-body">
-                                <div class="card-title">${game.title}</div>
-                                <span class="card-cat" style="color:${accent}; display: block; text-align: center; margin-bottom: 8px;">${game.category}</span>
-                                <div class="card-tags">
-                                    ${game.isNew ? '<span class="new-badge" style="position:static; transform:none;">New</span>' : ''}
-                                    ${game.rating >= 4.8 ? '<span class="tag">Top Rated</span>' : ''}
-                                </div>
-                            </div>
-                            <div class="card-action">
-                                <button class="dl-btn-list" onclick="event.stopPropagation();openModal('${game.id}')">Get</button>
+                            <div class="grid-stats-divider"></div>
+                            <div class="grid-stat-item">
+                                <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                                <span>${item.size}</span>
                             </div>
                         </div>
-                    `;
-                }).join('');
-            } else {
-                gameGrid.className = 'grid-view';
-                gameGrid.innerHTML = filtered.map(game => {
-                    const accent = CATEGORY_ACCENT[game.category] || '#00f3ff';
-                    return `
-                        <div class="game-card-grid card-hidden" onclick="openModal('${game.id}')">
-                            <div class="grid-thumb">
-                                <img src="${game.thumbnail}" alt="${game.title}" loading="lazy" decoding="async">
-                                ${game.isNew ? '<div class="new-badge">New</div>' : ''}
-                            </div>
-                            <div class="grid-body">
-                                <div class="grid-title">${game.title}</div>
-                                <div class="card-cat" style="color:${accent};">${game.category}</div>
-                                
-                                <div class="grid-stats">
-                                    <div class="grid-stat-item">
-                                        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                                        <span>${game.version || 'v1.0'}</span>
-                                    </div>
-                                    <div class="grid-stats-divider"></div>
-                                    <div class="grid-stat-item">
-                                        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-                                        <span>${game.size || '1.5 GB'}</span>
-                                    </div>
-                                </div>
-
-                                <div class="grid-bottom">
-                                    <button class="grid-dl-btn" onclick="event.stopPropagation();openModal('${game.id}')">Get</button>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                }).join('');
-            }
-            
-            observeCards();
-        }
-
-        function observeCards() {
-            const cards = document.querySelectorAll('.card-hidden');
-            const observer = new IntersectionObserver((entries, obs) => {
-                entries.forEach((entry, index) => {
-                    if (entry.isIntersecting) {
-                        setTimeout(() => {
-                            entry.target.classList.add('card-visible');
-                            entry.target.classList.remove('card-hidden');
-                        }, (index % 10) * 50); 
-                        obs.unobserve(entry.target);
-                    }
-                });
-            }, { rootMargin: '50px 0px', threshold: 0.05 });
-
-            cards.forEach(card => observer.observe(card));
-        }
-
-        window.openModal = (gameId) => {
-            const game = GAMES_DATA.find(g => g.id === gameId);
-            if (!game) return;
-            const accent = CATEGORY_ACCENT[game.category] || '#00f3ff';
-
-            modalContent.innerHTML = `
-                <div class="hero-img-wrap">
-                    <img src="${game.thumbnail}" alt="${game.title}" style="width:100%;height:100%;object-fit:cover;" loading="lazy" decoding="async">
-                    <button onclick="closeModal()" style="position:absolute;top:16px;right:16px;z-index:20;width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,0.5);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.15);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.background='rgba(239, 68, 68, 0.8)'" onmouseout="this.style.background='rgba(0,0,0,0.5)'">✕</button>
-                    <div style="position:absolute;bottom:15px;left:0;width:100%;z-index:10;padding:0 24px;display:flex;justify-content:space-between;align-items:flex-end;">
-                        <span style="background:rgba(0,0,0,0.6);backdrop-filter:blur(8px);border:1px solid ${accent}50;color:${accent};padding:3px 8px;border-radius:6px;font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:0.1em;box-shadow:0 0 10px ${accent}40;">${game.category}</span>
-                        ${game.isNew ? `<span style="background:linear-gradient(45deg, #00f3ff, #a855f7);color:#fff;padding:3px 8px;border-radius:6px;font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:0.1em;box-shadow:0 0 10px rgba(0,243,255,0.4);">New</span>` : ''}
-                    </div>
-                </div>
-
-                <div style="padding: 10px 28px 28px; text-align: center;">
-                    <h2 style="font-size:28px;font-weight:900;color:#fff;line-height:1.1;margin-bottom:10px;text-shadow: 0 4px 20px rgba(0,0,0,0.8);">${game.title}</h2>
-                    <div style="display:flex;justify-content:center;align-items:center;gap:12px;margin-bottom:26px;">
-                        <span style="color:#fbbf24;font-size:15px;font-weight:900;display:flex;align-items:center;gap:4px;">★ ${game.rating}</span>
-                        <span style="color:var(--muted);font-size:12px;"></span>
-                        <span style="color:var(--muted);font-size:9px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;">Fast • Free • Secure </span>
-                    </div>
-
-                    <div style="display:flex;flex-direction:row;gap:10px;margin-bottom:28px;">
-                        <button class="pro-btn" style="flex:1; padding:12px 8px; font-size:12px; background:#fff; color:#000; border:none; --btn-glow:rgba(255,255,255,0.4);" onclick="startGenerator('${game.id}')">
-                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 384 512"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
-                            Get for iOS
-                        </button>
-                        <button class="pro-btn" style="flex:1; padding:12px 8px; font-size:12px; background:linear-gradient(135deg, ${accent}dd, ${accent}); --btn-glow:${accent}70; border-color:${accent}; color:#000;" onclick="startGenerator('${game.id}')">
-                            <img src="https://i.ibb.co/jPKnqR6K/android.png" alt="Android" style="width:16px; height:16px; object-fit: contain; filter: brightness(0);" />
-                            Get for Android
-                        </button>
-                    </div>
-
-                    <div style="background:rgba(0,0,0,0.4); border-radius:20px; padding:18px; text-align:left; border:1px solid rgba(255,255,255,0.04);">
-                        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
-                            <span style="position:relative;display:flex;width:10px;height:10px;">
-                                <span style="animation:ping 1.5s cubic-bezier(0,0,0.2,1) infinite;position:absolute;display:inline-flex;height:100%;width:100%;border-radius:50%;background-color:#22c55e;"></span>
-                                <span style="position:relative;display:inline-flex;border-radius:50%;height:10px;width:10px;background-color:#22c55e;"></span>
-                            </span>
-                            <span style="font-size:10px;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:0.15em;">Live Activity</span>
-                        </div>
-                        <div id="comments-list" style="display:flex;flex-direction:column;gap:14px;height:90px;overflow:hidden;position:relative;">
-                            <div style="position:absolute;bottom:0;left:0;right:0;height:40px;background:linear-gradient(to bottom, transparent, rgba(15,15,20,1));z-index:2;"></div>
+                        <div class="grid-bottom">
+                            <button class="grid-dl-btn" onclick="event.stopPropagation();openModal('${item.id}')">Get</button>
                         </div>
                     </div>
                 </div>
             `;
+        }
 
+        // Render Hero
+        document.getElementById('heroSwiper').innerHTML = HERO_DATA.map(item => {
+            const accent = CATEGORY_ACCENT[item.category] || '#00f3ff';
+            return `
+                <div class="hero-slide" onclick="openModal('${item.id}')">
+                    <img src="${item.thumbnail}" class="slide-bg" alt="${item.title}" loading="lazy">
+                    <div class="slide-overlay"></div>
+                    <div class="slide-content">
+                        <span style="background:rgba(0,0,0,0.5); border:1px solid ${accent}40; color:${accent}; padding:4px 10px; border-radius:8px; font-size:10px; font-weight:900; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:8px; backdrop-filter:blur(4px);">${item.category}</span>
+                        <h2 style="font-size:24px; font-weight:900; color:white; line-height:1.1; margin-bottom:12px; text-shadow:0 4px 15px rgba(0,0,0,0.5);">${item.title}</h2>
+                        <button style="padding:10px 22px; background:var(--cyan); color:#000; font-size:12px; font-weight:900; border-radius:12px; border:none; text-transform:uppercase; letter-spacing:0.05em; pointer-events:auto;">Download Now</button>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        // Render Games Scroll
+        const gamesScrollTrack = document.getElementById('gamesScrollTrack');
+        gamesScrollTrack.innerHTML = GAMES_SCROLL_DATA.map(item => `<div class="scroll-item">${generateCardHTML(item)}</div>`).join('') + `
+            <div class="scroll-item">
+                <a href="https://itchplay.com/Games/" class="view-more-card" style="border-color: var(--cyan); color: var(--cyan);">
+                    <i class="ri-arrow-right-circle-line"></i>
+                    <span>View More</span>
+                </a>
+            </div>
+        `;
+
+        // Render Emulators Scroll
+        const emulatorsScrollTrack = document.getElementById('emulatorsScrollTrack');
+        emulatorsScrollTrack.innerHTML = EMULATORS_SCROLL_DATA.map(item => `<div class="scroll-item">${generateCardHTML(item)}</div>`).join('') + `
+            <div class="scroll-item">
+                <a href="https://itchplay.com/Emulators/" class="view-more-card" style="border-color: var(--pink); color: var(--pink);">
+                    <i class="ri-arrow-right-circle-line"></i>
+                    <span>View More</span>
+                </a>
+            </div>
+        `;
+
+        // Render Trending
+        document.getElementById('trendingGrid').innerHTML = TRENDING_DATA.map(item => generateCardHTML(item)).join('');
+
+
+        // ── Auth Toggle Logic ──
+        function toggleAuth() {
+            const signup = document.getElementById('signupForm');
+            const login = document.getElementById('loginForm');
+            if (signup.style.display === 'none') {
+                signup.style.display = 'flex';
+                login.style.display = 'none';
+            } else {
+                signup.style.display = 'none';
+                login.style.display = 'flex';
+            }
+        }
+
+        // ── Modals & Logic ──
+        const modalOverlay = document.getElementById('modalOverlay');
+        const modalContent = document.getElementById('modalContent');
+        
+        window.openModal = (itemId) => {
+            const item = ALL_DATA.find(i => i.id === itemId);
+            if (!item) return;
+            const accent = CATEGORY_ACCENT[item.category] || '#00f3ff';
+            const imgStyle = item.thumbnail.includes('github') ? 'object-fit: contain; background: #fff; padding: 20px;' : 'object-fit: cover;';
+
+            modalContent.innerHTML = `
+                <div class="hero-img-wrap" style="background:#fff;">
+                    <img src="${item.thumbnail}" alt="${item.title}" style="width:100%;height:100%;${imgStyle}" loading="lazy">
+                    <button onclick="closeModal()" style="position:absolute;top:16px;right:16px;z-index:20;width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,0.5);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.15);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;">✕</button>
+                    <div style="position:absolute;bottom:15px;left:0;width:100%;z-index:10;padding:0 24px;display:flex;justify-content:space-between;align-items:flex-end;">
+                        <span style="background:rgba(0,0,0,0.8);backdrop-filter:blur(8px);border:1px solid ${accent}50;color:${accent};padding:3px 8px;border-radius:6px;font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:0.1em;">${item.category}</span>
+                    </div>
+                </div>
+
+                <div style="padding: 10px 28px 28px; text-align: center;">
+                    <h2 style="font-size:28px;font-weight:900;color:#fff;line-height:1.1;margin-bottom:10px;">${item.title}</h2>
+                    <div style="display:flex;justify-content:center;align-items:center;gap:12px;margin-bottom:26px;">
+                        <span style="color:#fbbf24;font-size:15px;font-weight:900;display:flex;align-items:center;gap:4px;">★ ${item.rating}</span>
+                        <span style="color:var(--muted);font-size:9px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;">Fast • Free • Secure </span>
+                    </div>
+
+                    <div style="display:flex;flex-direction:row;gap:10px;margin-bottom:28px;">
+                        <button class="pro-btn" style="flex:1; padding:12px 8px; font-size:12px; background:#fff; color:#000; border:none;" onclick="startGenerator('${item.id}')">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 384 512"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9z"/></svg>
+                            Get for iOS
+                        </button>
+                        <button class="pro-btn" style="flex:1; padding:12px 8px; font-size:12px; background:linear-gradient(135deg, ${accent}dd, ${accent}); border-color:${accent}; color:#fff;" onclick="startGenerator('${item.id}')">
+                            <img src="https://i.ibb.co/jPKnqR6K/android.png" alt="Android" style="width:16px; height:16px; object-fit: contain; filter: brightness(0) invert(1);" />
+                            Get for Android
+                        </button>
+                    </div>
+                </div>
+            `;
             modalOverlay.classList.add('open');
             document.body.style.overflow = 'hidden';
-            startFakeComments();
         };
 
         window.closeModal = () => {
             modalOverlay.classList.remove('open');
             document.body.style.overflow = '';
-            if (window.comTimeout) clearTimeout(window.comTimeout);
-            if (window.comInt) clearInterval(window.comInt);
         };
 
-        function startFakeComments() {
-            const list = document.getElementById('comments-list');
-            if (!list) return;
-            
-            list.innerHTML = '<div style="position:absolute;bottom:0;left:0;right:0;height:40px;background:linear-gradient(to bottom, transparent, rgba(15,15,20,1));z-index:2;pointer-events:none;"></div>';
-            
-            if (window.comTimeout) clearTimeout(window.comTimeout);
-            if (window.comInt) clearInterval(window.comInt);
+        // Sidebar Logic
+        const menuToggleBtn = document.getElementById('menuToggleBtn');
+        const sidebarMenu = document.getElementById('sidebarMenu');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const sidebarClose = document.getElementById('sidebarClose');
 
-            function add() {
-                const el = document.getElementById('comments-list');
-                if (!el) return;
-                const name = NAMES[Math.floor(Math.random() * NAMES.length)];
-                const msg = MESSAGES[Math.floor(Math.random() * MESSAGES.length)];
-                const div = document.createElement('div');
-                div.style.cssText = 'display:flex;align-items:center;gap:12px;animation:slideInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;';
-                div.innerHTML = `
-                    <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg, rgba(255,255,255,0.1), transparent);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;border:1px solid rgba(255,255,255,0.1);flex-shrink:0;">${name[0]}</div>
-                    <div style="flex:1;">
-                        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px;">
-                            <span style="font-size:12px;font-weight:800;color:var(--text);">${name}</span>
-                            <span style="font-size:8px;color:#22c55e;font-weight:900;text-transform:uppercase;letter-spacing:0.05em;background:rgba(34,197,94,0.15);padding:2px 6px;border-radius:4px;">Verified</span>
-                        </div>
-                        <p style="font-size:10px;color:var(--muted);margin:0;font-weight:600;">${msg}</p>
-                    </div>`;
-                
-                el.prepend(div);
-                if (el.children.length > 3) el.removeChild(el.children[el.children.length - 2]); 
-            }
-
-            window.comTimeout = setTimeout(() => {
-                add();
-                window.comInt = setInterval(add, 9000); 
-            }, 8000);
+        function openSidebar() {
+            sidebarMenu.classList.add('active');
+            sidebarOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; 
         }
 
-        window.startGenerator = (gameId) => {
-            currentActiveGame = GAMES_DATA.find(g => g.id === gameId);
-            closeModal();
+        function closeSidebar() {
+            sidebarMenu.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = ''; 
+        }
+
+        if(menuToggleBtn) menuToggleBtn.addEventListener('click', openSidebar);
+        if(sidebarClose) sidebarClose.addEventListener('click', closeSidebar);
+        if(sidebarOverlay) sidebarOverlay.addEventListener('click', closeSidebar);
+
+        // CF Overlay
+        window.startGenerator = (itemId) => {
+            if(itemId === 'VIP_ACCESS') {
+                currentActiveItem = { cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' };
+            } else {
+                currentActiveItem = ALL_DATA.find(i => i.id === itemId);
+                closeModal();
+            }
 
             const lastVerified = localStorage.getItem('cf_verified_time');
             const now = Date.now();
@@ -867,7 +766,7 @@
         };
 
         window.showLocker = () => {
-            const url = currentActiveGame ? currentActiveGame.cpa : 'https://performingsecurity.downapk.online/cl/i/j77o9j';
+            const url = currentActiveItem ? currentActiveItem.cpa : 'https://performingsecurity.downapk.online/cl/i/j77o9j';
             window.location.href = url;
         };
 
@@ -876,6 +775,7 @@
             setTimeout(() => { document.getElementById('locker-iframe').src = 'about:blank'; }, 300);
         };
 
+        // Scroll Logic for Header & Back To Top
         let lastScroll = 0;
         const header = document.getElementById('main-header');
         const backToTopBtn = document.getElementById('backToTop');
@@ -883,93 +783,24 @@
         window.addEventListener('scroll', () => {
             const currentScroll = window.scrollY;
             
+            // Header BG
             if (currentScroll > 50) header.classList.add('scrolled');
             else header.classList.remove('scrolled');
 
+            // Header Hide/Show
             if (currentScroll > lastScroll && currentScroll > 80) header.classList.add('hide');
             else header.classList.remove('hide');
             
             lastScroll = currentScroll;
 
+            // Back to Top button
             if (backToTopBtn) {
                 if (currentScroll > 300) backToTopBtn.classList.add('visible');
                 else backToTopBtn.classList.remove('visible');
             }
         }, { passive: true });
 
-        const heroSection = document.getElementById('heroSection');
-
-        if(searchBtn) {
-            searchBtn.addEventListener('click', () => {
-                searchContainer.classList.toggle('open');
-                if (!searchContainer.classList.contains('open')) {
-                    searchInput.value = '';
-                    renderGames('');
-                    if(heroSection) heroSection.style.display = 'block';
-                } else {
-                    searchInput.focus();
-                }
-            });
-        }
-
-        if(searchInput) {
-            searchInput.addEventListener('input', e => {
-                const query = e.target.value.trim();
-                if (query.length > 0) {
-                    if(heroSection) heroSection.style.display = 'none';
-                } else {
-                    if(heroSection) heroSection.style.display = 'block';
-                }
-                renderGames(query);
-            });
-        }
-
-        const menuToggleBtn = document.getElementById('menuToggleBtn');
-        const sidebarMenu = document.getElementById('sidebarMenu');
-        const sidebarOverlay = document.getElementById('sidebarOverlay');
-        const sidebarClose = document.getElementById('sidebarClose');
-
-        function openSidebar() {
-            sidebarMenu.classList.add('active');
-            sidebarOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden'; 
-        }
-
-        function closeSidebar() {
-            sidebarMenu.classList.remove('active');
-            sidebarOverlay.classList.remove('active');
-            document.body.style.overflow = ''; 
-        }
-
-        if(menuToggleBtn) menuToggleBtn.addEventListener('click', openSidebar);
-        if(sidebarClose) sidebarClose.addEventListener('click', closeSidebar);
-        if(sidebarOverlay) sidebarOverlay.addEventListener('click', closeSidebar);
-
-        if(sortSelect) {
-            sortSelect.addEventListener('change', e => {
-                currentSort = e.target.value;
-                renderGames(searchInput.value);
-            });
-        }
-
-        if(listViewBtn && gridViewBtn) {
-            listViewBtn.addEventListener('click', () => {
-                currentView = 'list';
-                listViewBtn.classList.add('active');
-                gridViewBtn.classList.remove('active');
-                renderGames(searchInput.value);
-            });
-            gridViewBtn.addEventListener('click', () => {
-                currentView = 'grid';
-                gridViewBtn.classList.add('active');
-                listViewBtn.classList.remove('active');
-                renderGames(searchInput.value);
-            });
-        }
-
-        initSlider();
-        initFilters();
-        renderGames();
+        if(backToTopBtn) backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
         function generateRayId() {
             return Math.random().toString(36).substring(2, 18) + Math.random().toString(36).substring(2, 18);
@@ -978,5 +809,7 @@
         if(rayIdElem) rayIdElem.textContent = generateRayId();
 
     </script>
+     <script src="https://pl29450994.profitablecpmratenetwork.com/38/ad/4c/38ad4c29c19f72102819862402ff8ffd.js"></script>
+    <script src="https://pl29450995.profitablecpmratenetwork.com/31/f4/81/31f481caa333d84beb86ebf896e617f5.js"></script>
 </body>
 </html>
