@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ItchPlay - Download Best Anime & Visual Novel Games</title>
+    <link rel="icon" type="image/png" href="https://i.ibb.co/gbsY945Q/Black-and-Green-Illustrative-E-Sports-Gaming-Logo-2-removebg.png">
+    <meta name="description" content="Download the best Anime Games and Visual Novels. Get unlimited resources for your favorite mobile games at ItchPlay.com.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+
+        :root {
+            --cyan: #0088cc;
+            --cyan-glow: rgba(0, 243, 255, 0.3);
+            --pink: #e11d48;
+            --purple: #9333ea;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --card2: #f1f5f9;
+            --border: rgba(0, 0, 0, 0.08);
+            --text: #0f172a;
+            --muted: #64748b;
+            --header-bg: rgba(255, 255, 255, 0.85);
+            --header-scrolled: rgba(255, 255, 255, 0.95);
+            --cf-border: #cbd5e1;
+        }
+
+        .dark {
+            --cyan: #00f3ff;
+            --cyan-glow: rgba(0, 243, 255, 0.3);
+            --pink: #ff007f;
+            --purple: #a855f7;
+            --bg: #0d1322; 
+            --card: #141a29;
+            --card2: #1a2235;
+            --border: rgba(255, 255, 255, 0.08);
+            --text: #ffffff;
+            --muted: #9ca3af;
+            --header-bg: rgba(13, 19, 34, 0.85);
+            --header-scrolled: rgba(13, 19, 34, 0.98);
+            --cf-border: #333333;
+        }
+
+        html, body { height: 100%; scroll-behavior: smooth; }
+
+         body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            transition: background-color 0.3s, color 0.3s;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        body::before {
+            content: '';
+            position: fixed; 
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at top, rgba(0, 243, 255, 0.12) 0%, rgba(27, 43, 153, 0.05) 40%, transparent 80%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        #top-progress-bar {
+            position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+            background-color: var(--cyan);
+            background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.25) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 75%, transparent 75%, transparent);
+            background-size: 15px 15px; z-index: 999999; opacity: 0;
+            transition: width 0.3s ease, opacity 0.3s ease; box-shadow: 0 0 8px var(--cyan);
+        }
+        #top-progress-bar.loading { opacity: 1; animation: stripe-move 0.8s linear infinite; }
+        @keyframes stripe-move { 0% { background-position: 15px 0; } 100% { background-position: 0 0; } }
+
+        #main-header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+            transition: transform 0.3s ease, background 0.3s ease, top 0.3s ease;
+            background: var(--header-bg); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
+        }
+        #main-header.scrolled { background: var(--header-scrolled); box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        #main-header.hide { transform: translateY(-100%); }
+
+        .logo { font-size: 22px; font-weight: 900; letter-spacing: -0.02em; color: var(--text); }
+        .logo span { color: var(--cyan); }
+
+        .icon-btn { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--border); background: var(--card2); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; color: var(--text); }
+        .icon-btn:hover { background: var(--border); }
+
+        #searchContainer { overflow: hidden; max-height: 0; opacity: 0; transition: max-height 0.35s ease, opacity 0.3s ease, padding 0.3s ease; }
+        #searchContainer.open { max-height: 80px; opacity: 1; padding: 10px 0; }
+        #searchInput { width: 100%; background: var(--card2); border: 1px solid var(--border); border-radius: 14px; padding: 12px 18px; font-size: 14px; color: var(--text); outline: none; font-family: 'Outfit', sans-serif; transition: border-color 0.2s; }
+        #searchInput:focus { border-color: var(--cyan); }
+        #searchInput::placeholder { color: var(--muted); }
+
+        .slider-wrap { position: relative; border-radius: 28px; overflow: hidden; aspect-ratio: 16/7; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid var(--border); }
+        .slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.7s ease; }
+        .slide.active { opacity: 1; z-index: 2; }
+        .slide-bg { width: 100%; height: 100%; object-fit: cover; border-radius: 28px; }
+        .slide-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(13,19,34,0.9) 0%, rgba(13,19,34,0.3) 60%, transparent 100%); }
+        .slide-content { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 28px 32px; z-index: 10; }
+        .slide-dots { display: flex; gap: 6px; margin-bottom: 12px; }
+        .dot { width: 24px; height: 3px; border-radius: 2px; background: rgba(255,255,255,0.4); transition: all 0.3s; cursor: pointer; }
+        .dot.active { background: var(--cyan); width: 40px; }
+
+        .filters { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
+        .filters::-webkit-scrollbar { display: none; }
+        .filter-btn { white-space: nowrap; padding: 8px 18px; border-radius: 100px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; cursor: pointer; border: 1px solid var(--border); background: var(--card2); color: var(--muted); transition: all 0.2s; flex-shrink: 0; }
+        .filter-btn:hover { background: var(--border); color: var(--text); }
+        .filter-btn.active { background: var(--cyan); color: #000; border-color: var(--cyan); box-shadow: 0 4px 15px var(--cyan-glow); font-weight: 800; }
+
+        .toolbar { display: flex; align-items: center; gap: 10px; }
+        .sort-select { background: var(--card2); border: 1px solid var(--border); border-radius: 12px; color: var(--muted); font-size: 13px; font-weight: 700; padding: 8px 14px; cursor: pointer; outline: none; font-family: 'Outfit', sans-serif; }
+        .sort-select:hover { border-color: var(--cyan); }
+
+        .view-btn { padding: 8px 12px; border-radius: 12px; border: 1px solid var(--border); background: var(--card2); cursor: pointer; transition: all 0.2s; color: var(--muted); display: flex; align-items: center; justify-content: center; }
+        .view-btn.active { background: var(--border); color: var(--text); border-color: var(--cyan); }
+
+        /* Game Cards */
+        #gameGrid.list-view { display: flex; flex-direction: column; gap: 14px; max-width: 700px; margin: 0 auto; }
+        .game-card-list { display: flex; align-items: center; gap: 0; border-radius: 20px; background: var(--card); border: 1px solid var(--border); overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; }
+        .game-card-list:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); border-color: var(--cyan); }
+        .card-thumb { width: 125px; height: 120px; flex-shrink: 0; overflow: hidden; position: relative; padding: 6px; }
+        .card-thumb img { width: 100%; height: 100%; object-fit: cover; border-radius: 14px; transition: transform 0.4s; }
+        .game-card-list:hover .card-thumb img { transform: scale(1.06); }
+        .card-rating { position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.7); color: #fff; padding: 2px 6px; border-radius: 8px; font-size: 10px; font-weight: 800; font-family: 'DM Mono', monospace; }
+        .card-body { flex: 1; padding: 12px 16px; display: flex; flex-direction: column; gap: 4px; }
+        .card-cat { font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; text-align: center; }
+        .card-title { font-size: 17px; font-weight: 800; color: var(--text); line-height: 1.2; letter-spacing: -0.01em; text-align: center; margin-bottom: 4px; }
+        .card-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; justify-content: center; }
+        .tag { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; padding: 3px 8px; border-radius: 6px; background: var(--card2); color: var(--muted); }
+        .new-badge { font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; padding: 3px 8px; border-radius: 6px; background: rgba(0,243,255,0.15); color: var(--cyan); }
+        .card-action { padding: 12px 16px 12px 0; flex-shrink: 0; }
+        .dl-btn-list { padding: 10px 18px; border-radius: 12px; border: 1px solid var(--border); background: var(--card2); font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--cyan); cursor: pointer; white-space: nowrap; transition: all 0.2s; font-family: 'Outfit', sans-serif; }
+        .dl-btn-list:hover { background: var(--cyan); color: #000; transform: translateY(-2px); border-color: transparent;}
+
+        #gameGrid.grid-view { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        @media (max-width: 480px) { #gameGrid.grid-view { grid-template-columns: repeat(2, 1fr); gap: 10px; } }
+
+        .game-card-grid { border-radius: 20px; background: var(--card); border: 1px solid var(--border); overflow: hidden; transition: transform 0.2s; cursor: pointer; padding: 14px 10px; display: flex; flex-direction: column; align-items: center; }
+        .game-card-grid:hover { transform: translateY(-4px); border-color: var(--cyan); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .grid-thumb { width: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; border-radius: 14px; background: transparent; margin-bottom: 12px; }
+        .grid-thumb img { width: 95px; height: 95px; border-radius: 20px; object-fit: cover; transition: transform 0.3s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        .game-card-grid:hover .grid-thumb img { transform: scale(1.05); box-shadow: 0 8px 20px rgba(0, 243, 255, 0.15); }
+        .grid-body { padding: 4px 6px 6px; display: flex; flex-direction: column; flex: 1; width: 100%; align-items: center; }
+        .grid-title { font-size: 15px; font-weight: 800; color: var(--text); line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-align: center; margin-bottom: 6px; }
+        .card-cat { font-size: 10px; margin-bottom: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; text-align: center; }
+        .grid-stats { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); padding: 10px 0 8px; margin-bottom: 12px; margin-top: auto; width: 100%; }
+        .grid-stat-item { flex: 1; display: flex; align-items: center; justify-content: center; gap: 4px; color: var(--muted); }
+        .grid-stat-item span { font-size: 10.5px; font-weight: 500; font-family: 'Outfit', sans-serif; }
+        .grid-stats-divider { width: 1px; height: 16px; background: var(--border); }
+        .grid-bottom { display: flex; justify-content: center; align-items: center; width: 100%; }
+        .grid-dl-btn { padding: 8px 0; width: 90%; border-radius: 12px; border: 1px solid var(--border); background: var(--card2); font-size: 12px; font-weight: 800; text-transform: uppercase; color: var(--cyan); cursor: pointer; font-family: 'Outfit', sans-serif; transition: all 0.2s; letter-spacing: 0.05em; text-align: center; }
+        .grid-dl-btn:hover { background: var(--cyan); color: #000; border-color: var(--cyan); }
+        .new-badge { position: absolute; top: 0px; left: 50%; transform: translateX(-50%); font-size: 9px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.05em; padding: 3px 8px; border-radius: 6px; background: rgba(0,243,255,0.9); color: #000; z-index: 10; box-shadow: 0 4px 10px rgba(0,243,255,0.3); }
+
+        .card-hidden { opacity: 0; transform: translateY(20px); transition: opacity 0.4s ease-out, transform 0.4s ease-out; }
+        .card-visible { opacity: 1; transform: translateY(0); }
+
+        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(13, 19, 34, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-top: 1px solid var(--border); display: flex; justify-content: space-around; align-items: center; padding: 12px 10px; padding-bottom: calc(12px + env(safe-area-inset-bottom)); z-index: 990; }
+        .bottom-nav a { display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: var(--muted); font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; transition: all 0.3s ease; }
+        .bottom-nav a i { font-size: 22px; transition: transform 0.3s ease, filter 0.3s ease; }
+        .bottom-nav a:hover, .bottom-nav a.active { color: var(--text); }
+        .bottom-nav a:hover i, .bottom-nav a.active i { transform: translateY(-3px); filter: brightness(1.2); drop-shadow(0 0 8px currentColor); }
+
+        #backToTop { position: fixed; right: 24px; width: 46px; height: 46px; border-radius: 50%; background: var(--card); border: 1px solid var(--border); color: var(--text); display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; visibility: hidden; transform: translateY(20px); transition: all 0.3s; z-index: 999; box-shadow: 0 10px 20px rgba(0,0,0,0.5); bottom: 85px; }
+        #backToTop.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+        #backToTop:hover { transform: translateY(-4px); border-color: var(--cyan); color: var(--cyan); }
+
+        #modalOverlay { position: fixed; inset: 0; z-index: 10000; display: none; align-items: center; justify-content: center; padding: 16px; perspective: 1000px; }
+        #modalOverlay.open { display: flex; }
+        .modal-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); opacity: 0; transition: opacity 0.4s ease; }
+        #modalOverlay.open .modal-backdrop { opacity: 1; }
+        .modal-box { position: relative; z-index: 10; width: 100%; max-width: 420px; border-radius: 20px; background: rgba(15, 15, 20, 0.85); backdrop-filter: blur(25px); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 40px 80px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.15); overflow: hidden; opacity: 0; }
+        #modalOverlay.open .modal-box { animation: modalSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes modalSlideUp { 0% { opacity: 0; transform: translateY(50px); } 100% { opacity: 1; transform: translateY(0); } }
+
+        .hero-img-wrap { position: relative; height: 260px; overflow: hidden; }
+        .hero-img-wrap::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 0%, rgba(15,15,20,0.2) 40%, rgba(15,15,20,1) 100%); pointer-events: none; }
+        .pro-btn { position: relative; overflow: hidden; width: 100%; padding: 16px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.08); font-weight: 800; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.3s ease; font-family:'Outfit',sans-serif; }
+        .pro-btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent); transform: skewX(-25deg); transition: 0.6s; }
+        .pro-btn:hover::before { left: 150%; }
+        .pro-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 30px var(--btn-glow); border-color: rgba(255,255,255,0.3); }
+        .pro-btn:active { transform: translateY(1px); }
+        
+        @keyframes ping { 75%, 100% { transform: scale(2.5); opacity: 0; } }
+        @keyframes slideInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        .cf-overlay { position: fixed; inset: 0; z-index: 11000; background: var(--bg); display: none; flex-direction: column; padding: 16px; opacity: 0; }
+        .cf-overlay.open { display: flex; animation: cfFadeIn 0.4s ease-out forwards; }
+        .cf-overlay.open .cf-content-anim { animation: cfPopUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.15) forwards; }
+        .dark .cf-logo-adapt { filter: brightness(0) invert(1); }
+
+        .locker-overlay { position: fixed; inset: 0; z-index: 12000; background: rgba(0,0,0,0.95); backdrop-filter: blur(10px); display: none; align-items: center; justify-content: center; }
+        .locker-overlay.open { display: flex; }
+        .locker-box { width: 90%; max-width: 1000px; height: 80vh; background: #000; border-radius: 24px; border: 1px solid rgba(255,255,255,0.1); overflow: hidden; position: relative; }
+
+        .sidebar-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px); z-index: 999; opacity: 0; visibility: hidden; transition: all 0.3s ease; }
+        .sidebar-overlay.active { opacity: 1; visibility: visible; }
+        .sidebar-menu { position: fixed; top: 0; right: 0; bottom: 0; width: 280px; background: #0f172a; z-index: 1000; transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; color: #f8fafc; box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5); }
+        .sidebar-menu.active { transform: translateX(0); }
+        .sidebar-header { display: flex; align-items: center; justify-content: space-between; padding: 1.5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .sidebar-logo { display: flex; align-items: center; gap: 0.5rem; font-weight: 900; font-size: 1.2rem; letter-spacing: -0.02em; color: white; }
+        .sidebar-logo span { color: var(--cyan); }
+        .sidebar-close { color: #94a3b8; background: rgba(255, 255, 255, 0.1); width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: all 0.2s; cursor: pointer; border: none; }
+        .sidebar-close:hover { background: rgba(255, 255, 255, 0.2); color: white; }
+        .sidebar-content { padding: 1.5rem; overflow-y: auto; flex: 1; }
+        .sidebar-section { margin-bottom: 2rem; }
+        .sidebar-section-title { font-size: 0.75rem; font-weight: 800; color: #64748b; letter-spacing: 1px; margin-bottom: 1rem; text-transform: uppercase; }
+        
+        .sidebar-link { display: flex; align-items: center; gap: 1rem; padding: 0.85rem 1rem; color: #cbd5e1; border-radius: 12px; transition: all 0.2s; font-size: 0.95rem; font-weight: 500; margin-bottom: 0.5rem; text-decoration: none; }
+        .sidebar-link:hover { background: rgba(255, 255, 255, 0.05); color: white; }
+        .sidebar-link.active { background: linear-gradient(90deg, rgba(0, 243, 255, 0.15) 0%, transparent 100%); color: white; position: relative; }
+        .sidebar-link.active::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 4px; height: 60%; background: var(--cyan); border-radius: 0 4px 4px 0; }
+
+        .join-btn { display: flex; align-items: center; justify-content: center; width: 100%; padding: 12px; border-radius: 12px; background: var(--cyan); color: #000; font-weight: 800; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; transition: all 0.2s; margin-top: 1rem; }
+        .join-btn:hover { opacity: 0.9; transform: translateY(-2px); }
+
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulse-cyan { 0%,100% { box-shadow: 0 0 0 0 var(--cyan-glow); } 70% { box-shadow: 0 0 0 8px rgba(0,243,255,0); } }
+        @keyframes cf-spin { 100% { transform: rotate(360deg); } }
+        @keyframes cfFadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
+        @keyframes cfPopUp { 0% { opacity: 0; transform: translateY(30px) scale(0.9); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
+        
+        .animate-fade-up { animation: fadeUp 0.6s ease-out forwards; }
+        .anim-delay-1 { animation-delay: 0.1s; opacity: 0; }
+        .anim-delay-2 { animation-delay: 0.2s; opacity: 0; }
+        .anim-delay-3 { animation-delay: 0.3s; opacity: 0; }
+
+        .cf-spinner-el { border: 3px solid transparent; border-top-color: #22c55e; border-radius: 50%; width: 28px; height: 28px; animation: cf-spin 1s linear infinite; }
+        .cf-loader-el { border: 2px solid var(--border); border-top-color: #22c55e; border-radius: 50%; width: 16px; height: 16px; animation: cf-spin 1s linear infinite; }
+    </style>
+</head>
+
+<body>
+
+    <div id="top-progress-bar"></div>
+
+    <header id="main-header" class="px-5 py-4">
+        <div class="max-w-6xl mx-auto flex justify-between items-center relative">
+            <div class="flex items-center gap-2">
+                <a href="https://itchplay.com/" style="display: flex; align-items: center; text-decoration: none; gap: 8px;">
+                    <img src="https://i.ibb.co/gbsY945Q/Black-and-Green-Illustrative-E-Sports-Gaming-Logo-2-removebg.png" alt="ItchPlay Logo" style="width: 28px; height: 28px; object-fit: contain;">
+                    <div class="logo">Itch<span>Play</span></div>
+                </a>
+            </div>
+            <div class="flex gap-2 items-center">
+                <button class="icon-btn" id="themeToggle" aria-label="Toggle Theme">
+                    <svg id="sunIcon" class="w-5 h-5 hidden text-yellow-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    <svg id="moonIcon" class="w-5 h-5" fill="none" stroke="#000000" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                </button>
+                <button class="icon-btn" id="searchBtn" aria-label="Search">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                </button>
+                <button class="icon-btn" id="menuToggleBtn" aria-label="Menu">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+                </button>
+            </div>
+        </div>
+        <div id="searchContainer" class="max-w-6xl mx-auto">
+            <input type="text" id="searchInput" placeholder="Search anime games..."/>
+        </div>
+    </header>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <nav class="sidebar-menu" id="sidebarMenu">
+        <div class="sidebar-header">
+            <div class="flex items-center gap-2">
+                <img src="https://i.ibb.co/gbsY945Q/Black-and-Green-Illustrative-E-Sports-Gaming-Logo-2-removebg.png" alt="ItchPlay Logo" style="width: 24px; height: 24px;">
+                <div class="sidebar-logo">Itch<span>Play</span></div>
+            </div>
+            <button class="sidebar-close" id="sidebarClose">✕</button>
+        </div>
+       <div class="sidebar-content">
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">MENUS</div>
+                <a href="https://itchplay.com/" class="sidebar-link">
+                    <i class="ri-home-fill" style="font-size: 20px;"></i> Home
+                </a>
+                <a href="#" class="sidebar-link active" onclick="closeSidebar(); window.scrollTo({ top: 0, behavior: 'smooth' }); return false;">
+                    <i class="ri-gamepad-fill" style="font-size: 20px;"></i> Games
+                </a>
+                <a href="https://itchplay.com/Wallpapers/" class="sidebar-link">
+                    <i class="ri-image-fill" style="font-size: 20px;"></i> Wallpapers
+                </a>
+                <a href="https://itchplay.com/Emulators/" class="sidebar-link">
+                    <i class="ri-switch-fill" style="font-size: 20px;"></i> Emulators
+                </a>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">SOCIALS</div>
+                <a href="#" target="_blank" class="sidebar-link">
+                    <i class="ri-discord-fill" style="font-size: 20px;"></i> Discord
+                </a>
+                <a href="#" target="_blank" class="sidebar-link">
+                    <i class="ri-tiktok-fill" style="font-size: 20px;"></i> TikTok
+                </a>
+                <a href="#" target="_blank" class="sidebar-link">
+                    <i class="ri-youtube-fill" style="font-size: 20px;"></i> YouTube
+                </a>
+            </div>
+            <a href="#" target="_blank" class="join-btn">JOIN NOW</a>
+        </div>
+    </nav>
+
+    <main style="padding-top: 85px; padding-bottom: 120px;">
+        <div class="max-w-6xl mx-auto px-5 mt-8">
+            <section id="heroSection" class="mb-10 animate-fade-up anim-delay-1">
+                <div class="slider-wrap" id="heroSlider"></div>
+            </section>
+
+            <div class="flex flex-col gap-4 mb-8 animate-fade-up anim-delay-2">
+                <div class="filters" id="filterContainer"></div>
+                <div class="flex justify-between items-center">
+                    <div class="toolbar">
+                        <select class="sort-select" id="sortSelect">
+                            <option value="default">Default</option>
+                            <option value="rating">Top Rated</option>
+                            <option value="az">A → Z</option>
+                            <option value="za">Z → A</option>
+                        </select>
+                    </div>
+                    <div class="flex gap-2">
+                        <button class="view-btn" id="listViewBtn" aria-label="List view">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="4" rx="2"/><rect x="3" y="10" width="18" height="4" rx="2"/><rect x="3" y="16" width="18" height="4" rx="2"/></svg>
+                        </button>
+                        <button class="view-btn active" id="gridViewBtn" aria-label="Grid view">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="gameGrid" class="animate-fade-up anim-delay-3"></div>
+        </div>
+    </main>
+
+    <footer style="border-top:1px solid var(--border);background:var(--card);padding:48px 24px 100px;text-align:center;">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex justify-center items-center gap-2 mb-4">
+                <img src="https://i.ibb.co/gbsY945Q/Black-and-Green-Illustrative-E-Sports-Gaming-Logo-2-removebg.png" alt="ItchPlay Logo" style="width: 32px; height: 32px;">
+                <div class="logo" style="font-size:28px;">Itch<span style="color:var(--cyan);">Play</span></div>
+            </div>
+            <p style="font-size:14px;color:var(--muted);margin-bottom:24px;max-width:400px;margin-left:auto;margin-right:auto;line-height:1.6;font-weight:500;">The best place to discover and download Mobile Anime Games & Visual Novels.</p>
+            <div style="display:flex;justify-content:center;gap:24px;margin-bottom:24px;">
+                <span style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;color:var(--text);cursor:pointer;opacity:0.7;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">Privacy Policy</span>
+                <span style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;color:var(--text);cursor:pointer;opacity:0.7;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">Terms of Service</span>
+                <span style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;color:var(--text);cursor:pointer;opacity:0.7;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">About Us</span>
+            </div>
+            <p style="font-size:11px;color:var(--muted);font-weight:800;letter-spacing:0.2em;text-transform:uppercase;">© 2026 ITCHPLAY · ALL RIGHTS RESERVED</p>
+        </div>
+    </footer>
+
+    <nav class="bottom-nav">
+        <a href="https://itchplay.com/">
+            <i class="ri-home-fill" style="color: #00f3ff;"></i> 
+            <span>Home</span>
+        </a>
+        <a href="#" class="active" onclick="window.scrollTo({ top: 0, behavior: 'smooth' }); return false;">
+            <i class="ri-gamepad-fill" style="color: #a855f7;"></i> 
+            <span>Games</span>
+        </a>
+        <a href="https://itchplay.com/Wallpapers/">
+            <i class="ri-image-fill" style="color: #ff007f;"></i> 
+            <span>Wallpapers</span>
+        </a>
+        <a href="https://itchplay.com/Emulators/">
+            <i class="ri-switch-fill" style="color: #eab308;"></i> 
+            <span>Emulators</span>
+        </a>
+        <a href="https://www.youtube.com/watch?v=your-video-id" target="_blank">
+            <i class="ri-youtube-fill" style="color: #ef4444;"></i> 
+            <span>Verify</span>
+        </a>
+    </nav>
+
+    <div id="modalOverlay">
+        <div class="modal-backdrop" id="modalClose" onclick="closeModal()"></div>
+        <div class="modal-box" id="modalBox">
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+   <div class="cf-overlay" id="cf-overlay" style="background-color: #000;">
+        <div class="cf-content-anim" style="padding-top:80px;max-width:800px;width:100%;flex:1;display:flex;flex-direction:column;margin:0 auto; font-family: 'Poppins', sans-serif;">
+            
+            <div>
+                <p style="font-size:19px;font-weight:700;color:#9ca3af;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Itchplay.com</p>
+                <h1 style="font-size:32px;font-weight:800;color:white;margin-bottom:10px;letter-spacing:-0.02em;">Performing security<br>verification</h1>
+                <p style="color:#9ca3af;font-size:15px;line-height:1.6;margin-bottom:40px;max-width:480px;">This website uses a security service to protect against malicious bots. This page is displayed while we verify you are not a bot.</p>
+
+                <div style="background:#222;border:1px solid #fff;border-radius:6px;width:100%;max-width:340px;height:75px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;box-shadow:0 4px 10px rgba(0,0,0,0.5);">
+                    <div style="display:flex;align-items:center;gap:14px;" id="cf-interaction">
+                        <div id="cf-initial-box" style="width:28px;height:28px;display:flex;align-items:center;justify-content:center;"><div class="cf-loader-el"></div></div>
+                        <div id="cf-checkbox" style="display:none;width:28px;height:28px;border:2px solid #9ca3af;border-radius:4px;cursor:pointer;background:transparent;" onclick="startCFVerification()"></div>
+                        <div id="cf-spinner" style="display:none;width:28px;height:28px;position:relative;"><div class="cf-spinner-el" style="position:absolute;inset:0;"></div></div>
+                        
+                        <div id="cf-failure" style="display:none;width:28px;height:28px;border:2px solid #9ca3af;border-radius:4px;align-items:center;justify-content:center;">
+                            <svg width="22" height="22" fill="none" stroke="#f97316" stroke-width="4.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+                        </div>
+                        
+                        <span id="cf-text" style="color:#9ca3af;font-size:15px;font-weight:600;">Verifying...</span>
+                    </div>
+                    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0px;">
+                        <div style="margin-bottom: -7px; display: flex; justify-content: flex-end;">
+                            <img src="https://i.ibb.co/nqV5JMM8/cloudflare-logo-black-sth-2-removebg-preview.png" alt="Cloudflare" id="cf-logo-img" style="height: 50px; width: auto; object-fit: contain;">
+                        </div>
+                        <div style="font-size:10px;color:#fff;"><a href="https://www.cloudflare.com/privacypolicy/" target="_blank" style="color:#fff;text-decoration:none;">Privacy</a> · <a href="https://www.cloudflare.com/website-terms/" target="_blank" style="color:#fff;text-decoration:none;">Help</a></div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top:auto; padding-bottom: 20px; width:100%;">
+                <div style="border-top:1px solid #333;padding-top:20px;text-align:center;">
+                    <p style="font-size:13px;color:white;margin-bottom:4px;font-weight:600;">Ray ID: <span id="rayId" style="font-family:monospace;color:#9ca3af;font-weight:400;"></span></p>
+                    <p style="font-size:13px;color:white;font-weight:600;">Performance & Security by <a href="https://www.cloudflare.com" target="_blank" style="color:#3b82f6;text-decoration:underline;font-weight:400;">Cloudflare</a> <span style="color:#9ca3af; margin:0 4px;">|</span> <a href="https://www.cloudflare.com/website-terms/" target="_blank" style="color:#3b82f6;text-decoration:underline;font-weight:400;">Privacy</a></p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="locker-overlay" id="locker-overlay">
+        <div class="locker-box">
+            <button onclick="closeLocker()" style="position:absolute;top:12px;right:12px;z-index:10;width:38px;height:38px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:18px;cursor:pointer;">✕</button>
+            <iframe id="locker-iframe" style="width:100%;height:100%;border:none;background:#000;"></iframe>
+        </div>
+    </div>
+
+    <button id="backToTop" aria-label="Back to Top">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m18 15-6-6-6 6"/></svg>
+    </button>
+
+    <script>
+        // ── Data ──
+         const GAMES_DATA = [
+            { id: '1', title: 'XenoFeels', category: 'Horror', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4293910/8f717539b3a06244184ecd5d5803e5c17d2a4131/page_bg_raw.jpg?t=1781964788', rating: 4.7, size: '780 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '1', title: 'Tag After School', category: 'Horror', thumbnail: 'https://tagsafterschool.com/wp-content/uploads/2026/04/Green-light-1024x571-1-768x428.webp', rating: 4.3, size: '280 MB', version: 'v1.4', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '7', title: 'MotorSlice', category: 'Action', thumbnail: 'https://i0.wp.com/indiegame.com/wp-content/uploads/2026/05/MOTORSLICE-_Logo.png?fit=1024,1024&ssl=1', rating: 4.7, size: '3.1 GB', version: 'v0.5.0.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '2', title: 'Neverness to Everness Mobile Apk', category: 'Casual', thumbnail: 'https://gaming-cdn.com/images/products/20168/orig/neverness-to-everness-playstation-5-playstation-store-cover.jpg?v=1772105288', rating: 4.2, size: '1.1 GB', version: 'v0.9.5', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '12', title: 'NightGamer', category: 'Simulation', thumbnail: 'https://www.latestmodapks.com/wp-content/uploads/2024/10/nightgamer-mod-3-media.webp', rating: 4.9, size: '850 MB', version: 'v1.4', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '4', title: 'Cryptid Park', category: 'Simulation', thumbnail: 'https://img.itch.zone/aW1nLzI1MjgwNDM2LmdpZg==/315x250%23c/Yi2veN.gif', rating: 4.5, size: '750 MB', version: 'v2.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '190', title: 'Ghost Hunter Vena ', category: 'Horror', thumbnail: 'https://img.itch.zone/aW1nLzYwMTgxMzYuanBn/original/nx%2BAKT.jpg', rating: 4.7, size: '360 MB', version: 'v1.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '6', title: 'Kunoichi Sekiren', category: 'Action', thumbnail: 'https://thomastaihei-hgames.net/wp-content/uploads/2020/11/HG361-01.jpg', rating: 4.7, size: '350 MB', version: 'v1.0.3', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '7', title: 'Goblin Walker', category: 'Action', thumbnail: 'https://i.ytimg.com/vi/eecBNnpBj9E/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCkVaZ0OKJ12M6G_OLLtADjV-xCYw', rating: 4.7, size: '510 MB', version: 'v1.2.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '8', title: 'Rose and the magic beast', category: 'RPG', thumbnail: 'https://img-i.mojuedu.com/nesyouxi/2026/0318/cb34272d7b97f6fbc8480611cbbedfc6.png', rating: 4.6, size: '890 MB', version: 'v1.5', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '9', title: 'Apostate Verity', category: 'RPG', thumbnail: 'https://img.itch.zone/aW1hZ2UvNDE4MDM1Mi8yNTAyNTk3MC5qcGc=/original/XGfVB1.jpg', rating: 4.8, size: '1.4 GB', version: 'v2.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '10', title: 'College Brawl', category: 'Action', thumbnail: 'https://qa-apk.com/wp-content/uploads/2024/04/college-brawl.png', rating: 4.8, size: '150 MB', version: 'v1.8', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '11', title: 'Rotkappchen 2', category: 'Horror', thumbnail: 'https://img.itch.zone/aW1nLzYxNDM3NTYucG5n/original/O586lm.png', rating: 4.7, size: '620 MB', version: 'v2.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '12', title: 'NightGamer', category: 'Simulation', thumbnail: 'https://www.latestmodapks.com/wp-content/uploads/2024/10/nightgamer-mod-3-media.webp', rating: 4.9, size: '850 MB', version: 'v1.4', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '13', title: 'Fallen soldier', category: 'Action', thumbnail: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5VvKMv6QodRCh0WPtiT1tOFImcPSX82Cd4hvoWRMlgPejEsUZ', rating: 4.5, size: '440 MB', version: 'v1.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '14', title: 'Horror Book', category: 'Horror', thumbnail: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZEScOn1m_rBNpX1Zh90hkS_GKXYpZRdXITg&s', rating: 4.4, size: '310 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '15', title: 'Spooky Milk', category: 'Simulation', thumbnail: 'https://www.latestmodapks.com/wp-content/uploads/2023/07/Spooky.Milk_.Life-1.jpeg', rating: 4.8, size: '920 MB', version: 'v2.4', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '16', title: 'The Censor', category: 'Simulation', thumbnail: 'https://i.ytimg.com/vi/YRO4Kc9rgDs/maxresdefault.jpg', rating: 4.4, size: '380 MB', version: 'v1.2', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '17', title: 'Handyman Legend', category: 'Simulation', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2127010/capsule_616x353.jpg?t=1748937113', rating: 4.8, size: '1.2 GB', version: 'v1.0.5', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '18', title: 'Yuris Mansion', category: 'Visual Novel', thumbnail: 'https://preview.redd.it/yuris-mansion-v0-7gooksg0hjrb1.png?width=631&format=png&auto=webp&s=19145668abdea056ef73e0205de7afbe5e34b9f7', rating: 4.8, size: '480 MB', version: 'v0.7', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '19', title: 'GUNZ PROPHET', category: 'Action', thumbnail: 'https://i.ytimg.com/vi/Y0QqmnU2xB4/maxresdefault.jpg', rating: 4.6, size: '1.4 GB', version: 'v1.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '20', title: 'Secret Flasher Manaka', category: 'Simulation', thumbnail: 'https://storage.pinecast.net/podcasts/covers/3a9f835f-3720-4712-a99e-6f994dc5600e/secret_flasher_manaka.jpg', rating: 4.4, size: '250 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '21', title: 'Parasite In City', category: 'Horror', thumbnail: 'https://cdn2.steamgriddb.com/grid/2afe2e605a028de2f4bef4b875e90b36.jpg', rating: 4.7, size: '360 MB', version: 'v1.3', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '22', title: 'Summer Life In The Countryside', category: 'Simulation', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2107850/capsule_616x353.jpg?t=1733273350', rating: 4.8, size: '890 MB', version: 'v2.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '23', title: '3d Custom Girl Evolution', category: 'Simulation', thumbnail: 'https://lambda.vgmtreasurechest.com/soundtracks/3d-girl-custom-evolution-windows-gamerip-2013/cover.png', rating: 4.5, size: '1.5 GB', version: 'v1.8', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '24', title: 'Hospital Seduction', category: 'Simulation', thumbnail: 'https://img-i.mojuedu.com/nesyouxi/2026/0507/555fa78ed35202dd6e54ee49c904807e.jpg', rating: 4.3, size: '420 MB', version: 'v1.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '25', title: 'Tentacles Invasion', category: 'RPG', thumbnail: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThNKx97G9ZJ_xxzHhDHsizP5IQedSWMTHOGQ&s', rating: 4.6, size: '650 MB', version: 'v1.4', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '26', title: 'Lala and the Bizarre Dungeon', category: 'RPG', thumbnail: 'https://cdn.apkbine.com/userfiles/images/lala%20and%20the%20bizarre%20dungeon%20apk%20thumnail.jpg', rating: 4.7, size: '510 MB', version: 'v1.2', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '27', title: 'Tentacle Beach Party', category: 'Casual', thumbnail: 'https://i.ytimg.com/vi/u4oh-vrNLZo/maxresdefault.jpg', rating: 4.2, size: '280 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '28', title: 'Shoot Shoot My Waifu', category: 'Action', thumbnail: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoxVcMMzLP1Iq7kZVU3nTS40MPsWU7-gucLA&s', rating: 4.5, size: '320 MB', version: 'v2.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '29', title: 'Doll Room', category: 'Simulation', thumbnail: 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/2ebf3ed7-a0a6-4740-b6aa-c682835be53b/djy8erb-6dbe1253-042a-49f0-86c2-be8d3da6bf29.jpg/v1/fill/w_622,h_350,q_70,strp/doll_room_apk_9_7_descargar_gratis_para_android_by_bnrthfg_djy8erb-350t.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NzIwIiwicGF0aCI6Ii9mLzJlYmYzZWQ3LWEwYTYtNDc0MC1iNmFhLWM2ODI4MzViZTUzYi9kank4ZXJiLTZkYmUxMjUzLTA0MmEtNDlmMC04NmMyLWJlOGQzZGE2YmYyOS5qcGciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.8XJFXrvtSad53QLqLT16ECG9ZEsaq1dalqSGa__AxfU', rating: 4.1, size: '180 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '30', title: 'Outdoor Expose Girl Rena', category: 'Visual Novel', thumbnail: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRj-Jb-qb-KK0zpTGX6DIpMVkfTUZl_aFgfXw&s', rating: 4.3, size: '400 MB', version: 'v1.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '31', title: 'Taima Miko Iname', category: 'Action', thumbnail: 'https://51acg.buzz/forum.php?mod=image&aid=628148&size=100x100&key=bf5fdeaf1ad19914&type=1', rating: 4.6, size: '550 MB', version: 'v1.5', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '32', title: 'Kankaku Shadan Ana Kenkyuujo', category: 'Simulation', thumbnail: 'https://hencover.xyz/cover/2025/02/hr_250677.jpg', rating: 4.4, size: '490 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '33', title: 'Explosion Girl', category: 'Action', thumbnail: 'https://img.goodfon.com/wallpaper/big/9/7a/anime-art-kono-subarashii-3292.webp', rating: 4.7, size: '600 MB', version: 'v1.3', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '34', title: 'Night of Revenge', category: 'Action', thumbnail: 'https://howlongtobeat.com/games/103999_Night_of_Revenge.jpg', rating: 4.9, size: '1.2 GB', version: 'v2.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '35', title: 'Runaway Ninja', category: 'Action', thumbnail: 'https://i.ytimg.com/vi/Mz4TGFyDGqA/maxresdefault.jpg', rating: 4.5, size: '380 MB', version: 'v1.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '36', title: 'Uncle Escape File 2', category: 'Puzzle', thumbnail: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2264140/capsule_616x353.jpg?t=1751497531', rating: 4.3, size: '210 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '37', title: 'Exclusion Zone Shadow Island', category: 'Adventure', thumbnail: 'https://images.steamusercontent.com/ugc/938308370380781750/EE66191EF754434326FF44D92382DAEF4EFB797D/?imw=1024&imh=576&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true', rating: 4.6, size: '890 MB', version: 'v1.5', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '38', title: 'Alps and the Dangerous Forest', category: 'Action', thumbnail: 'https://i.ytimg.com/vi/t3jS1ayepBU/maxresdefault.jpg', rating: 4.8, size: '450 MB', version: 'v1.2', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '39', title: 'Monster Girl Conquest Battle Orc', category: 'RPG', thumbnail: 'https://www.kaguragames.com/wp-content/uploads/2024/05/Monster-Girl-Conquest-Records-Battle-Orc_BG_EN.jpg', rating: 4.6, size: '1.1 GB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '40', title: 'Echidna Wars DX', category: 'Action', thumbnail: 'https://apkrey.com/wp-content/uploads/2024/11/Echidna-Wars-DX-Everdrive-Mobile.jpg', rating: 4.8, size: '540 MB', version: 'v1.4', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '41', title: "A Day In A Goblin's Nest", category: 'RPG', thumbnail: 'https://cdn.apkmia.com/userfiles/images/a-day-in-a-goblins-nest-apk.jpg', rating: 4.4, size: '390 MB', version: 'v1.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '42', title: 'Shinobi Girl', category: 'Action', thumbnail: 'https://i.ytimg.com/vi/koqoYizcYZk/mqdefault.jpg', rating: 4.7, size: '280 MB', version: 'v1.5', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '43', title: 'Viola R.pe School', category: 'Simulation', thumbnail: 'https://preview.redd.it/lotus-lavender-and-viola-aka-tomo-nina-and-subaru-from-the-v0-x7wj0t436jig1.png?width=640&crop=smart&auto=webp&s=336818ab69524e053f3b1056c9e5cf46fe19a9f3', rating: 4.2, size: '420 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '44', title: 'Mugen18', category: 'Action', thumbnail: 'https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_9000,w_1200,f_auto,q_auto/12625791/WuTBthdYRVqEVPJlP8GF1wYxojJ.png', rating: 4.5, size: '1.2 GB', version: 'v1.6', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '45', title: 'Anastrologia of Scissors and Magic', category: 'RPG', thumbnail: 'https://i.ytimg.com/vi/rX87gfTB5K4/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCwntG0ZQe5lraYO-_IcORULVuNdw', rating: 4.6, size: '890 MB', version: 'v1.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '46', title: 'Dead-End City Blues', category: 'Action', thumbnail: 'https://i.ytimg.com/vi/K8f-u6LpqhY/hqdefault.jpg', rating: 4.4, size: '400 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '47', title: 'ECHICRA', category: 'Simulation', thumbnail: 'https://cdn2.steamgriddb.com/grid/5063447c5e7621069f85133135c81407.png', rating: 4.3, size: '310 MB', version: 'v1.2', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '48', title: 'Ender Saint', category: 'RPG', thumbnail: 'https://c10.patreonusercontent.com/4/patreon-media/p/campaign/13842842/8ccefaefe3d04511a36dddd57c13c405/eyJ3Ijo5NjAsIndlIjoxfQ%3D%3D/2.jpeg?token-hash=qyvje6GVjf6w1QxZGSHolTSnAkoj9Mv0N0KlR1a4l2M%3D&token-time=1777852800', rating: 4.5, size: '650 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '49', title: 'Fort of the Naughty World', category: 'RPG', thumbnail: 'https://cdn.apkbine.com/userfiles/images/fort%20of%20the%20naughty%20world%20apk%20android.jpg', rating: 4.5, size: '510 MB', version: 'v1.4', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '50', title: 'Magical Girl Lilith', category: 'Action', thumbnail: 'https://i.ytimg.com/vi/lxCJOeIxm50/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCTbdWTSBo_faAmMEL4pBhM24XWuA', rating: 4.6, size: '380 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '51', title: 'Mission Mermaiden', category: 'Action', thumbnail: 'https://img.itch.zone/aW1nLzc1NTE1MzkucG5n/original/EOGSkq.png', rating: 4.4, size: '290 MB', version: 'v1.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '52', title: 'Turret Girls', category: 'Action', thumbnail: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRO5r8MLACjpBsDb0vPfwu5RK_fD3DRntJYaA&s', rating: 4.5, size: '320 MB', version: 'v1.2', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '53', title: 'Vivi and the Magic Island', category: 'Adventure', thumbnail: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3591390/9686eaae020152aae16217ce36a284c08cff6239/capsule_616x353.jpg?t=1759972434', rating: 4.7, size: '890 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '54', title: 'Hikarisis', category: 'RPG', thumbnail: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxxL-0tKjwjsseDlT-eDEBE43JjW60mYtA0g&s', rating: 4.6, size: '410 MB', version: 'v1.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '55', title: 'Android Girl vs Naughty Aliens', category: 'Action', thumbnail: 'https://i.ytimg.com/vi/gwPwK37Jqs0/maxresdefault.jpg', rating: 4.3, size: '280 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '56', title: 'Awkward Awakenings', category: 'Visual Novel', thumbnail: 'https://i.ytimg.com/vi/UeBrItnyZcM/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCjz_cDjU5EjvTsHMZ8B8bBPFlkzQ', rating: 4.2, size: '520 MB', version: 'v1.2', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '57', title: 'Delivery Hot', category: 'Simulation', thumbnail: 'https://i.ytimg.com/vi/pJ35UveyJkc/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBGDiLjhu5o_u84rsnS_DkQ3uubuQ', rating: 4.4, size: '360 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '58', title: 'Exit 8th Street Magical Girl Against Anomalies', category: 'Horror', thumbnail: 'https://i.ytimg.com/vi/4aPhqUrMAlA/maxresdefault.jpg', rating: 4.6, size: '600 MB', version: 'v1.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '59', title: 'Ghost Girl', category: 'Horror', thumbnail: 'https://i.ytimg.com/vi/mHyH0p_Oe6k/sddefault.jpg', rating: 4.5, size: '240 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '60', title: 'Melancholianna', category: 'Puzzle', thumbnail: 'https://i.ytimg.com/vi/zFEc4O30vjA/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCAed2hTvmPaPUwZfYXPkfG1ijLFw', rating: 4.7, size: '180 MB', version: 'v2.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '61', title: 'Lewd Crest Knight and the Perv Lordess', category: 'RPG', thumbnail: 'https://i.ytimg.com/vi/S7w4i3yb2O0/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCWdTF0MztvfjpehsEMUnv8H4m-sA', rating: 4.5, size: '510 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '62', title: 'Massage Parlor Management Simulator', category: 'Simulation', thumbnail: 'https://i.ytimg.com/vi/7O6hA7Ck86o/sddefault.jpg', rating: 4.3, size: '320 MB', version: 'v1.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '63', title: 'Winter Life in the Countryside', category: 'Simulation', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3289580/header.jpg?t=1762324109', rating: 4.8, size: '940 MB', version: 'v1.2', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '64', title: 'Handyman Fantasy', category: 'Simulation', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2690010/capsule_616x353.jpg?t=1766129787', rating: 4.6, size: '810 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '65', title: 'Monster Girls You-ki Chan', category: 'Action', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1219860/capsule_616x353.jpg?t=1759307429', rating: 4.5, size: '440 MB', version: 'v1.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '66', title: 'Princess Reconquista', category: 'RPG', thumbnail: 'https://i.ytimg.com/vi/YCIRM9Iu-zo/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAh05C8N_Elq2V8lwY0z1JHFxG6tA', rating: 4.7, size: '690 MB', version: 'v1.5', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '67', title: 'Necro Vanny Girl', category: 'Action', thumbnail: 'https://i.ytimg.com/vi/JVmewjXPEQs/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAEQAWZzF6--bATndvXVD5LtSIh9g', rating: 4.4, size: '280 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '68', title: 'SiNiSistar2', category: 'Action', thumbnail: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/4466620/9ceef8e15438cd53a6b1c21ef971ba30118ef0b2/capsule_616x353.jpg?t=1777092822', rating: 4.9, size: '1.5 GB', version: 'v2.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '69', title: 'Priestess Lust', category: 'RPG', thumbnail: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2073030/ss_f3242e23fb15928a7af1e91c81fda9a639f43958.1920x1080.jpg?t=1758683734', rating: 4.5, size: '390 MB', version: 'v1.2', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '70', title: 'The Den of Chaos 2', category: 'RPG', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1966800/capsule_616x353.jpg?t=1652660380', rating: 4.6, size: '720 MB', version: 'v1.5', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '71', title: "Sol Rui -after mini- Goblin's Den", category: 'RPG', thumbnail: 'https://assets-prd.ignimgs.com/2025/09/23/dice-goblins-den-button-1758636608749.jpg', rating: 4.5, size: '510 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '72', title: 'Succuquest', category: 'RPG', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2100270/capsule_616x353.jpg?t=1759307599', rating: 4.4, size: '480 MB', version: 'v1.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '73', title: 'Pig Exit8', category: 'Puzzle', thumbnail: 'https://static.playhop.com/images/4746a_6300668_4f7a9/51cc9ed7b/2a000001994cb573_7eabdce/bce3f6c4aa0e613330b5_9aad52/orig', rating: 4.3, size: '200 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '74', title: 'Monster Girl Town', category: 'RPG', thumbnail: 'https://i.ytimg.com/vi/eW3MdEpm5rY/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDIxMOioVje9dZRAYENV1E_WYfMog', rating: 4.6, size: '550 MB', version: 'v1.2', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '75', title: 'Which Girl to Live With 3', category: 'Simulation', thumbnail: 'https://i.ytimg.com/vi/ZpYdm7FrRBg/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDDxYRnehfzDsIc5jhD1bp9Z13EaA', rating: 4.4, size: '480 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '76', title: 'Yusha Wants a Sadistic Woman Sadiubus', category: 'RPG', thumbnail: 'https://i.ytimg.com/vi/2hVA2X-hsAY/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAWMn-V38DVuxWMmCQYFZV3es9AZQ', rating: 4.7, size: '890 MB', version: 'v1.5', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '77', title: 'Adulttale', category: 'RPG', thumbnail: 'https://img.itch.zone/aW1hZ2UvMzkxMjYyMS8yMzM0MTM4OC5wbmc=/original/wyXkRL.png', rating: 4.7, size: '310 MB', version: 'v1.2', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '78', title: 'Aeons Echo', category: 'Visual Novel', thumbnail: 'https://gamefaqs.gamespot.com/a/box/4/2/9/1041429_front.jpg', rating: 4.7, size: '1.8 GB', version: 'v3.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '79', title: 'Train 45', category: 'Horror', thumbnail: 'https://modhello.io/wp-content/uploads/2025/04/train-number-45-apk-free-download-1.jpg', rating: 4.5, size: '260 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '80', title: 'Helltaker', category: 'Puzzle', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1289310/header.jpg', rating: 4.9, size: '150 MB', version: 'v1.5', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '81', title: 'Rock Paper Scissore Ghost', category: 'Casual', thumbnail: 'https://i.ytimg.com/vi/715tP-mQuhY/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLA__dqQ2ObvkCfOe51tZ_JToizXJg', rating: 4.3, size: '120 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '82', title: "Monsters' Night", category: 'Action', thumbnail: 'https://img.skich.io/games/icons/5d55a725-3685-4103-b895-74ab39f25389.jpg', rating: 4.3, size: '420 MB', version: 'v1.2', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '83', title: 'Sea of Stars', category: 'Pixel', thumbnail: 'https://cdn.akamai.steamstatic.com/steam/apps/1244090/capsule_616x353.jpg', rating: 4.9, size: '2.5 GB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '84', title: 'Banny BarTalk', category: 'Simulation', thumbnail: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfve0r3neLK9e6_JjixdJNXe6MYI9sjexPGw&s', rating: 4.5, size: '380 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '85', title: 'EP Battle Girl', category: 'Action', thumbnail: 'https://i.ytimg.com/vi/WvSWtFB3mL8/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLA4sfJ4151d3t-RRxw8HDb_y4gMWg', rating: 4.6, size: '540 MB', version: 'v1.4', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '86', title: 'Miko Chan', category: 'Action', thumbnail: 'https://4ap.tech/images/x22.webp', rating: 4.7, size: '410 MB', version: 'v1.5', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '87', title: 'Knight Sprites', category: 'Pixel', thumbnail: 'https://img.itch.zone/aW1nLzE3NTk3MDc4LmdpZg==/315x250%23c/RZhCAV.gif', rating: 4.8, size: '180 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '88', title: 'Succubus Successor', category: 'RPG', thumbnail: 'https://i.ytimg.com/vi/svjBYU8VidE/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCPicsr428syGKqywiJsdA1de2MTA', rating: 4.8, size: '950 MB', version: 'v1.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '89', title: 'Dead Cells', category: 'Pixel', thumbnail: 'https://cdn.akamai.steamstatic.com/steam/apps/588650/capsule_616x353.jpg', rating: 4.8, size: '1.2 GB', version: 'v3.5', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '90', title: 'Tamer Vale', category: 'Strategy', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2543680/capsule_616x353.jpg?t=1737698358', rating: 4.7, size: '600 MB', version: 'v1.3', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '91', title: 'Lonely Girl', category: 'Simulation', thumbnail: 'https://4ap.tech/images/x1.webp', rating: 4.8, size: '320 MB', version: 'v1.2', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '92', title: 'EscapeR', category: 'Puzzle', thumbnail: 'https://i.ytimg.com/vi/W2zhTnzHnBo/mqdefault.jpg', rating: 4.2, size: '150 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '93', title: 'Dave the Diver', category: 'Adventure', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1868140/header.jpg', rating: 4.9, size: '1.8 GB', version: 'v1.5', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '94', title: 'The Last Train Cage', category: 'Simulation', thumbnail: 'https://fh-xy.net/forum.php?mod=image&aid=377357&size=500x480&key=58173aef314708af', rating: 4.5, size: '280 MB', version: 'v1.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '95', title: 'Spirit Echoes', category: 'RPG', thumbnail: 'https://i.ytimg.com/vi/nBlELZYOLrI/maxresdefault.jpg', rating: 4.5, size: '920 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '96', title: "Bellagarth's Quest", category: 'RPG', thumbnail: 'https://i.vimeocdn.com/video/2114425839-aef9f8ec4eb38a221071d429fa6ebf50f4184385ee925f3e0fdf54cd1a71db70-d?f=webp', rating: 4.6, size: '750 MB', version: 'v1.2', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '97', title: 'Sanabi', category: 'Action', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1562700/header.jpg', rating: 4.8, size: '1.1 GB', version: 'v1.2', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '98', title: 'Fear & Hunger', category: 'RPG', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1873770/header.jpg', rating: 4.6, size: '890 MB', version: 'v1.4', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '99', title: 'Cult of the Lamb', category: 'Action', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1313140/header.jpg', rating: 4.8, size: '1.5 GB', version: 'v1.3', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '100', title: 'Lollipop Chainsaw RePop', category: 'Action', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2658450/header.jpg', rating: 4.8, size: '2.1 GB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '101', title: 'Vampire Survivors', category: 'Pixel', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1794680/header.jpg', rating: 4.8, size: '250 MB', version: 'v1.8', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '102', title: 'Shoot Shoot My Waifu', category: 'Action', thumbnail: 'https://kotaku.com/igdb/image/upload/t_cover_big/co412k.jpg', rating: 4.5, size: '320 MB', version: 'v2.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true },
+            { id: '103', title: 'Castle of Temptation', category: 'RPG', thumbnail: 'https://static.wikia.nocookie.net/castle-of-temptation/images/d/d9/Temp_pic.png/revision/latest/scale-to-width-down/1200?cb=20240618121030', rating: 4.9, size: '680 MB', version: 'v2.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '104', title: 'Signalis', category: 'Horror', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1262350/header.jpg', rating: 4.8, size: '1.2 GB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '105', title: 'Coffee Talk', category: 'Simulation', thumbnail: 'https://image.api.playstation.com/vulcan/img/rnd/202104/0510/kqFKzYXgYrUH0Ytg9ehjazY9.png', rating: 4.8, size: '400 MB', version: 'v1.5', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '106', title: 'Lost Ruins', category: 'Action', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1306630/header.jpg', rating: 4.7, size: '850 MB', version: 'v1.2', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '107', title: 'Self Defense Dojo', category: 'Simulation', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2534120/capsule_616x353_tchinese.jpg?t=1714999370', rating: 4.4, size: '320 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '108', title: 'Anomalous Coffee Machine', category: 'Puzzle', thumbnail: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3797340/1a2d2a34a383647d962588972cd9a5678f3ad16b/capsule_616x353.jpg?t=1773234679', rating: 4.1, size: '250 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '109', title: 'Eastward', category: 'RPG', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/971620/header.jpg', rating: 4.6, size: '1.4 GB', version: 'v1.2', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '110', title: 'Tower of L Demo Short', category: 'Adventure', thumbnail: 'https://i.ytimg.com/vi/eD5HJEr-T9c/sddefault.jpg?v=672c3e72', rating: 4.2, size: '180 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '111', title: 'Stardew Valley', category: 'Pixel', thumbnail: 'https://cdn.akamai.steamstatic.com/steam/apps/413150/capsule_616x353.jpg', rating: 4.9, size: '350 MB', version: 'v1.5', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '112', title: 'Housefestation', category: 'Horror', thumbnail: 'https://img.itch.zone/aW1nLzE5MDc1NjQ5LmdpZg==/originalm/blaoc8.gif', rating: 4.3, size: '420 MB', version: 'v1.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '113', title: 'Chained Echoes', category: 'Pixel', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1229240/header.jpg', rating: 4.9, size: '950 MB', version: 'v1.2', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '114', title: 'Battle Queen', category: 'Action', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4639050/c582ac4378a1d6af15f77d2e304ab080d1fb4821/header.jpg?t=1777596509', rating: 4.6, size: '510 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '115', title: 'Inscryption', category: 'Strategy', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1092790/header.jpg', rating: 4.9, size: '1.2 GB', version: 'v1.3', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '116', title: 'Momoppu Farm', category: 'Action', thumbnail: 'https://i.ytimg.com/vi/6jcnfYJnmpA/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBXVtuDyHRQraJiIDWZmOHrmcTMaA', rating: 4.7, size: '640 MB', version: 'v1.2', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '117', title: 'Graveyard Keeper', category: 'Simulation', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/599140/header.jpg', rating: 4.5, size: '890 MB', version: 'v1.4', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '118', title: 'Blasphemous 2', category: 'Action', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2114740/header.jpg', rating: 4.7, size: '1.8 GB', version: 'v1.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '119', title: 'Cooking Companions', category: 'Horror', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1263230/header.jpg', rating: 4.5, size: '420 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '120', title: 'Potion Permit', category: 'Simulation', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1337760/header.jpg', rating: 4.4, size: '650 MB', version: 'v1.2', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '121', title: 'Core Keeper', category: 'Adventure', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1621690/header.jpg', rating: 4.7, size: '890 MB', version: 'v1.3', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '122', title: 'Eiyuden Chronicle', category: 'Pixel', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1658290/header.jpg', rating: 4.3, size: '1.5 GB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '123', title: 'Katana ZERO', category: 'Pixel', thumbnail: 'https://cdn.akamai.steamstatic.com/steam/apps/460950/capsule_616x353.jpg', rating: 4.9, size: '350 MB', version: 'v1.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '124', title: 'Celeste', category: 'Pixel', thumbnail: 'https://cdn.akamai.steamstatic.com/steam/apps/504230/capsule_616x353.jpg', rating: 4.9, size: '1.2 GB', version: 'v1.4', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '125', title: 'Terraria', category: 'Pixel', thumbnail: 'https://cdn.akamai.steamstatic.com/steam/apps/105600/capsule_616x353.jpg', rating: 4.8, size: '280 MB', version: 'v1.4.4', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '126', title: 'Night Call Dojo', category: 'Action', thumbnail: 'https://4ap.tech/images/NIGHT_CALL_DOJO.jpg', rating: 4.8, size: '540 MB', version: 'v1.2', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '127', title: 'Together Again', category: 'Visual Novel', thumbnail: 'https://4ap.tech/images/x8.webp', rating: 4.7, size: '420 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '128', title: 'Kingdom Of Night', category: 'RPG', thumbnail: 'https://img.itch.zone/aW1nLzI0MzM5ODkyLnBuZw==/original/e6CQr0.png', rating: 4.7, size: '890 MB', version: 'v1.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '129', title: 'Freak Circus', category: 'Visual Novel', thumbnail: 'https://img.itch.zone/aW1nLzI0MzI1NjA3LnBuZw==/original/fsplsb.png', rating: 4.9, size: '600 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '130', title: '3d Anime Girl', category: 'Simulation', thumbnail: 'https://4ap.tech/images/3d_anime_girl.png', rating: 4.6, size: '1.1 GB', version: 'v2.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '131', title: 'Starbound Soul', category: 'Adventure', thumbnail: 'https://external-preview.redd.it/starbound-cloud-and-tifas-love-individuation-and-soul-v0-WNTTbH8-kB_RpNTsLfKECCVX29qi_9f8OmKG_6xa3O0.jpeg?auto=webp&s=26ad7a921a1488a036124420873541806a57c0b6', rating: 4.8, size: '750 MB', version: 'v1.5', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '132', title: 'Holocure', category: 'Action', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2420510/header.jpg', rating: 4.9, size: '180 MB', version: 'v0.6', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '133', title: 'The Stray Cat of Belheim', category: 'RPG', thumbnail: 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/68015e5f-1eb7-404b-bf45-77683e344578/djni66p-c89f999f-632f-4c54-b8cb-62ba2a8fe98c.jpg/v1/fill/w_1192,h_670,q_70,strp/the_stray_cat_of_belheim_apk__full_version__free_by_apklulugem_djni66p-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NzIwIiwicGF0aCI6Ii9mLzY4MDE1ZTVmLTFlYjctNDA0Yi1iZjQ1LTc3NjgzZTM0NDU3OC9kam5pNjZwLWM4OWY5OTlmLTYzMmYtNGM1NC1iOGNiLTYyYmEyYThmZTk4Yy5qcGciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.ES3mY0iTH7Uj487rByjdCH8cxAdTa6Ms981ItuYLkn4', rating: 4.8, size: '890 MB', version: 'v1.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '134', title: 'Max the elf', category: 'Action', thumbnail: 'https://img.itch.zone/aW1nLzIyOTQwNjUxLnBuZw==/315x250%23c/CWvbdc.png', rating: 4.5, size: '320 MB', version: 'v1.4', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '135', title: 'Me and the Summer Sisters', category: 'Visual Novel', thumbnail: 'https://d2x8kymwjom7h7.cloudfront.net/live/application_no/119001/application_no/119001/images/14_1721781780342.jpg', rating: 4.7, size: '540 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '136', title: 'Octopath Traveler', category: 'Pixel', thumbnail: 'https://cdn.akamai.steamstatic.com/steam/apps/921570/capsule_616x353.jpg', rating: 4.7, size: '2.5 GB', version: 'v1.2', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            //{ id: '137', title: 'Imperial Harem', category: 'Strategy', thumbnail: 'https://apktodo.io/uploads/2026/1/screenshot-2026-01-09-214331.jpg', rating: 4.7, size: '810 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '138', title: 'My State Sponsored Catgirl', category: 'Visual Novel', thumbnail: 'https://i.ytimg.com/vi/BS8ebNBgzok/mqdefault.jpg', rating: 4.8, size: '460 MB', version: 'v1.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '139', title: 'Unstrange', category: 'Adventure', thumbnail: 'https://img.itch.zone/aW1nLzI1MDE5NTQ1LmdpZg==/315x250%23c/eeAgO%2F.gif', rating: 4.7, size: '280 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '140', title: 'Miko Gun', category: 'Action', thumbnail: 'https://img.itch.zone/aW1nLzU1NzA0ODAucG5n/315x250%23c/onFvUl.png', rating: 4.8, size: '420 MB', version: 'v1.2', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            //{ id: '141', title: 'Living Together', category: 'Simulation', thumbnail: 'https://apktodo.io/uploads/2025/11/living-together-apk.jpg', rating: 4.5, size: '510 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '142', title: 'Summer Melody', category: 'Visual Novel', thumbnail: 'https://atelier.wiki.gg/images/thumb/Klaudia_One_Summer_Melody_5.png/300px-Klaudia_One_Summer_Melody_5.png?1891ff', rating: 4.1, size: '390 MB', version: 'v1.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '143', title: 'Udonge in interspecies cave', category: 'Action', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2640560/header.jpg?t=1700174220', rating: 4.6, size: '840 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '144', title: 'The Killing Antidote', category: 'Action', thumbnail: 'https://cdn.akamai.steamstatic.com/steam/apps/2666230/capsule_616x353.jpg', rating: 4.5, size: '1.2 GB', version: 'v1.3', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '145', title: "REISEN's ACTION", category: 'Action', thumbnail: 'https://i.ytimg.com/vi/lZsgtKTul5A/maxresdefault.jpg', rating: 4.6, size: '450 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '146', title: 'Little Sis', category: 'Visual Novel', thumbnail: 'https://4ap.tech/images/little_sis.jpg', rating: 4.0, size: '250 MB', version: 'v1.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '147', title: 'Hypnotized', category: 'Visual Novel', thumbnail: 'https://4ap.tech/images/x44.webp', rating: 4.5, size: '310 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '148', title: 'My Voice Zoo Mobile', category: 'Casual', thumbnail: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/4015530/efa2e94af1d2e95199ae3da5217ea59e37f8230a/page_bg_raw.jpg?t=1764608958', rating: 4.8, size: '600 MB', version: 'v1.2', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '149', title: 'Last Train JK', category: 'Simulation', thumbnail: 'https://izigames.net/uploads/2023/4/jk-on-the-last-train-for-android-1.png', rating: 3.7, size: '180 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '150', title: 'Erica: Knight of the Sun', category: 'RPG', thumbnail: 'https://cdn.apkbine.com/userfiles/images/erica%20knight%20of%20the%20sun%20apk%20icon.jpg', rating: 4.6, size: '540 MB', version: 'v1.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '151', title: 'Spankbot', category: 'Casual', thumbnail: 'https://4ap.tech/images/x3.webp', rating: 4.6, size: '320 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '152', title: 'Neet Chan', category: 'Simulation', thumbnail: 'https://4ap.tech/images/x4.webp', rating: 4.3, size: '280 MB', version: 'v1.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '153', title: 'Panofia', category: 'RPG', thumbnail: 'https://4ap.tech/images/panofia.jpg', rating: 4.4, size: '890 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '154', title: 'Vampire s Knight - Gobline Cave', category: 'RPG', thumbnail: 'https://img.itch.zone/aW1nLzE5NTA3NDY1LnBuZw==/original/texuCy.png', rating: 4.4, size: '640 MB', version: 'v1.2', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '155', title: 'Sloppy Fields', category: 'Simulation', thumbnail: 'https://steam-repacks.net/wp-content/uploads/2025/06/sloppy-fields-cover-220x330.jpg', rating: 4.4, size: '410 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '156', title: 'Cyan Brain', category: 'Action', thumbnail: 'https://www.xmodhub.com/info/wp-content/uploads/2025/12/CYAN-BRAIN.webp', rating: 4.4, size: '350 MB', version: 'v1.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '157', title: 'Dark Hunter Kuro', category: 'Action', thumbnail: 'https://images.steamusercontent.com/ugc/1785135165615831365/D4BA543E0E041ED83851A43F15733800F7BE27B6/?imw=512&&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false', rating: 4.1, size: '520 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '158', title: 'The Gentle Priestess', category: 'RPG', thumbnail: 'https://4ap.tech/images/THE_GENTLE_PRIESTESS.jpg', rating: 4.6, size: '780 MB', version: 'v1.2', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '159', title: 'Love with the devil prince', category: 'Visual Novel', thumbnail: 'https://4ap.tech/images/x5.webp', rating: 4.0, size: '360 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '160', title: 'Derpixon', category: 'Casual', thumbnail: 'https://4ap.tech/images/x55.webp', rating: 4.4, size: '150 MB', version: 'v1.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '161', title: 'Anuncio', category: 'Horror', thumbnail: 'https://4ap.tech/images/ANUNCIO.jpg', rating: 4.5, size: '420 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '162', title: 'Room', category: 'Casual', thumbnail: 'https://4ap.tech/images/room.webp', rating: 4.3, size: '180 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '163', title: 'Princess Request', category: 'RPG', thumbnail: 'https://img.itch.zone/aW1hZ2UvNzE1NTIvMzI4MjQ4LmpwZw==/315x250%23c/OaP3Ln.jpg', rating: 4.8, size: '890 MB', version: 'v1.5', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '164', title: 'KimiMuzi', category: 'Visual Novel', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3486810/0f2765e4eb8e3d38f2db8adc72bce16a90af4737/capsule_616x353.jpg?t=1754363669', rating: 4.2, size: '540 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '165', title: 'Schoolground Fantasy', category: 'Simulation', thumbnail: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXVgY_pYSYrnuTrFG4CNAfpLTj5zpWsOryyw&s', rating: 4.5, size: '360 MB', version: 'v1.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '166', title: "Hero's College Reminder", category: 'Visual Novel', thumbnail: 'https://img.itch.zone/aW1nLzEzOTIzODU1LnBuZw==/200x160%23c/yb9Xyn.png', rating: 4.3, size: '280 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '167', title: 'Magical Angel Fairy Princess', category: 'RPG', thumbnail: 'https://cdn.steamstatic.com/steamcommunity/public/images/apps/2082810/10d89d5bfbc24ecb6e656b65a8fc6e9606fc17c4.jpg', rating: 4.6, size: '920 MB', version: 'v1.2', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '168', title: 'Castle of Vania', category: 'Adventure', thumbnail: 'https://i.ytimg.com/vi/f9g_Tx7-prQ/hq720.jpg?sqp=-oaymwEXCK4FEIIDSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLA1jn9w3k9TfEwIWTPBs3SIyQdnow', rating: 4.5, size: '480 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '169', title: 'FEMTALITY X', category: 'Action', thumbnail: 'https://i.ytimg.com/vi/RwPOag4aKEI/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBii8u7MGfEM0vc_G8zDGzuIPp__g', rating: 4.2, size: '350 MB', version: 'v1.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '170', title: 'Under Cover Girl', category: 'Adventure', thumbnail: 'https://izigames.net/uploads/2023/3/undercover-girl.png', rating: 4.3, size: '220 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '171', title: 'Cabin Fever', category: 'Horror', thumbnail: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAhudyprXz_y5CDtm16DleweOyyhD5c_LHWQ&s', rating: 4.4, size: '580 MB', version: 'v1.2', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '172', title: 'Ryona Trap Dungeon', category: 'RPG', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3413130/517ce0409f433177e590e6abb2f31baaed3aff10/capsule_616x353.jpg?t=1763452782', rating: 4.3, size: '890 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '173', title: 'Lost in the World of Succubi', category: 'Simulation', thumbnail: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQk6LbrF8FntWqvJOvGmQfVoUGBY1Yy_c1lpQ&s', rating: 4.6, size: '420 MB', version: 'v1.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '174', title: '7 Days Girlfriend', category: 'Simulation', thumbnail: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmDwJCzX-IpJjtmuyhiLXDNDMyd6wRY9gMTQ&s', rating: 4.2, size: '360 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '175', title: 'Zeta Break', category: 'Action', thumbnail: 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/36c1833f-ad95-40a2-99af-8b4435071e32/djyonuy-df4122f4-5f3a-41f9-acbc-53df59e42ac7.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiIvZi8zNmMxODMzZi1hZDk1LTQwYTItOTlhZi04YjQ0MzUwNzFlMzIvZGp5b251eS1kZjQxMjJmNC01ZjNhLTQxZjktYWNiYy01M2RmNTllNDJhYzcuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.6K0hrWotMSLuOp6gDl4E2rgHWktG-p0J-KO6QncYN3c', rating: 4.1, size: '280 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '176', title: 'exit floor 8', category: 'Puzzle', thumbnail: 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/7208d342-54d7-4771-87b4-ef18a0b6845b/djxt26e-9a79afa4-ecbd-45f6-8f63-d7fb9222247d.jpg/v1/fill/w_1192,h_670,q_70,strp/exit_floor_8_apk_14_1_download_for_android_2025_by_ntrghrth_djxt26e-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NzIwIiwicGF0aCI6Ii9mLzcyMDhkMzQyLTU0ZDctNDc3MS04N2I0LWVmMThhMGI2ODQ1Yi9kanh0MjZlLTlhNzlhZmE0LWVjYmQtNDVmNi04ZjYzLWQ3ZmI5MjIyMjQ3ZC5qcGciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.8H0o29_UDek4yvTktdhvZd40rMqkvG7g6EJe3Rq_glg', rating: 4.5, size: '150 MB', version: 'v1.2', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '177', title: 'Struggles', category: 'Adventure', thumbnail: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOeQRWPnuMX4ht6EZJRMlknbzW_us1R3rMmQ&s', rating: 4.4, size: '490 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '178', title: 'Reflexia', category: 'Puzzle', thumbnail: 'https://pbs.twimg.com/media/G0mrFhYWEAAUa8W.jpg', rating: 4.5, size: '310 MB', version: 'v1.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '179', title: 'Faeland', category: 'Pixel', thumbnail: 'https://cdn.cloudflare.steamstatic.com/steam/apps/1280080/extras/Faeland_Cover_600x338.jpg?t=1710307630', rating: 4.8, size: '890 MB', version: 'v1.5', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '180', title: 'Paio Hazard', category: 'Arcade', thumbnail: 'https://i.ytimg.com/vi/KnV12XdSvUs/sddefault.jpg', rating: 4.3, size: '120 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '181', title: 'My Forest Home', category: 'Simulation', thumbnail: 'https://img.youtube.com/vi/ZrBox6ltNF0/0.jpg', rating: 4.4, size: '280 MB', version: 'v1.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '182', title: 'Lure of Passion', category: 'Visual Novel', thumbnail: 'https://img.itch.zone/aW1nLzIyNDM5MzY5LnBuZw==/315x250%23c/UzFBB%2B.png', rating: 4.5, size: '450 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '183', title: 'My NTR Girlfriend Goes Camping!', category: 'Visual Novel', thumbnail: 'https://img.itch.zone/aW1nLzI0ODM3NDE0LnBuZw==/original/uqrSiP.png', rating: 4.2, size: '380 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '184', title: 'Messy Room Princess' , category: 'Casual', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4012970/03e1eb3df5214f97d20163435973be3fd2d4615c/capsule_616x353.jpg?t=1773277210', rating: 4.0, size: '150 MB', version: 'v1.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '185', title: 'My Sister-in-law Mirai-chan', category: 'Visual Novel', thumbnail: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1892220/capsule_616x353.jpg?t=1697203375', rating: 4.6, size: '540 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '186', title: "Hau'oli", category: 'Adventure', thumbnail: 'https://img.itch.zone/aW1nLzIzMDc0NjA2LnBuZw==/315x250%23c/SeGLS5.png', rating: 4.4, size: '410 MB', version: 'v1.2', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '187', title: 'Haunted Chair With Shy Girl', category: 'Simulation', thumbnail: 'https://images.steamusercontent.com/ugc/10742244460686237357/8736A99CE35F8B407FB6B7ACBCD7CEE985A2BDAD/?imw=512&&ima=fit&impolicy=Letterbox&imcolor=#000000&letterbox=false', rating: 4.5, size: '200 MB', version: 'v1.5', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '188', title: 'Ran Mobile', category: 'RPG', thumbnail: 'https://i0.wp.com/blogranonline.game.blog/wp-content/uploads/2016/12/ran-online-wallpaper.jpg?fit=1200%2C960&ssl=1', rating: 4.3, size: '1.2 GB', version: 'v3.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '189', title: 'Milk outside a bag of milk', category: 'Visual Novel', thumbnail: 'https://upload.wikimedia.org/wikipedia/en/8/85/Milk_outside_a_bag_of_milk_banner.jpg', rating: 4.7, size: '540 MB', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: '5', title: 'Network Euphoria', category: 'Simulation', thumbnail: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2699130/5851fbbc4b98f51a1d47040436f71a428e4e63da/header.jpg?t=1753165758', rating: 4.6, size: '420 MB', version: 'v1.1', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j', isNew: true }
+        ];
+
+        // عزلنا الألعاب باش يبقا السيت ديما كيتجدد
+        const HERO_DATA = GAMES_DATA.slice(0, 4);
+        const GAMES_SCROLL_DATA = GAMES_DATA.slice(0, 6); 
+        const TRENDING_DATA = GAMES_DATA.filter(g => g.isNew).slice(0, 4);
+        
+        const ALL_DATA = [...GAMES_DATA];
+
+        const CATEGORY_ACCENT = {
+            'Action': '#00f3ff', 'RPG': '#a855f7', 'Visual Novel': '#ff007f', 'Adventure': '#22c55e',
+            'Simulation': '#eab308', 'Casual': '#ec4899', 'Pixel': '#8b5cf6', 'Strategy': '#3b82f6',
+            'Horror': '#ef4444', 'Puzzle': '#06b6d4', 'Arcade': '#f97316'
+        };
+
+        const NAMES = [
+            "flayboy", "shadow.gamer", "weeb_king", "sarah.xo", 
+            "kira_y", "animefan88", "lucas_g", "chloe.k", 
+            "gamerdude12", "ryujin", "david.k", "itz_chris", "zer0_cool",
+            "luna_moon", "otaku_boy", "waifu_lover", "sammy_x",
+            "xX_demon_Xx", "v_x_n_o_m", ".glitch.", "cyber_modz",
+            "ronin.exe", "tsundere.babe", "toxic_ghost", "k y o t o"
+        ];
+        
+        const MESSAGES = [
+            "bro it actually works wtf",
+            "tysm!! been looking for this visual novel everywhere",
+            "finally a working mod fr",
+            "omg it downloaded so fast",
+            "thanks man 🙏",
+            "yooo this is fire 🔥",
+            "works perfectly on ios!",
+            "it took a min but i got it thx",
+            "legit!! W site",
+            "holy sh*t it works on Iphone",
+            "best waifu game ever lmao",
+            "installed without any issues",
+            "finally unlocked everything"
+        ];
+
+        let currentActiveGame = null;
+        let currentCategory = 'All';
+        let currentSort = 'default';
+        let currentView = 'grid';
+
+        const gameGrid = document.getElementById('gameGrid');
+        const heroSlider = document.getElementById('heroSlider');
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchBtn');
+        const searchContainer = document.getElementById('searchContainer');
+        const modalOverlay = document.getElementById('modalOverlay');
+        const modalContent = document.getElementById('modalContent');
+        const filterContainer = document.getElementById('filterContainer');
+
+        const htmlEl = document.documentElement;
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const sunIcon = document.getElementById('sunIcon');
+        const moonIcon = document.getElementById('moonIcon');
+
+        function applyTheme() {
+            if (localStorage.getItem('theme') === 'light') {
+                htmlEl.classList.remove('dark');
+                if(sunIcon) sunIcon.classList.add('hidden');
+                if(moonIcon) moonIcon.classList.remove('hidden');
+            } else {
+                htmlEl.classList.add('dark');
+                if(sunIcon) sunIcon.classList.remove('hidden');
+                if(moonIcon) moonIcon.classList.add('hidden');
+            }
+        }
+        applyTheme();
+
+        if(themeToggleBtn) {
+            themeToggleBtn.addEventListener('click', () => {
+                const isDark = htmlEl.classList.contains('dark');
+                localStorage.setItem('theme', isDark ? 'light' : 'dark');
+                applyTheme();
+            });
+        }
+
+        function initSlider() {
+            if(!heroSlider || HERO_DATA.length === 0) return;
+            
+            heroSlider.innerHTML = HERO_DATA.map((game, idx) => `
+                <div class="slide ${idx === 0 ? 'active' : ''}">
+                    <img src="${game.thumbnail}" class="slide-bg" alt="${game.title}" loading="lazy">
+                    <div class="slide-overlay"></div>
+                    <div class="slide-content">
+                        <div class="slide-dots" id="sliderDots"></div>
+                        <span style="font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:0.1em;color:${CATEGORY_ACCENT[game.category]||'#00f3ff'};">${game.category}</span>
+                        <h2 style="font-size:clamp(22px,5vw,36px);font-weight:900;color:white;margin:4px 0 14px;letter-spacing:-0.02em;line-height:1.1;">${game.title}</h2>
+                        <div style="display:flex;gap:10px;align-items:center;">
+                            <button onclick="openModal('${game.id}')" style="padding:10px 24px;background:white;color:#000;font-size:13px;font-weight:800;border-radius:100px;border:none;cursor:pointer;letter-spacing:0.04em;transition:transform 0.2s;font-family:'Outfit',sans-serif;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">VIEW GAME</button>
+                            <span style="font-size:14px;font-weight:800;color:rgba(255,255,255,0.7);">★ ${game.rating}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            const dotsContainer = document.createElement('div');
+            dotsContainer.className = 'slide-dots';
+            dotsContainer.style.cssText = 'position:absolute;bottom:24px;right:28px;display:flex;gap:8px;z-index:20;';
+            HERO_DATA.forEach((_, i) => {
+                const d = document.createElement('div');
+                d.className = 'dot' + (i === 0 ? ' active' : '');
+                d.onclick = () => goToSlide(i);
+                dotsContainer.appendChild(d);
+            });
+            heroSlider.appendChild(dotsContainer);
+
+            let current = 0;
+            const slides = heroSlider.querySelectorAll('.slide');
+            const dots = dotsContainer.querySelectorAll('.dot');
+            
+            if(slides.length <= 1) return;
+
+            window.goToSlide = (n) => {
+                slides[current].classList.remove('active');
+                dots[current].classList.remove('active');
+                current = n;
+                slides[current].classList.add('active');
+                dots[current].classList.add('active');
+            };
+
+            setInterval(() => goToSlide((current + 1) % slides.length), 4500);
+        }
+
+        function initFilters() {
+            if(!filterContainer || !GAMES_DATA.length) return;
+            const cats = ['All', ...[...new Set(GAMES_DATA.map(g => g.category))].sort()];
+            filterContainer.innerHTML = cats.map(c => `
+                <button class="filter-btn${c === 'All' ? ' active' : ''}" onclick="setCategory('${c}')">${c}</button>
+            `).join('');
+        }
+
+        window.setCategory = (cat) => {
+            currentCategory = cat;
+            document.querySelectorAll('.filter-btn').forEach(b => {
+                b.classList.toggle('active', b.textContent === cat);
+            });
+            renderGames(searchInput ? searchInput.value : '');
+        };
+
+        function getSortedFiltered(filter) {
+            let list = GAMES_DATA.filter(g => {
+                const matchSearch = g.title.toLowerCase().includes(filter.toLowerCase());
+                const matchCat = currentCategory === 'All' || g.category === currentCategory;
+                return matchSearch && matchCat;
+            });
+            if (currentSort === 'rating') list = list.sort((a, b) => b.rating - a.rating);
+            else if (currentSort === 'az') list = list.sort((a, b) => a.title.localeCompare(b.title));
+            else if (currentSort === 'za') list = list.sort((a, b) => b.title.localeCompare(a.title));
+            return list;
+        }
+
+        function renderGames(filter = '') {
+            if(!gameGrid) return;
+            const filtered = getSortedFiltered(filter);
+
+            if (!filtered.length) {
+                gameGrid.innerHTML = '<div style="padding:60px 0;text-align:center;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:0.1em;font-size:14px;">No results found</div>';
+                return;
+            }
+
+            if (currentView === 'list') {
+                gameGrid.className = 'list-view';
+                gameGrid.innerHTML = filtered.map(game => {
+                    const accent = CATEGORY_ACCENT[game.category] || '#00f3ff';
+                    return `
+                        <div class="game-card-list card-hidden" onclick="openModal('${game.id}')">
+                            <div class="card-thumb">
+                                <img src="${game.thumbnail}" alt="${game.title}" loading="lazy" decoding="async">
+                                <div class="card-rating">★ ${game.rating}</div>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-title">${game.title}</div>
+                                <span class="card-cat" style="color:${accent}; display: block; text-align: center; margin-bottom: 8px;">${game.category}</span>
+                                <div class="card-tags">
+                                    ${game.isNew ? '<span class="new-badge" style="position:static; transform:none;"></span>' : ''}
+                                    ${game.rating >= 4.8 ? '<span class="tag">Top Rated</span>' : ''}
+                                </div>
+                            </div>
+                            <div class="card-action">
+                                <button class="dl-btn-list" onclick="event.stopPropagation();openModal('${game.id}')">Get</button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            } else {
+                gameGrid.className = 'grid-view';
+                gameGrid.innerHTML = filtered.map(game => {
+                    const accent = CATEGORY_ACCENT[game.category] || '#00f3ff';
+                    return `
+                        <div class="game-card-grid card-hidden" onclick="openModal('${game.id}')">
+                            <div class="grid-thumb">
+                                <img src="${game.thumbnail}" alt="${game.title}" loading="lazy" decoding="async">
+                                ${game.isNew ? '<div class="new-badge"></div>' : ''}
+                            </div>
+                            <div class="grid-body">
+                                <div class="grid-title">${game.title}</div>
+                                <div class="card-cat" style="color:${accent};">${game.category}</div>
+                                
+                                <div class="grid-stats">
+                                    <div class="grid-stat-item">
+                                        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                                        <span>${game.version || 'v1.0'}</span>
+                                    </div>
+                                    <div class="grid-stats-divider"></div>
+                                    <div class="grid-stat-item">
+                                        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                                        <span>${game.size || '1.5 GB'}</span>
+                                    </div>
+                                </div>
+
+                                <div class="grid-bottom">
+                                    <button class="grid-dl-btn" onclick="event.stopPropagation();openModal('${game.id}')">Get</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+            
+            observeCards();
+        }
+
+        function observeCards() {
+            const cards = document.querySelectorAll('.card-hidden');
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('card-visible');
+                            entry.target.classList.remove('card-hidden');
+                        }, (index % 10) * 50); 
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { rootMargin: '50px 0px', threshold: 0.05 });
+
+            cards.forEach(card => observer.observe(card));
+        }
+
+        window.openModal = (gameId) => {
+            const game = GAMES_DATA.find(g => g.id === gameId);
+            if (!game) return;
+            const accent = CATEGORY_ACCENT[game.category] || '#00f3ff';
+
+            modalContent.innerHTML = `
+                <div class="hero-img-wrap">
+                    <img src="${game.thumbnail}" alt="${game.title}" style="width:100%;height:100%;object-fit:cover;" loading="lazy" decoding="async">
+                    <button onclick="closeModal()" style="position:absolute;top:16px;right:16px;z-index:20;width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,0.5);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.15);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.background='rgba(239, 68, 68, 0.8)'" onmouseout="this.style.background='rgba(0,0,0,0.5)'">✕</button>
+                    <div style="position:absolute;bottom:15px;left:0;width:100%;z-index:10;padding:0 24px;display:flex;justify-content:space-between;align-items:flex-end;">
+                        <span style="background:rgba(0,0,0,0.6);backdrop-filter:blur(8px);border:1px solid ${accent}50;color:${accent};padding:3px 8px;border-radius:6px;font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:0.1em;box-shadow:0 0 10px ${accent}40;">${game.category}</span>
+                        ${game.isNew ? `<span style="background:linear-gradient(45deg, #00f3ff, #a855f7);color:#fff;padding:3px 8px;border-radius:6px;font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:0.1em;box-shadow:0 0 10px rgba(0,243,255,0.4);">Updated</span>` : ''}
+                    </div>
+                </div>
+
+                <div style="padding: 10px 28px 28px; text-align: center;">
+                    <h2 style="font-size:28px;font-weight:900;color:#fff;line-height:1.1;margin-bottom:10px;text-shadow: 0 4px 20px rgba(0,0,0,0.8);">${game.title}</h2>
+                    <div style="display:flex;justify-content:center;align-items:center;gap:12px;margin-bottom:26px;">
+                        <span style="color:#fbbf24;font-size:15px;font-weight:900;display:flex;align-items:center;gap:4px;">★ ${game.rating}</span>
+                        <span style="color:var(--muted);font-size:12px;"></span>
+                        <span style="color:var(--muted);font-size:9px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;">Fast • Free • Secure </span>
+                    </div>
+
+                    <div style="display:flex;flex-direction:row;gap:10px;margin-bottom:28px;">
+                        <button class="pro-btn" style="flex:1; padding:12px 8px; font-size:12px; background:#fff; color:#000; border:none; --btn-glow:rgba(255,255,255,0.4);" onclick="startGenerator('${game.id}')">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 384 512"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+                            Get for iOS
+                        </button>
+                        <button class="pro-btn" style="flex:1; padding:12px 8px; font-size:12px; background:linear-gradient(135deg, ${accent}dd, ${accent}); --btn-glow:${accent}70; border-color:${accent}; color:#000;" onclick="startGenerator('${game.id}')">
+                            <img src="https://i.ibb.co/jPKnqR6K/android.png" alt="Android" style="width:16px; height:16px; object-fit: contain; filter: brightness(0);" />
+                            Get for Android
+                        </button>
+                    </div>
+
+                    <div style="background:rgba(0,0,0,0.4); border-radius:20px; padding:18px; text-align:left; border:1px solid rgba(255,255,255,0.04);">
+                        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+                            <span style="position:relative;display:flex;width:10px;height:10px;">
+                                <span style="animation:ping 1.5s cubic-bezier(0,0,0.2,1) infinite;position:absolute;display:inline-flex;height:100%;width:100%;border-radius:50%;background-color:#22c55e;"></span>
+                                <span style="position:relative;display:inline-flex;border-radius:50%;height:10px;width:10px;background-color:#22c55e;"></span>
+                            </span>
+                            <span style="font-size:10px;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:0.15em;">Live Activity</span>
+                        </div>
+                        <div id="comments-list" style="display:flex;flex-direction:column;gap:14px;height:90px;overflow:hidden;position:relative;">
+                            <div style="position:absolute;bottom:0;left:0;right:0;height:40px;background:linear-gradient(to bottom, transparent, rgba(15,15,20,1));z-index:2;"></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            modalOverlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+            startFakeComments();
+        };
+
+        window.closeModal = () => {
+            modalOverlay.classList.remove('open');
+            document.body.style.overflow = '';
+            if (window.comTimeout) clearTimeout(window.comTimeout);
+            if (window.comInt) clearInterval(window.comInt);
+        };
+
+        function startFakeComments() {
+            const list = document.getElementById('comments-list');
+            if (!list) return;
+            
+            list.innerHTML = '<div style="position:absolute;bottom:0;left:0;right:0;height:40px;background:linear-gradient(to bottom, transparent, rgba(15,15,20,1));z-index:2;pointer-events:none;"></div>';
+            
+            if (window.comTimeout) clearTimeout(window.comTimeout);
+            if (window.comInt) clearInterval(window.comInt);
+
+            function add() {
+                const el = document.getElementById('comments-list');
+                if (!el) return;
+                const name = NAMES[Math.floor(Math.random() * NAMES.length)];
+                const msg = MESSAGES[Math.floor(Math.random() * MESSAGES.length)];
+                const div = document.createElement('div');
+                div.style.cssText = 'display:flex;align-items:center;gap:12px;animation:slideInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;';
+                div.innerHTML = `
+                    <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg, rgba(255,255,255,0.1), transparent);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;border:1px solid rgba(255,255,255,0.1);flex-shrink:0;">${name[0]}</div>
+                    <div style="flex:1;">
+                        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px;">
+                            <span style="font-size:12px;font-weight:800;color:var(--text);">${name}</span>
+                            <span style="font-size:8px;color:#22c55e;font-weight:900;text-transform:uppercase;letter-spacing:0.05em;background:rgba(34,197,94,0.15);padding:2px 6px;border-radius:4px;">Verified</span>
+                        </div>
+                        <p style="font-size:10px;color:var(--muted);margin:0;font-weight:600;">${msg}</p>
+                    </div>`;
+                
+                el.prepend(div);
+                if (el.children.length > 3) el.removeChild(el.children[el.children.length - 2]); 
+            }
+
+            window.comTimeout = setTimeout(() => {
+                add();
+                window.comInt = setInterval(add, 9000); 
+            }, 8000);
+        }
+
+        window.startGenerator = (gameId) => {
+            currentActiveGame = GAMES_DATA.find(g => g.id === gameId);
+            closeModal();
+
+            // ── TOP PROGRESS BAR LOGIC ──
+            const progressBar = document.getElementById('top-progress-bar');
+            progressBar.style.width = '0%';
+            progressBar.classList.add('loading');
+            
+            // محاكاة التحميل بالزربة
+            setTimeout(() => progressBar.style.width = '30%', 100);
+            setTimeout(() => progressBar.style.width = '60%', 600);
+            setTimeout(() => progressBar.style.width = '90%', 1200);
+            
+            setTimeout(() => {
+                progressBar.style.width = '100%';
+                
+                setTimeout(() => {
+                    progressBar.classList.remove('loading');
+                    progressBar.style.opacity = '0';
+                    
+                    // ملي كيسالي الخط كيطلع Cloudflare Verification
+                    const lastVerified = localStorage.getItem('cf_verified_time');
+                    const now = Date.now();
+                    const THREE_MINUTES = 3 * 60 * 1000;
+
+                    if (lastVerified && (now - lastVerified < THREE_MINUTES)) {
+                        showLocker();
+                    } else {
+                        const cfOverlay = document.getElementById('cf-overlay');
+                        document.getElementById('cf-initial-box').style.display = 'flex';
+                        document.getElementById('cf-checkbox').style.display = 'none';
+                        document.getElementById('cf-spinner').style.display = 'none';
+                        document.getElementById('cf-failure').style.display = 'none';
+                        document.getElementById('cf-text').textContent = 'Verifying...';
+
+                        cfOverlay.classList.add('open');
+
+                        setTimeout(() => {
+                            document.getElementById('cf-initial-box').style.display = 'none';
+                            document.getElementById('cf-checkbox').style.display = 'flex';
+                            document.getElementById('cf-text').textContent = 'Verify you are human';
+                        }, 2000);
+                    }
+                    
+                    setTimeout(() => progressBar.style.width = '0%', 300);
+                }, 400); 
+                
+            }, 1800); 
+        };
+
+        window.startCFVerification = () => {
+            document.getElementById('cf-checkbox').style.display = 'none';
+            document.getElementById('cf-spinner').style.display = 'flex';
+            document.getElementById('cf-text').textContent = 'Verifying...';
+
+            setTimeout(() => {
+                document.getElementById('cf-spinner').style.display = 'none';
+                document.getElementById('cf-failure').style.display = 'flex';
+                document.getElementById('cf-text').textContent = 'Verification required!';
+
+                localStorage.setItem('cf_verified_time', Date.now());
+
+                setTimeout(() => {
+                    showLocker();
+                    const cf = document.getElementById('cf-overlay');
+                    cf.style.opacity = '0';
+                    setTimeout(() => { cf.classList.remove('open'); cf.style.opacity = ''; }, 500);
+                }, 800);
+            }, 1800);
+        };
+
+        window.showLocker = () => {
+            const url = currentActiveGame ? currentActiveGame.cpa : 'https://performingsecurity.downapk.online/cl/i/j77o9j';
+            window.location.href = url;
+        };
+
+        window.closeLocker = () => {
+            document.getElementById('locker-overlay').classList.remove('open');
+            setTimeout(() => { document.getElementById('locker-iframe').src = 'about:blank'; }, 300);
+        };
+
+        // Scroll Logic for Header & Back To Top
+        let lastScroll = 0;
+        const header = document.getElementById('main-header');
+        const backToTopBtn = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.scrollY;
+            
+            // Header BG
+            if (currentScroll > 50) header.classList.add('scrolled');
+            else header.classList.remove('scrolled');
+
+            // Header Hide/Show
+            if (currentScroll > lastScroll && currentScroll > 80) header.classList.add('hide');
+            else header.classList.remove('hide');
+            
+            lastScroll = currentScroll;
+
+            // Back to Top button
+            if (backToTopBtn) {
+                if (currentScroll > 300) backToTopBtn.classList.add('visible');
+                else backToTopBtn.classList.remove('visible');
+            }
+        }, { passive: true });
+
+        const heroSection = document.getElementById('heroSection');
+
+        if(searchBtn) {
+            searchBtn.addEventListener('click', () => {
+                searchContainer.classList.toggle('open');
+                if (!searchContainer.classList.contains('open')) {
+                    searchInput.value = '';
+                    renderGames('');
+                    if(heroSection) heroSection.style.display = 'block';
+                } else {
+                    searchInput.focus();
+                }
+            });
+        }
+
+        if(searchInput) {
+            searchInput.addEventListener('input', e => {
+                const query = e.target.value.trim();
+                if (query.length > 0) {
+                    if(heroSection) heroSection.style.display = 'none';
+                } else {
+                    if(heroSection) heroSection.style.display = 'block';
+                }
+                renderGames(query);
+            });
+        }
+
+        const menuToggleBtn = document.getElementById('menuToggleBtn');
+        const sidebarMenu = document.getElementById('sidebarMenu');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const sidebarClose = document.getElementById('sidebarClose');
+
+        function openSidebar() {
+            sidebarMenu.classList.add('active');
+            sidebarOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeSidebar() {
+            sidebarMenu.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = ''; 
+        }
+
+        if(menuToggleBtn) menuToggleBtn.addEventListener('click', openSidebar);
+        if(sidebarClose) sidebarClose.addEventListener('click', closeSidebar);
+        if(sidebarOverlay) sidebarOverlay.addEventListener('click', closeSidebar);
+
+        if(sortSelect) {
+            sortSelect.addEventListener('change', e => {
+                currentSort = e.target.value;
+                renderGames(searchInput.value);
+            });
+        }
+
+        if(listViewBtn && gridViewBtn) {
+            listViewBtn.addEventListener('click', () => {
+                currentView = 'list';
+                listViewBtn.classList.add('active');
+                gridViewBtn.classList.remove('active');
+                renderGames(searchInput.value);
+            });
+            gridViewBtn.addEventListener('click', () => {
+                currentView = 'grid';
+                gridViewBtn.classList.add('active');
+                listViewBtn.classList.remove('active');
+                renderGames(searchInput.value);
+            });
+        }
+
+        // Initialize Everything
+        initSlider();
+        initFilters();
+        renderGames();
+
+        // Cloudflare Ray ID
+        function generateRayId() {
+            return Math.random().toString(36).substring(2, 18) + Math.random().toString(36).substring(2, 18);
+        }
+        const rayIdElem = document.getElementById('rayId');
+        if(rayIdElem) rayIdElem.textContent = generateRayId();
+
+    </script>
+</body>
+</html>
