@@ -97,21 +97,30 @@
 
         /* ── Big Nav Cards ── */
         .big-nav-cards { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 10px; }
-        @media(min-width: 640px) { .big-nav-cards { grid-template-columns: 1fr 1fr; } }
+        @media(min-width: 640px) { .big-nav-cards { grid-template-columns: repeat(3, 1fr); } }
         
         .nav-card { position: relative; border-radius: 18px; padding: 16px 20px; text-decoration: none; transition: all 0.3s ease; display: flex; flex-direction: row; align-items: center; justify-content: flex-start; gap: 16px; background: var(--card); border: 1px solid var(--border); overflow: hidden; }
-        .nav-card.games { border-left: 4px solid var(--cyan); }
-        .nav-card.games:hover { box-shadow: 0 10px 25px rgba(0, 243, 255, 0.1); transform: translateY(-3px); border-color: rgba(0, 243, 255, 0.3); }
-        .nav-card.apps { border-left: 4px solid var(--pink); }
-        .nav-card.apps:hover { box-shadow: 0 10px 25px rgba(255, 0, 127, 0.1); transform: translateY(-3px); border-color: rgba(255, 0, 127, 0.3); }
+        
+        /* Games - Purple */
+        .nav-card.games { border-left: 4px solid var(--purple); }
+        .nav-card.games:hover { box-shadow: 0 10px 25px rgba(168, 85, 247, 0.1); transform: translateY(-3px); border-color: rgba(168, 85, 247, 0.3); }
+        .nav-card.games .nav-icon-box { background: rgba(168, 85, 247, 0.1); color: var(--purple); }
+
+        /* Wallpapers - Pink */
+        .nav-card.wallpapers { border-left: 4px solid var(--pink); }
+        .nav-card.wallpapers:hover { box-shadow: 0 10px 25px rgba(255, 0, 127, 0.1); transform: translateY(-3px); border-color: rgba(255, 0, 127, 0.3); }
+        .nav-card.wallpapers .nav-icon-box { background: rgba(255, 0, 127, 0.1); color: var(--pink); }
+
+        /* Emulators - Yellow */
+        .nav-card.emulators { border-left: 4px solid #eab308; }
+        .nav-card.emulators:hover { box-shadow: 0 10px 25px rgba(234, 179, 8, 0.1); transform: translateY(-3px); border-color: rgba(234, 179, 8, 0.3); }
+        .nav-card.emulators .nav-icon-box { background: rgba(234, 179, 8, 0.1); color: #eab308; }
 
         .nav-icon-box { width: 50px; height: 50px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 26px; flex-shrink: 0; }
-        .nav-card.games .nav-icon-box { background: rgba(0, 243, 255, 0.1); color: var(--cyan); }
-        .nav-card.apps .nav-icon-box { background: rgba(255, 0, 127, 0.1); color: var(--pink); }
         
         .nav-text { display: flex; flex-direction: column; }
-        .nav-text h3 { font-size: 17px; font-weight: 900; color: var(--text); margin-bottom: 2px; letter-spacing: 0.02em; }
-        .nav-text p { font-size: 12px; color: var(--muted); font-weight: 600; margin: 0; }
+        .nav-text h3 { font-size: 16px; font-weight: 900; color: var(--text); margin-bottom: 2px; letter-spacing: 0.02em; }
+        .nav-text p { font-size: 11px; color: var(--muted); font-weight: 600; margin: 0; }
         
         .nav-arrow { margin-left: auto; color: var(--muted); font-size: 20px; transition: transform 0.3s; }
         .nav-card:hover .nav-arrow { transform: translateX(4px); color: var(--text); }
@@ -119,7 +128,7 @@
         .section-title { display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 900; color: var(--text); margin: 30px 0 16px; }
         .section-title i { font-size: 22px; }
 
-        /* ── Grid Styles ── */
+        /* ── Grid Styles (Games) ── */
         .game-card-grid { border-radius: 20px; background: var(--card); border: 1px solid var(--border); overflow: hidden; transition: transform 0.2s; cursor: pointer; padding: 14px 10px; display: flex; flex-direction: column; align-items: center; height: 100%; }
         .game-card-grid:hover { transform: translateY(-4px); border-color: var(--cyan); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
         
@@ -142,6 +151,13 @@
 
         .new-badge { position: absolute; top: 0px; left: 50%; transform: translateX(-50%); font-size: 9px; font-weight: 900; text-transform: uppercase; padding: 3px 8px; border-radius: 6px; background: rgba(0,243,255,0.9); color: #000; z-index: 10; box-shadow: 0 4px 10px rgba(0,243,255,0.3); }
 
+        /* ── Wallpapers Grid (iPhone Shape) ── */
+        .wp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+        .wp-card { border-radius: 28px; aspect-ratio: 9/19.5; border: 4px solid var(--card2); overflow: hidden; position: relative; cursor: pointer; background: #000; box-shadow: 0 10px 20px rgba(0,0,0,0.4); transition: transform 0.2s; }
+        .wp-card:hover { transform: translateY(-4px); border-color: var(--pink); box-shadow: 0 12px 25px rgba(255,0,127,0.3); }
+        .wp-card::before { content: ''; position: absolute; top: 8px; left: 50%; transform: translateX(-50%); width: 35%; height: 14px; background: var(--card2); border-radius: 10px; z-index: 10; pointer-events: none;}
+        .wp-gif { width: 100%; height: 100%; object-fit: cover; }
+
         /* ── Horizontal Scroll Sections ── */
         .scroll-track { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 15px; scroll-snap-type: x mandatory; scrollbar-width: none; -ms-overflow-style: none; margin: 0 -20px; padding: 0 20px 15px; }
         .scroll-track::-webkit-scrollbar { display: none; }
@@ -159,34 +175,12 @@
         @media (max-width: 480px) { #trendingGrid { grid-template-columns: repeat(2, 1fr); gap: 10px; } }
 
         /* ── NEW VIP BANNER DESIGN 👑 ── */
-        .vip-container { 
-            margin: 50px 0 30px; 
-            padding: 2px; 
-            border-radius: 26px; 
-            background: linear-gradient(45deg, #00f3ff, #ff007f, #a855f7, #00f3ff); 
-            background-size: 300% 300%;
-            animation: borderGradient 4s ease infinite;
-            box-shadow: 0 10px 30px rgba(255, 0, 127, 0.15);
-        }
+        .vip-container { margin: 50px 0 30px; padding: 2px; border-radius: 26px; background: linear-gradient(45deg, #00f3ff, #ff007f, #a855f7, #00f3ff); background-size: 300% 300%; animation: borderGradient 4s ease infinite; box-shadow: 0 10px 30px rgba(255, 0, 127, 0.15); }
         @keyframes borderGradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         
-        .vip-card { 
-            background: rgba(15, 23, 42, 0.95); 
-            backdrop-filter: blur(20px);
-            border-radius: 24px; 
-            padding: 40px 24px; 
-            text-align: center; 
-            position: relative; 
-            overflow: hidden; 
-        }
-        .vip-card::before { 
-            content: ''; position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; 
-            background: radial-gradient(circle, rgba(0, 243, 255, 0.2) 0%, transparent 70%); pointer-events: none; 
-        }
-        .vip-card::after { 
-            content: ''; position: absolute; bottom: -50px; left: -50px; width: 150px; height: 150px; 
-            background: radial-gradient(circle, rgba(255, 0, 127, 0.2) 0%, transparent 70%); pointer-events: none; 
-        }
+        .vip-card { background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(20px); border-radius: 24px; padding: 40px 24px; text-align: center; position: relative; overflow: hidden; }
+        .vip-card::before { content: ''; position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background: radial-gradient(circle, rgba(0, 243, 255, 0.2) 0%, transparent 70%); pointer-events: none; }
+        .vip-card::after { content: ''; position: absolute; bottom: -50px; left: -50px; width: 150px; height: 150px; background: radial-gradient(circle, rgba(255, 0, 127, 0.2) 0%, transparent 70%); pointer-events: none; }
         
         .join-title { font-size: 26px; font-weight: 900; color: #fff; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; gap: 10px; letter-spacing: -0.02em; }
         .join-subtitle { font-size: 13px; color: #cbd5e1; margin-bottom: 28px; line-height: 1.6; max-width: 90%; margin-left: auto; margin-right: auto; }
@@ -338,39 +332,55 @@
                 <div class="hero-swiper" id="heroSwiper"></div>
             </div>
 
+            <!-- Big Nav Cards (Games, Wallpapers, Emulators) -->
             <div class="big-nav-cards animate-fade-up anim-delay-1">
                 <a href="https://itchplay.com/Games/" class="nav-card games">
                     <div class="nav-icon-box"><i class="ri-gamepad-fill"></i></div>
                     <div class="nav-text">
                         <h3>All Mobile Games</h3>
-                        <p>Explore Best Hidden Gems With Casual & Retro For Free & Unlocked Features</p>
+                        <p>Explore Best Hidden Gems</p>
                     </div>
                     <i class="ri-arrow-right-s-line nav-arrow"></i>
                 </a>
                 
-                <a href="https://itchplay.com/Emulators/" class="nav-card apps">
+                <a href="https://itchplay.com/Wallpapers/" class="nav-card wallpapers">
+                    <div class="nav-icon-box"><i class="ri-image-fill"></i></div>
+                    <div class="nav-text">
+                        <h3>Live Wallpapers</h3>
+                        <p>4K Anime Live Wallpapers</p>
+                    </div>
+                    <i class="ri-arrow-right-s-line nav-arrow"></i>
+                </a>
+
+                <a href="https://itchplay.com/Emulators/" class="nav-card emulators">
                     <div class="nav-icon-box"><i class="ri-switch-fill"></i></div>
                     <div class="nav-text">
                         <h3>Mobile Emulators</h3>
-                        <p>Play PC, Switch, and Console Games on your Phone</p>
+                        <p>Play Console Games</p>
                     </div>
                     <i class="ri-arrow-right-s-line nav-arrow"></i>
                 </a>
             </div>
 
             <div class="animate-fade-up anim-delay-2" style="margin-top: 30px;">
-                <h2 class="section-title"><i class="ri-gamepad-fill" style="color:var(--cyan);"></i> Popular Games</h2>
+                <h2 class="section-title"><i class="ri-gamepad-fill" style="color:var(--purple);"></i> Popular Games</h2>
                 <div class="scroll-track" id="gamesScrollTrack"></div>
             </div>
 
             <div class="animate-fade-up anim-delay-3" style="margin-top: 20px;">
-                <h2 class="section-title"><i class="ri-switch-fill" style="color:var(--pink);"></i> Popular Emulators</h2>
+                <h2 class="section-title"><i class="ri-switch-fill" style="color:#eab308;"></i> Popular Emulators</h2>
                 <div class="scroll-track" id="emulatorsScrollTrack"></div>
             </div>
 
             <div class="animate-fade-up anim-delay-3" style="margin-top: 20px;">
                 <h2 class="section-title"><i class="ri-fire-fill" style="color:#ef4444;"></i> Trending Now</h2>
                 <div id="trendingGrid"></div>
+            </div>
+
+            <!-- NEW Wallpapers Section Under Trending -->
+            <div class="animate-fade-up anim-delay-3" style="margin-top: 30px;">
+                <h2 class="section-title"><i class="ri-image-fill" style="color:var(--pink);"></i> Hot Wallpapers</h2>
+                <div class="wp-grid" id="wallpaperGrid"></div>
             </div>
 
             <div class="vip-container animate-fade-up anim-delay-3">
@@ -447,43 +457,30 @@
     </div>
 
     <div class="cf-overlay" id="cf-overlay" style="background-color: #000;">
-        <div class="cf-content-anim" style="padding-top:80px;max-width:800px;width:100%;flex:1;display:flex;flex-direction:column;margin:0 auto; font-family: 'Poppins', sans-serif;">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
+            <div style="color: white; font-size: 16px; font-weight: 500;">Making sure you're human...</div>
             
-            <div>
-                <p style="font-size:19px;font-weight:700;color:#9ca3af;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Itchplay.com</p>
-                <h1 style="font-size:32px;font-weight:800;color:white;margin-bottom:10px;letter-spacing:-0.02em;">Performing security<br>verification</h1>
-                <p style="color:#9ca3af;font-size:15px;line-height:1.6;margin-bottom:40px;max-width:480px;">This website uses a security service to protect against malicious bots. This page is displayed while we verify you are not a bot.</p>
-
-                <div style="background:#222;border:1px solid #fff;border-radius:6px;width:100%;max-width:340px;height:75px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;box-shadow:0 4px 10px rgba(0,0,0,0.5);">
-                    <div style="display:flex;align-items:center;gap:14px;" id="cf-interaction">
-                        <div id="cf-initial-box" style="width:28px;height:28px;display:flex;align-items:center;justify-content:center;"><div class="cf-loader-el"></div></div>
-                        <div id="cf-checkbox" style="display:none;width:28px;height:28px;border:2px solid #9ca3af;border-radius:4px;cursor:pointer;background:transparent;" onclick="startCFVerification()"></div>
-                        <div id="cf-spinner" style="display:none;width:28px;height:28px;position:relative;"><div class="cf-spinner-el" style="position:absolute;inset:0;"></div></div>
-                        
-                        <div id="cf-failure" style="display:none;width:28px;height:28px;border:2px solid #9ca3af;border-radius:4px;align-items:center;justify-content:center;">
-                            <svg width="22" height="22" fill="none" stroke="#f97316" stroke-width="4.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
-                        </div>
-                        
-                        <span id="cf-text" style="color:#9ca3af;font-size:15px;font-weight:600;">Verifying...</span>
+            <div style="background:#222;border:1px solid #444;border-radius:6px;width:100%;max-width:340px;min-width:310px;height:75px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;box-shadow:0 4px 10px rgba(0,0,0,0.5);">
+                <div style="display:flex;align-items:center;gap:14px;" id="cf-interaction">
+                    <div id="cf-spinner" style="width:28px;height:28px;position:relative;"><div class="cf-spinner-el" style="position:absolute;inset:0;"></div></div>
+                    <div id="cf-checkbox" style="display:none;width:28px;height:28px;border:2px solid #9ca3af;border-radius:4px;cursor:pointer;background:transparent;" onclick="startCFVerification()"></div>
+                    
+                    <div id="cf-failure" style="display:none;width:28px;height:28px;align-items:center;justify-content:center;">
+                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                     </div>
-                    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0px;">
-                        <div style="margin-bottom: -7px; display: flex; justify-content: flex-end;">
-                            <img src="https://i.ibb.co/nqV5JMM8/cloudflare-logo-black-sth-2-removebg-preview.png" alt="Cloudflare" id="cf-logo-img" style="height: 50px; width: auto; object-fit: contain;">
-                        </div>
-                        <div style="font-size:10px;color:#fff;"><a href="https://www.cloudflare.com/privacypolicy/" target="_blank" style="color:#fff;text-decoration:none;">Privacy</a> · <a href="https://www.cloudflare.com/website-terms/" target="_blank" style="color:#fff;text-decoration:none;">Help</a></div>
+                    
+                    <span id="cf-text" style="color:#9ca3af;font-size:15px;font-weight:600;">Verifying...</span>
+                </div>
+                <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0px;">
+                    <div style="margin-bottom: -7px; display: flex; justify-content: flex-end;">
+                        <img src="https://i.ibb.co/nqV5JMM8/cloudflare-logo-black-sth-2-removebg-preview.png" alt="Cloudflare" id="cf-logo-img" style="height: 50px; width: auto; object-fit: contain;">
                     </div>
+                    <div style="font-size:10px;color:#fff;"><a href="https://www.cloudflare.com/privacypolicy/" target="_blank" style="color:#fff;text-decoration:none;">Privacy</a> · <a href="https://www.cloudflare.com/website-terms/" target="_blank" style="color:#fff;text-decoration:none;">Help</a></div>
                 </div>
             </div>
-
-            <div style="margin-top:auto; padding-bottom: 20px; width:100%;">
-                <div style="border-top:1px solid #333;padding-top:20px;text-align:center;">
-                    <p style="font-size:13px;color:white;margin-bottom:4px;font-weight:600;">Ray ID: <span id="rayId" style="font-family:monospace;color:#9ca3af;font-weight:400;"></span></p>
-                    <p style="font-size:13px;color:white;font-weight:600;">Performance & Security by <a href="https://www.cloudflare.com" target="_blank" style="color:#3b82f6;text-decoration:underline;font-weight:400;">Cloudflare</a> <span style="color:#9ca3af; margin:0 4px;">|</span> <a href="https://www.cloudflare.com/website-terms/" target="_blank" style="color:#3b82f6;text-decoration:underline;font-weight:400;">Privacy</a></p>
-                </div>
-            </div>
-            
         </div>
     </div>
+
     <div class="locker-overlay" id="locker-overlay">
         <div class="locker-box">
             <button onclick="closeLocker()" style="position:absolute;top:12px;right:12px;z-index:10;width:38px;height:38px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:18px;cursor:pointer;">✕</button>
@@ -525,11 +522,16 @@
             { id: '2', title: 'Kunoichi Sekiren', category: 'Action', thumbnail: 'https://thomastaihei-hgames.net/wp-content/uploads/2020/11/HG361-01.jpg', rating: 4.7, cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' }
         ];
 
-        const ALL_DATA = [...HERO_DATA, ...TRENDING_DATA, ...GAMES_SCROLL_DATA, ...EMULATORS_SCROLL_DATA];
+        const WALLPAPERS_DATA = [
+            { id: 'w1', title: 'Rikka Takanashi', category: 'Live Wallpaper', thumbnail: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/rikka_takanashi_fan_en.gif', rating: 4.9, size: '4K', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: 'w2', title: 'Cyberpunk Neon', category: 'Live Wallpaper', thumbnail: 'https://i.gifer.com/1B2Q.gif', rating: 4.8, size: '4K', version: 'v1.0', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' }
+        ];
+
+        const ALL_DATA = [...HERO_DATA, ...TRENDING_DATA, ...GAMES_SCROLL_DATA, ...EMULATORS_SCROLL_DATA, ...WALLPAPERS_DATA];
 
         const CATEGORY_ACCENT = {
             'Action': '#00f3ff', 'RPG': '#a855f7', 'Visual Novel': '#ff007f', 'Adventure': '#22c55e', 'Simulation': '#eab308', 'Casual': '#ec4899',
-            'RenPy/RPG Maker': '#ff007f', 'PC Emulator': '#00f3ff', 'Nintendo Switch': '#ef4444', 'PS Vita': '#3b82f6'
+            'RenPy/RPG Maker': '#ff007f', 'PC Emulator': '#00f3ff', 'Nintendo Switch': '#ef4444', 'PS Vita': '#3b82f6', 'Live Wallpaper': '#ff007f'
         };
 
         let currentActiveItem = null;
@@ -607,7 +609,7 @@
         const gamesScrollTrack = document.getElementById('gamesScrollTrack');
         gamesScrollTrack.innerHTML = GAMES_SCROLL_DATA.map(item => `<div class="scroll-item">${generateCardHTML(item)}</div>`).join('') + `
             <div class="scroll-item">
-                <a href="https://itchplay.com/Games/" class="view-more-card" style="border-color: var(--cyan); color: var(--cyan);">
+                <a href="https://itchplay.com/Games/" class="view-more-card" style="border-color: var(--purple); color: var(--purple);">
                     <i class="ri-arrow-right-circle-line"></i>
                     <span>View More</span>
                 </a>
@@ -618,7 +620,7 @@
         const emulatorsScrollTrack = document.getElementById('emulatorsScrollTrack');
         emulatorsScrollTrack.innerHTML = EMULATORS_SCROLL_DATA.map(item => `<div class="scroll-item">${generateCardHTML(item)}</div>`).join('') + `
             <div class="scroll-item">
-                <a href="https://itchplay.com/Emulators/" class="view-more-card" style="border-color: var(--pink); color: var(--pink);">
+                <a href="https://itchplay.com/Emulators/" class="view-more-card" style="border-color: #eab308; color: #eab308;">
                     <i class="ri-arrow-right-circle-line"></i>
                     <span>View More</span>
                 </a>
@@ -628,6 +630,12 @@
         // Render Trending
         document.getElementById('trendingGrid').innerHTML = TRENDING_DATA.map(item => generateCardHTML(item)).join('');
 
+        // Render Wallpapers
+        document.getElementById('wallpaperGrid').innerHTML = WALLPAPERS_DATA.map(wp => `
+            <div class="wp-card" onclick="openModal('${wp.id}')">
+                <img src="${wp.thumbnail}" class="wp-gif" loading="lazy">
+            </div>
+        `).join('');
 
         // ── Auth Toggle Logic ──
         function toggleAuth() {
@@ -728,31 +736,30 @@
                 showLocker();
             } else {
                 const cfOverlay = document.getElementById('cf-overlay');
-                document.getElementById('cf-initial-box').style.display = 'flex';
+                document.getElementById('cf-spinner').style.display = 'block';
                 document.getElementById('cf-checkbox').style.display = 'none';
-                document.getElementById('cf-spinner').style.display = 'none';
                 document.getElementById('cf-failure').style.display = 'none';
-                document.getElementById('cf-text').textContent = 'Verifying...';
+                document.getElementById('cf-text').textContent = 'Making sure you\'re human...';
 
                 cfOverlay.classList.add('open');
 
                 setTimeout(() => {
-                    document.getElementById('cf-initial-box').style.display = 'none';
-                    document.getElementById('cf-checkbox').style.display = 'flex';
+                    document.getElementById('cf-spinner').style.display = 'none';
+                    document.getElementById('cf-checkbox').style.display = 'block';
                     document.getElementById('cf-text').textContent = 'Verify you are human';
-                }, 2000);
+                }, 1500);
             }
         };
 
         window.startCFVerification = () => {
             document.getElementById('cf-checkbox').style.display = 'none';
-            document.getElementById('cf-spinner').style.display = 'flex';
+            document.getElementById('cf-spinner').style.display = 'block';
             document.getElementById('cf-text').textContent = 'Verifying...';
 
             setTimeout(() => {
                 document.getElementById('cf-spinner').style.display = 'none';
                 document.getElementById('cf-failure').style.display = 'flex';
-                document.getElementById('cf-text').textContent = 'Verification required!';
+                document.getElementById('cf-text').textContent = 'Success!';
 
                 localStorage.setItem('cf_verified_time', Date.now());
 
@@ -762,7 +769,7 @@
                     cf.style.opacity = '0';
                     setTimeout(() => { cf.classList.remove('open'); cf.style.opacity = ''; }, 500);
                 }, 800);
-            }, 1800);
+            }, 1500);
         };
 
         window.showLocker = () => {
@@ -801,12 +808,6 @@
         }, { passive: true });
 
         if(backToTopBtn) backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-        function generateRayId() {
-            return Math.random().toString(36).substring(2, 18) + Math.random().toString(36).substring(2, 18);
-        }
-        const rayIdElem = document.getElementById('rayId');
-        if(rayIdElem) rayIdElem.textContent = generateRayId();
 
     </script>
      
