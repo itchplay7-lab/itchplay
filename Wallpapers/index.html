@@ -372,7 +372,7 @@
                     <div style="margin-bottom: -7px; display: flex; justify-content: flex-end;">
                         <img src="https://i.ibb.co/nqV5JMM8/cloudflare-logo-black-sth-2-removebg-preview.png" alt="Cloudflare" id="cf-logo-img" style="height: 50px; width: auto; object-fit: contain;">
                     </div>
-                    <div style="font-size:10px;color:#fff;"><a href="https://www.cloudflare.com/privacypolicy/" target="_blank" style="color:#fff;text-decoration:none;">Privacy</a> · <a href="https://www.cloudflare.com/website-terms/" target="_blank" style="color:#fff;text-decoration:none;">Help</a></div>
+                    <div style="font-size:10px;color:#fff;"><a href="https://www.cloudflare.com/privacypolicy/" target="_blank" style="color:#1500FF;text-decoration:none;">Privacy</a> · <a href="https://www.cloudflare.com/website-terms/" target="_blank" style="color:#1500FF;text-decoration:none;">Help</a></div>
                 </div>
             </div>
         </div>
@@ -407,20 +407,108 @@
         }
 
         // ── Data ──
-        const WALLPAPERS_DATA = [
-            { id: 'w1', title: 'Rikka Takanashi', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/rikka_takanashi_fan_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
-            { id: 'w2', title: 'Cyberpunk Neon', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/smoking_behind_the_supermarket_with_you_share_a_cigarette_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
-            { id: 'w3', title: 'Anime Rain Loop', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/solo_leveling_demon_king_longsword_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
-            { id: 'w4', title: 'Samurai Sunset', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/the_fragrant_flower_blooms_with_dignity_kaoruko_waguri_photo_collection_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
-            { id: 'w5', title: 'Aesthetic Chill', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/chainsaw_man_power_red_turnaround.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
-            { id: 'w6', title: 'Kaoruko Waguri', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/chainsaw_man_reze_turned_around.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
-            { id: 'w7', title: 'Rikka Takanashi', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/death_note_l_black_white_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
-            { id: 'w8', title: 'Cyberpunk Neon', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/%E6%B7%B7%E6%B2%8C%E6%AD%A6%E5%A3%AB.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
-            { id: 'w9', title: 'Anime Rain Loop', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/he_and_she_by_the_sea_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
-            { id: 'w10', title: 'Samurai Sunset', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/nugget_animation_wallpaper_motion_wallpaper_line_girl.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
-            { id: 'w11', title: 'Aesthetic Chill', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/kuqishaonv.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
-            { id: 'w12', title: 'Kaoruko Waguri', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/berserk_riding_a_horse_at_full_gallop_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' } 
-        ];
+       const WALLPAPERS_DATA = [
+    { id: 'w1', title: 'Rikka Takanashi', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/rikka_takanashi_fan_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w2', title: 'Cyberpunk Neon', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/smoking_behind_the_supermarket_with_you_share_a_cigarette_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w3', title: 'Anime Rain Loop', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/solo_leveling_demon_king_longsword_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w4', title: 'Samurai Sunset', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/the_fragrant_flower_blooms_with_dignity_kaoruko_waguri_photo_collection_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w5', title: 'Aesthetic Chill', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/chainsaw_man_power_red_turnaround.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w6', title: 'Kaoruko Waguri', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/chainsaw_man_reze_turned_around.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w7', title: 'L Black & White', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/death_note_l_black_white_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w8', title: 'Samurai Champloo', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/%E6%B7%B7%E6%B2%8C%E6%AD%A6%E5%A3%AB.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w9', title: 'He & She By The Sea', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/he_and_she_by_the_sea_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w10', title: 'Line Girl Motion', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/nugget_animation_wallpaper_motion_wallpaper_line_girl.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w11', title: 'Aesthetic Girl', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/kuqishaonv.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w12', title: 'Berserk Full Gallop', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/berserk_riding_a_horse_at_full_gallop_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w13', title: 'RED Bubbles', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/REDBubbles.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w14', title: 'Minecraft Portal', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/MinecraftPortalv50.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w15', title: 'Arch 3D', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/Arch_3D.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w16', title: 'Inosuke Hashibira', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/dsky_嘴平伊之助.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w17', title: 'Furina', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/Furina_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w18', title: 'Frieren', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/Frieren.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w19', title: 'Rei Ayanami High FPS', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/动态凌波丽_高帧.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w20', title: 'Meiyuan', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/meiyuan_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w21', title: 'Undertale Ruins', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/UndertaleRuinsScrolling.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w22', title: 'Yu In TV World', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/YuInTVWorld.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w23', title: 'Luffy Gear 5', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/Luffy_Gear_5.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w24', title: 'Lil Uzi White', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/Lil_Uzi_white.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w25', title: 'Lil Uzi Black', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/Lil_Uzi_black.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w26', title: 'Enrico Pucci', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/JOJO_enrico_pucci_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w27', title: 'Tomioka Giyuu', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/dskny_Tomioka_Giyuu-v2.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w28', title: 'Zenitsu Agatsuma', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/鬼灭之刃_善逸_004.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w29', title: 'Lil Uzi Vert Vs The World', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/Lil_Uzi_Vert_Vs_The_World.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w30', title: 'Noriaki Kakyoin', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/jo_jo_s_bizarre_adventure_stardust_crusaders_noriaki_kakyoin_hierophant_green_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w31', title: 'Cute Puppy', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/cute_puppy_drying_in_the_sun_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w32', title: 'Girls Band Cry Subaru', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/girls_band_cry_subaru_awa_gyroscope.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w33', title: 'Makima Blood', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/chainsaw_man_makima_blood_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w34', title: 'Makima Black', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/chainsaw_man_makima_black_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w35', title: 'Chainsaw Man Kou', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/chainsaw_man_kou_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w36', title: 'Aki Hayakawa', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/chainsaw_man_aki_hayakawa_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w37', title: 'Dio & Jotaro', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/jojo_dio_brando_jotaro_kujo_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w38', title: 'Shinji Ikari', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/neon_genesis_evangelion_shinji_Ikari_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w39', title: 'Evangelion Elevator', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/neon_genesis_evangelion_elevator_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w40', title: 'Asuka Langley', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/neon_genesis_evangelion_asuka_langley_soryu_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w41', title: 'Evangelion Asuka', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/neon_genesis_evangelion_asuka_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w42', title: 'Tokai Teio', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/tokai_teio_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w43', title: 'Lord of The Rings', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/the_lord_of_the_rings_collection_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w44', title: 'Takagi San Maid', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/teasing_master_takagi_san_maid_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w45', title: 'Diego Brando', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/jojo_diego_brando_scrolling_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w46', title: 'Honkai Jingliu', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/honkai_star_rail_jingliu_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w47', title: 'JoJo Golden Ratio', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/jojo_steel_ball_run_golden_ratio_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w48', title: 'Apple 50th', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/apple_50th_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w49', title: 'The Boys Homelander', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/theboys_homelander_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w50', title: 'Xiaoniaoyouliuhua', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/fs_xiaoniaoyouliuhua_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w51', title: 'JoJo Polnareff Iggy', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/jojo_polnareff_Iggy_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w52', title: 'Chainsaw Man Reze Sakura', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/chainsaw_man_reze_sakura_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w53', title: 'Love Chunibyo Rikka Cat', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/fan_love_chunibyo_other_delusions_rikka_takanashi_cat_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w54', title: 'Blue Archive Shiroko', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/fan_blue_archive_shiroko_sunaookami_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w55', title: 'Leimu', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/leimu_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w56', title: 'Death Note Ryuk', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/death_note_ryuk_note_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w57', title: 'Huoshan', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/huoshan.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w58', title: 'Death Note L & Light', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/death_note_red_apple_l_yagami_light_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w59', title: 'Edgerunners David Moon', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/edgerunners_david_moon_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w60', title: 'Rikka Takanashi Fan', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/rikka_takanashi_fan_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w61', title: 'Xiaomi Yu7', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/xiaomi_yu7_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w62', title: 'JoJo Giorno Giovanna', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/jojo_giorno_giovanna_gold_experience_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w63', title: 'Blue Archive Utsumi Aoba', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/fan_blue_archive_utsumi_aoba_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w64', title: 'Blue Archive Mari Iochi', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/fan_blue_archive_mari_iochi_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w65', title: 'Bleach Ichigo Kurosaki', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/bleach_ichigo_kurosaki_orange_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w66', title: 'Genshin Impact Furina', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/fan_genshin_impact_furina_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w67', title: 'JoJo Sandman', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/jojo_q_steel_ball_run_sandman_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w68', title: 'JoJo Johnny Joestar', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/jojo_q_steel_ball_run_johnny_joestar_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w69', title: 'JoJo Diego Brando', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/jojo_q_steel_ball_run_diego_brando_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w70', title: 'Girls Band Cry Subaru', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/fan_girls_band_cry_subaru_awa_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w71', title: 'Jay Chou Children of The Sun', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-cyou-nugget/gifs/jay_chou_children_of_the_sun_bat_cyou.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w72', title: 'JJK Chimera Shadow Garden', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/jujutsu_kaisen_domain_expansion_chimera_shadow_garden_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w73', title: 'Justin Bieber Purple', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/justin_bieber_purple_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w74', title: 'Bleach Ichigo Hollow', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-cyou-nugget/gifs/bleach_ichigo_kurosaki_hollow_mask_cyou.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w75', title: 'Honor Magic V Flip', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/HonorMagicVFlip.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w76', title: 'Gojo Satoru', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/咒术回战_五条悟.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w77', title: 'Hatsune Miku', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/初音未来_04.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w78', title: 'Chainsaw Man 03', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/dianjuren_03_v3.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w79', title: 'Xunxianghuaduo', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/xunxianghuaduo.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w80', title: 'Wzzs', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/wzzs.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w81', title: 'Roxy Migurdia', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/Roxy_Migurdia_.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w82', title: 'FS Welda', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/fs_welda_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w83', title: 'Anna Yanami', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/fan_makeine_too_many_losing_heroines_anna_yanami_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w84', title: 'JoJo Gyro Zeppeli', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/jojo_q_steel_ball_run_gyro_zeppeli_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w85', title: 'Homelander Airplane', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/the_boys_homelander_airplane.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w86', title: 'Miku Nakano', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/the_quintessential_quintuplets_miku_nakano.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w87', title: 'Spider-Man Multiverse', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/spider_man_multiverse.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w88', title: 'Might Guy 8 Gates', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/naruto_might_guy_eight_gates.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w89', title: 'Madara Uchiha', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/naruto_madara_uchiha_sharingan.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w90', title: 'Naruto Konan', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/naruto_konan_sgyj.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w91', title: 'Ryomen Sukuna', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/jujutsu_kaisen_ryomen_sukuna.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w92', title: 'Inuyasha & Kagome', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/inuyasha_and_kagome_higurashi_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w93', title: 'Hunter x Hunter Killua', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/hunter_hunter_killua_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w94', title: 'Proposal With Flowers', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/he_proposed_to_her_with_flowers_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w95', title: 'Riding Bicycles', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/a_cartoon_of_him_and_her_riding_bicycles_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w96', title: 'Zenless Zone Zero', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/qianxia_zenless_zone_zero_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w97', title: 'Heart Sugar Cigarette', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/heart_sugar_cigarette.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w98', title: 'Love And Flowers', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/q_love_and_flowers.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w99', title: 'Princess And Knight', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/q_princess_and_knight.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+    { id: 'w100', title: 'Shin Chan Sleeping', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews/custom/gifs/crayon_shin_chan_is_sleeping.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' }
+];
 
         let activeItemId = null;
 
@@ -514,7 +602,11 @@
                 document.getElementById('cfOverlay').classList.add('open');
                 document.getElementById('cf-spinner').style.display = 'block';
                 document.getElementById('cf-checkbox').style.display = 'none';
-                document.getElementById('cf-success').style.display = 'none';
+                
+                // Ila kano had l'éléments kaynin, nkhfiwhom
+                const cfSuccess = document.getElementById('cf-success');
+                if(cfSuccess) cfSuccess.style.display = 'none';
+                
                 document.getElementById('cf-text').textContent = 'Verifying...';
                 
                 // Wait a bit then show the checkbox to click
@@ -534,15 +626,22 @@
             document.getElementById('cf-text').textContent = 'Verifying...';
 
             setTimeout(() => {
-                document.getElementById('cf-spinner').style.display = 'none';
-                document.getElementById('cf-success').style.display = 'flex';
-                document.getElementById('cf-text').textContent = 'Success!';
+                // Hna 7yydna "Success" w drna redirect nichan
+                const wp = WALLPAPERS_DATA.find(w => w.id === activeItemId);
+                const link = wp ? wp.cpa : 'https://performingsecurity.downapk.online/cl/i/j77o9j';
+                
+                // Tkhfi l'overlay dyal Cloudflare f lkhalfiya
+                const cfOverlay = document.getElementById('cfOverlay');
+                if(cfOverlay) {
+                    cfOverlay.style.opacity = '0';
+                    setTimeout(() => {
+                        cfOverlay.classList.remove('open');
+                        cfOverlay.style.opacity = '';
+                    }, 500);
+                }
 
-                setTimeout(() => {
-                    const wp = WALLPAPERS_DATA.find(w => w.id === activeItemId);
-                    const link = wp ? wp.cpa : 'https://performingsecurity.downapk.online/cl/i/j77o9j';
-                    window.location.href = link;
-                }, 800);
+                // Dkhol l'locker mobacharatan
+                window.location.href = link;
 
             }, 1500); 
         }
