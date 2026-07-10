@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ItchPlay - 4K Anime Live Wallpapers</title>
+    <link rel="icon" type="image/png" href="https://i.ibb.co/gbsY945Q/Black-and-Green-Illustrative-E-Sports-Gaming-Logo-2-removebg.png">
+    <meta name="description" content="Download the best 4K Anime Live Wallpapers for Android & iOS.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+
+        :root {
+            --cyan: #0088cc;
+            --pink: #e11d48;
+            --purple: #9333ea;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --card2: #f1f5f9;
+            --border: rgba(0, 0, 0, 0.08);
+            --text: #0f172a;
+            --muted: #64748b;
+            --header-bg: rgba(255, 255, 255, 0.85);
+            --header-scrolled: rgba(255, 255, 255, 0.95);
+        }
+
+        .dark {
+            --cyan: #00f3ff;
+            --pink: #ff007f;
+            --purple: #a855f7;
+            --bg: #0d1322; 
+            --card: #141a29;
+            --card2: #1a2235;
+            --border: rgba(255, 255, 255, 0.08);
+            --text: #ffffff;
+            --muted: #9ca3af;
+            --header-bg: rgba(13, 19, 34, 0.85);
+            --header-scrolled: rgba(13, 19, 34, 0.98);
+        }
+
+        html, body { height: 100%; scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            transition: background-color 0.3s, color 0.3s;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        body::before {
+            content: '';
+            position: fixed; 
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at top, rgba(0, 243, 255, 0.12) 0%, rgba(255, 0, 127, 0.05) 40%, transparent 80%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* ── Top Progress Bar ── */
+        #top-progress-bar {
+            position: fixed; top: 0; left: 0; height: 3px; width: 0%; background-color: var(--cyan);
+            background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.25) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 75%, transparent 75%, transparent);
+            background-size: 15px 15px; z-index: 999999; opacity: 0; transition: width 0.3s ease, opacity 0.3s ease; box-shadow: 0 0 8px var(--cyan);
+        }
+        #top-progress-bar.loading { opacity: 1; animation: stripe-move 0.8s linear infinite; }
+        @keyframes stripe-move { 0% { background-position: 15px 0; } 100% { background-position: 0 0; } }
+
+        /* ── Header & Search ── */
+        #main-header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 50; transition: transform 0.3s ease, background 0.3s ease, top 0.3s ease;
+            background: var(--header-bg); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
+        }
+        #main-header.scrolled { background: var(--header-scrolled); box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+        #main-header.hide { transform: translateY(-100%); }
+
+        .logo { font-size: 22px; font-weight: 900; letter-spacing: -0.02em; color: var(--text); }
+        .logo span { color: var(--cyan); }
+        .icon-btn { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--border); background: var(--card2); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; color: var(--text); }
+        .icon-btn:hover { background: var(--border); }
+
+        #searchContainer { overflow: hidden; max-height: 0; opacity: 0; transition: max-height 0.35s ease, opacity 0.3s ease, padding 0.3s ease; }
+        #searchContainer.open { max-height: 80px; opacity: 1; padding: 10px 0; }
+        #searchInput { width: 100%; background: var(--card2); border: 1px solid var(--border); border-radius: 14px; padding: 12px 18px; font-size: 14px; color: var(--text); outline: none; font-family: 'Outfit', sans-serif; transition: border-color 0.2s; }
+        #searchInput:focus { border-color: var(--cyan); }
+
+        /* ── Wallpapers Logic ── */
+        .wp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+        .wp-card { 
+            border-radius: 28px; 
+            aspect-ratio: 9/19.5; 
+            border: 4px solid var(--card2); 
+            overflow: hidden; 
+            position: relative; 
+            cursor: pointer; 
+            background: #000; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4); 
+            transition: transform 0.2s; 
+        }
+        .wp-card:hover { transform: translateY(-4px); border-color: var(--pink); box-shadow: 0 12px 25px rgba(255,0,127,0.3); }
+        .wp-card::before { content: ''; position: absolute; top: 8px; left: 50%; transform: translateX(-50%); width: 35%; height: 14px; background: var(--card2); border-radius: 10px; z-index: 10; pointer-events: none;}
+        .wp-gif { width: 100%; height: 100%; object-fit: cover; }
+
+        /* ── Continuous Auto Scroll Slider (Infinite Marquee) ── */
+        .hero-scroll-container {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            margin: 0 -20px;
+            padding: 10px 20px 15px 20px;
+            position: relative;
+        }
+        .scroll-track {
+            display: inline-flex;
+            animation: scrollMarquee 25s linear infinite;
+        }
+        .hero-scroll-container:hover .scroll-track,
+        .hero-scroll-container:active .scroll-track {
+            animation-play-state: paused;
+        }
+        @keyframes scrollMarquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .scroll-item {
+            width: 160px;
+            flex-shrink: 0;
+            margin-right: 14px; 
+        }
+        
+        /* ── Modals & Overlays ── */
+        #modalOverlay { position: fixed; inset: 0; z-index: 10000; display: none; align-items: flex-end; justify-content: center; padding: 0; perspective: 1000px; }
+        @media (min-width: 640px) { #modalOverlay { align-items: center; padding: 16px; } }
+        #modalOverlay.open { display: flex; }
+        .modal-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); opacity: 0; transition: opacity 0.4s ease; }
+        #modalOverlay.open .modal-backdrop { opacity: 1; }
+        .modal-box { position: relative; z-index: 10; width: 100%; max-width: 450px; background: var(--card); border-top-left-radius: 24px; border-top-right-radius: 24px; border: 1px solid var(--border); overflow: hidden; opacity: 0; padding-bottom: env(safe-area-inset-bottom); }
+        @media (min-width: 640px) { .modal-box { border-radius: 24px; } }
+        #modalOverlay.open .modal-box { animation: modalSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes modalSlideUp { 0% { opacity: 0; transform: translateY(100%); } 100% { opacity: 1; transform: translateY(0); } }
+
+        .quality-btn { flex: 1; padding: 10px 0; border-radius: 12px; border: 1px solid var(--border); background: var(--card2); text-align: center; font-size: 12px; font-weight: 800; color: var(--muted); cursor: pointer; transition: all 0.2s; font-family: 'Outfit', sans-serif; }
+        .quality-btn.active { background: rgba(0, 243, 255, 0.1); border-color: var(--cyan); color: var(--cyan); }
+
+        .pro-btn { position: relative; overflow: hidden; width: 100%; padding: 14px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.08); font-weight: 800; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.3s ease; }
+        .pro-btn:active { transform: scale(0.98); }
+
+        /* ── Cloudflare Turnstile Verification (Extracted Box) ── */
+        .cf-overlay { position: fixed; inset: 0; z-index: 12000; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; font-family: 'Outfit', sans-serif; }
+        .cf-overlay.open { display: flex; }
+        .cf-spinner-el { border: 3px solid transparent; border-top-color: #22c55e; border-radius: 50%; width: 28px; height: 28px; animation: cf-spin 1s linear infinite; }
+        @keyframes cf-spin { 100% { transform: rotate(360deg); } }
+
+        /* ── Sidebar & Colored Bottom Navigation ── */
+        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(13, 19, 34, 0.85); backdrop-filter: blur(20px); border-top: 1px solid var(--border); display: flex; justify-content: space-around; align-items: center; padding: 12px 10px; padding-bottom: calc(12px + env(safe-area-inset-bottom)); z-index: 990; }
+        .bottom-nav a { display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: var(--muted); font-size: 10px; font-weight: 800; text-transform: uppercase; transition: all 0.3s ease; }
+        .bottom-nav a i { font-size: 22px; transition: transform 0.3s ease; }
+        .bottom-nav a:hover, .bottom-nav a.active { color: var(--text); }
+        .bottom-nav a:hover i, .bottom-nav a.active i { transform: translateY(-3px); filter: brightness(1.2); drop-shadow(0 0 8px currentColor); }
+
+        .sidebar-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px); z-index: 999; opacity: 0; visibility: hidden; transition: all 0.3s ease; }
+        .sidebar-overlay.active { opacity: 1; visibility: visible; }
+        .sidebar-menu { position: fixed; top: 0; right: 0; bottom: 0; width: 280px; background: #0f172a; z-index: 1000; transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; color: #f8fafc; box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5); }
+        .sidebar-menu.active { transform: translateX(0); }
+        .sidebar-header { display: flex; align-items: center; justify-content: space-between; padding: 1.5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .sidebar-logo { display: flex; align-items: center; gap: 0.5rem; font-weight: 900; font-size: 1.2rem; letter-spacing: -0.02em; color: white; }
+        .sidebar-logo span { color: var(--cyan); }
+        .sidebar-close { color: #94a3b8; background: rgba(255, 255, 255, 0.1); width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; border: none; }
+        .sidebar-content { padding: 1.5rem; overflow-y: auto; flex: 1; }
+        .sidebar-section { margin-bottom: 2rem; }
+        .sidebar-section-title { font-size: 0.75rem; font-weight: 800; color: #64748b; margin-bottom: 1rem; text-transform: uppercase; }
+        .sidebar-link { display: flex; align-items: center; gap: 1rem; padding: 0.85rem 1rem; color: #cbd5e1; border-radius: 12px; transition: all 0.2s; font-weight: 500; text-decoration: none; margin-bottom: 0.5rem; }
+        .sidebar-link:hover, .sidebar-link.active { background: rgba(255, 255, 255, 0.05); color: white; }
+        .join-btn { display: flex; align-items: center; justify-content: center; width: 100%; padding: 12px; border-radius: 12px; background: var(--cyan); color: #000; font-weight: 800; text-transform: uppercase; margin-top: 1rem; }
+    </style>
+</head>
+
+<body>
+
+    <div id="top-progress-bar"></div>
+
+    <header id="main-header" class="px-5 py-4">
+        <div class="max-w-6xl mx-auto flex justify-between items-center relative">
+            <div class="flex items-center gap-2">
+                <a href="https://itchplay.com/" style="display: flex; align-items: center; text-decoration: none; gap: 8px;">
+                    <img src="https://i.ibb.co/gbsY945Q/Black-and-Green-Illustrative-E-Sports-Gaming-Logo-2-removebg.png" alt="ItchPlay Logo" style="width: 28px; height: 28px; object-fit: contain;">
+                    <div class="logo">Itch<span>Play</span></div>
+                </a>
+            </div>
+
+            <div class="flex gap-2 items-center">
+                <!-- Theme Toggle Button -->
+                <button class="icon-btn" id="themeToggle" aria-label="Toggle Theme">
+                    <svg id="sunIcon" class="w-5 h-5 hidden text-yellow-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    <svg id="moonIcon" class="w-5 h-5" fill="none" stroke="#000000" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                </button>
+                <!-- Search Button -->
+                <button class="icon-btn" id="searchBtn" aria-label="Search">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                </button>
+                <!-- Menu Button -->
+                <button class="icon-btn" id="menuToggleBtn" aria-label="Menu">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+                </button>
+            </div>
+        </div>
+        <div id="searchContainer" class="max-w-6xl mx-auto">
+            <input type="text" id="searchInput" placeholder="Search wallpapers..."/>
+        </div>
+    </header>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <nav class="sidebar-menu" id="sidebarMenu">
+        <div class="sidebar-header">
+            <div class="flex items-center gap-2">
+                <img src="https://i.ibb.co/gbsY945Q/Black-and-Green-Illustrative-E-Sports-Gaming-Logo-2-removebg.png" alt="ItchPlay Logo" style="width: 24px; height: 24px;">
+                <div class="sidebar-logo">Itch<span>Play</span></div>
+            </div>
+            <button class="sidebar-close" id="sidebarClose">✕</button>
+        </div>
+       <div class="sidebar-content">
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">MENUS</div>
+                <a href="https://itchplay.com/" class="sidebar-link">
+                    <i class="ri-home-fill" style="font-size: 20px;"></i> Home
+                </a>
+                <a href="https://itchplay.com/Games/" class="sidebar-link">
+                    <i class="ri-gamepad-fill" style="font-size: 20px;"></i> Games
+                </a>
+                <a href="#" class="sidebar-link active" onclick="closeSidebar(); window.scrollTo({ top: 0, behavior: 'smooth' }); return false;">
+                    <i class="ri-image-fill" style="font-size: 20px;"></i> Wallpapers
+                </a>
+                <a href="https://itchplay.com/Emulators/" class="sidebar-link">
+                    <i class="ri-switch-fill" style="font-size: 20px;"></i> Emulators
+                </a>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">SOCIALS</div>
+                <a href="#" target="_blank" class="sidebar-link"><i class="ri-discord-fill" style="font-size: 20px;"></i> Discord</a>
+                <a href="#" target="_blank" class="sidebar-link"><i class="ri-tiktok-fill" style="font-size: 20px;"></i> TikTok</a>
+                <a href="#" target="_blank" class="sidebar-link"><i class="ri-youtube-fill" style="font-size: 20px;"></i> YouTube</a>
+            </div>
+            <a href="#" target="_blank" class="join-btn">JOIN NOW</a>
+        </div>
+    </nav>
+
+    <main style="padding-top: 85px; padding-bottom: 40px;">
+        <div class="max-w-6xl mx-auto px-5">
+            
+            <div class="flex items-center justify-between mb-4 mt-4 animate__animated animate__fadeInUp">
+                <h2 class="text-lg font-black text-white flex items-center gap-2"><i class="ri-fire-fill text-pink-500"></i> Hot Wallpapers</h2>
+            </div>
+            
+            <!-- Infinite Auto Scrolling Slider -->
+            <div class="hero-scroll-container animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
+                <div class="scroll-track" id="heroScroll"></div>
+            </div>
+
+            <div class="flex items-center justify-between mb-4 mt-6 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                <h2 class="text-lg font-black text-white flex items-center gap-2"><i class="ri-gallery-fill text-cyan-400"></i> Discover 4K Live</h2>
+            </div>
+            
+            <div class="wp-grid animate__animated animate__fadeInUp" style="animation-delay: 0.3s;" id="wallpaperGrid">
+                </div>
+
+        </div>
+    </main>
+
+    <footer style="border-top:1px solid var(--border);background:var(--card);padding:48px 24px 100px;text-align:center;margin-top:20px;">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex justify-center items-center gap-2 mb-4">
+                <img src="https://i.ibb.co/gbsY945Q/Black-and-Green-Illustrative-E-Sports-Gaming-Logo-2-removebg.png" alt="ItchPlay Logo" style="width: 32px; height: 32px;">
+                <div class="logo" style="font-size:28px;">Itch<span style="color:var(--cyan);">Play</span></div>
+            </div>
+            <p style="font-size:14px;color:var(--muted);margin-bottom:24px;max-width:400px;margin-left:auto;margin-right:auto;line-height:1.6;font-weight:500;">The best place to discover and download Mobile Anime Games & Live Wallpapers.</p>
+            <div style="display:flex;justify-content:center;gap:24px;margin-bottom:24px;">
+                <span style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;color:var(--text);cursor:pointer;opacity:0.7;">Privacy Policy</span>
+                <span style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;color:var(--text);cursor:pointer;opacity:0.7;">Terms of Service</span>
+                <span style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;color:var(--text);cursor:pointer;opacity:0.7;">About Us</span>
+            </div>
+            <p style="font-size:11px;color:var(--muted);font-weight:800;letter-spacing:0.2em;text-transform:uppercase;">© 2026 ITCHPLAY · ALL RIGHTS RESERVED</p>
+        </div>
+    </footer>
+
+    <!-- Colored Bottom Navigation (Always Colored) -->
+    <nav class="bottom-nav">
+        <a href="https://itchplay.com/">
+            <i class="ri-home-fill" style="color: #00f3ff;"></i> 
+            <span>Home</span>
+        </a>
+        <a href="https://itchplay.com/Games/">
+            <i class="ri-gamepad-fill" style="color: #a855f7;"></i> 
+            <span>Games</span>
+        </a>
+        <a href="#" class="active" onclick="window.scrollTo({ top: 0, behavior: 'smooth' }); return false;">
+            <i class="ri-image-fill" style="color: #ff007f;"></i> 
+            <span>Wallpapers</span>
+        </a>
+        <a href="https://itchplay.com/Emulators/">
+            <i class="ri-switch-fill" style="color: #eab308;"></i> 
+            <span>Emulators</span>
+        </a>
+        <a href="https://www.youtube.com/watch?v=your-video-id" target="_blank">
+            <i class="ri-youtube-fill" style="color: #ef4444;"></i> 
+            <span>Verify</span>
+        </a>
+    </nav>
+
+    <div id="modalOverlay">
+        <div class="modal-backdrop" onclick="closeModal()"></div>
+        <div class="modal-box" id="modalBox">
+            
+            <div class="relative h-[240px] w-full bg-black">
+                <img id="modalImg" src="" class="w-full h-full object-cover opacity-80">
+                <button onclick="closeModal()" class="absolute top-4 right-4 w-8 h-8 bg-black/50 backdrop-blur rounded-full flex items-center justify-center text-white border border-white/20"><i class="ri-close-line text-lg"></i></button>
+                <div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-[#141a29] to-transparent">
+                    <h2 id="modalTitle" class="text-xl font-black text-white">Wallpaper Title</h2>
+                </div>
+            </div>
+
+            <div class="p-5">
+                <div class="mb-6">
+                    <label class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-2 block">1. Select Quality</label>
+                    <div class="flex gap-2" id="qualityOptions">
+                        <button class="quality-btn" onclick="selectQuality(this)">Original</button>
+                        <button class="quality-btn" onclick="selectQuality(this)">1080p</button>
+                        <button class="quality-btn active" onclick="selectQuality(this)">4K Ultra</button>
+                    </div>
+                </div>
+
+                <label class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-2 block">2. Download For</label>
+                <div class="flex gap-3">
+                    <button class="pro-btn bg-white text-black" onclick="initiateDownload()">
+                        <i class="ri-apple-fill text-lg"></i> Get for iOS
+                    </button>
+                    <button class="pro-btn" style="background:linear-gradient(135deg, var(--cyan), #005bb5); border-color:var(--cyan); color:#fff;" onclick="initiateDownload()">
+                        <img src="https://i.ibb.co/jPKnqR6K/android.png" alt="Android" style="width:16px; height:16px; object-fit: contain; filter: brightness(0) invert(1);" /> Get for Android
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cloudflare Turnstile Modal -->
+    <div class="cf-overlay" id="cfOverlay">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
+            <!-- Text above the box -->
+            <div style="color: white; font-size: 16px; font-weight: 500;">Making sure you're human...</div>
+            
+            <!-- Box structure from your snippet -->
+            <div style="background:#222;border:1px solid #444;border-radius:6px;width:100%;max-width:340px;min-width:310px;height:75px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;box-shadow:0 4px 10px rgba(0,0,0,0.5);">
+                <div style="display:flex;align-items:center;gap:14px;" id="cf-interaction">
+                    <div id="cf-spinner" style="width:28px;height:28px;position:relative;"><div class="cf-spinner-el" style="position:absolute;inset:0;"></div></div>
+                    <div id="cf-checkbox" style="display:none;width:28px;height:28px;border:2px solid #9ca3af;border-radius:4px;cursor:pointer;background:transparent;" onclick="verifyHuman()"></div>
+                    
+                    <div id="cf-success" style="display:none;width:28px;height:28px;align-items:center;justify-content:center;">
+                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </div>
+                    
+                    <span id="cf-text" style="color:#9ca3af;font-size:15px;font-weight:600;">Verifying...</span>
+                </div>
+                <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0px;">
+                    <div style="margin-bottom: -7px; display: flex; justify-content: flex-end;">
+                        <img src="https://i.ibb.co/nqV5JMM8/cloudflare-logo-black-sth-2-removebg-preview.png" alt="Cloudflare" id="cf-logo-img" style="height: 50px; width: auto; object-fit: contain;">
+                    </div>
+                    <div style="font-size:10px;color:#fff;"><a href="https://www.cloudflare.com/privacypolicy/" target="_blank" style="color:#fff;text-decoration:none;">Privacy</a> · <a href="https://www.cloudflare.com/website-terms/" target="_blank" style="color:#fff;text-decoration:none;">Help</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Dark/Light Mode Logic ---
+        const htmlEl = document.documentElement;
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const sunIcon = document.getElementById('sunIcon');
+        const moonIcon = document.getElementById('moonIcon');
+
+        function applyTheme() {
+            if (localStorage.getItem('theme') === 'light') {
+                htmlEl.classList.remove('dark');
+                if(sunIcon) sunIcon.classList.add('hidden');
+                if(moonIcon) moonIcon.classList.remove('hidden');
+            } else {
+                htmlEl.classList.add('dark');
+                if(sunIcon) sunIcon.classList.remove('hidden');
+                if(moonIcon) moonIcon.classList.add('hidden');
+            }
+        }
+        applyTheme();
+
+        if(themeToggleBtn) {
+            themeToggleBtn.addEventListener('click', () => {
+                const isDark = htmlEl.classList.contains('dark');
+                localStorage.setItem('theme', isDark ? 'light' : 'dark');
+                applyTheme();
+            });
+        }
+
+        // ── Data ──
+        const WALLPAPERS_DATA = [
+            { id: 'w1', title: 'Rikka Takanashi', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/rikka_takanashi_fan_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: 'w2', title: 'Cyberpunk Neon', gif: 'https://i.gifer.com/1B2Q.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: 'w3', title: 'Anime Rain Loop', gif: 'https://i.pinimg.com/originals/a3/9b/44/a39b44cc48fc32822a16d860eab15332.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: 'w4', title: 'Samurai Sunset', gif: 'https://media.tenor.com/P4E2nLp1hRAAAAAC/samurai-sunset.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: 'w5', title: 'Aesthetic Chill', gif: 'https://i.gifer.com/7SjL.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' },
+            { id: 'w6', title: 'Kaoruko Waguri', gif: 'https://wallpaper-oss.9527012346.xyz/nugget/previews-host/gifs/rikka_takanashi_fan_en.gif', cpa: 'https://performingsecurity.downapk.online/cl/i/j77o9j' } 
+        ];
+
+        let activeItemId = null;
+
+        // --- Search Bar Logic ---
+        const searchBtn = document.getElementById('searchBtn');
+        const searchContainer = document.getElementById('searchContainer');
+        const searchInput = document.getElementById('searchInput');
+
+        if(searchBtn) {
+            searchBtn.addEventListener('click', () => {
+                searchContainer.classList.toggle('open');
+                if (!searchContainer.classList.contains('open')) {
+                    searchInput.value = '';
+                } else {
+                    searchInput.focus();
+                }
+            });
+        }
+
+        // ── Render Bottom Grid ──
+        function renderMainGrid() {
+            const wpGrid = document.getElementById('wallpaperGrid');
+            if (!wpGrid) return;
+            wpGrid.innerHTML = WALLPAPERS_DATA.map(wp => `
+                <div class="wp-card" onclick="openModal('${wp.id}')">
+                    <img src="${wp.gif}" class="wp-gif" loading="lazy">
+                </div>
+            `).join('');
+        }
+        renderMainGrid();
+
+        // ── Render Infinite Scroll Hero ──
+        function renderRandomHero() {
+            const track = document.getElementById('heroScroll');
+            if (!track) return;
+            const randomData = [...WALLPAPERS_DATA].sort(() => 0.5 - Math.random()).slice(0, 5);
+            
+            const itemsHTML = randomData.map(wp => `
+                <div class="scroll-item">
+                    <div class="wp-card" onclick="openModal('${wp.id}')">
+                        <img src="${wp.gif}" class="wp-gif" loading="lazy">
+                    </div>
+                </div>
+            `).join('');
+
+            track.innerHTML = itemsHTML + itemsHTML;
+        }
+        renderRandomHero();
+
+        // ── Modal Logic ──
+        function openModal(id) {
+            const wp = WALLPAPERS_DATA.find(w => w.id === id);
+            if(!wp) return;
+            activeItemId = wp.id;
+            
+            document.getElementById('modalTitle').textContent = wp.title;
+            document.getElementById('modalImg').src = wp.gif; 
+            
+            document.getElementById('modalOverlay').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        function selectQuality(btn) {
+            const btns = document.getElementById('qualityOptions').children;
+            for(let i=0; i<btns.length; i++) { btns[i].classList.remove('active'); }
+            btn.classList.add('active');
+        }
+
+        // ── Download & Cloudflare Verification Logic ──
+        function initiateDownload() {
+            closeModal();
+            
+            const pb = document.getElementById('top-progress-bar');
+            pb.style.width = '0%';
+            pb.classList.add('loading');
+            
+            setTimeout(() => pb.style.width = '35%', 200);
+            setTimeout(() => pb.style.width = '75%', 800);
+            setTimeout(() => pb.style.width = '100%', 1500);
+
+            setTimeout(() => {
+                pb.classList.remove('loading');
+                pb.style.opacity = '0';
+                
+                // Show Cloudflare widget
+                document.getElementById('cfOverlay').classList.add('open');
+                document.getElementById('cf-spinner').style.display = 'block';
+                document.getElementById('cf-checkbox').style.display = 'none';
+                document.getElementById('cf-success').style.display = 'none';
+                document.getElementById('cf-text').textContent = 'Verifying...';
+                
+                // Wait a bit then show the checkbox to click
+                setTimeout(() => {
+                    document.getElementById('cf-spinner').style.display = 'none';
+                    document.getElementById('cf-checkbox').style.display = 'block';
+                    document.getElementById('cf-text').textContent = 'Verify you are human';
+                }, 1500);
+
+                setTimeout(() => { pb.style.width = '0%'; pb.style.opacity = '1'; }, 500);
+            }, 1800);
+        }
+
+        function verifyHuman() {
+            document.getElementById('cf-checkbox').style.display = 'none';
+            document.getElementById('cf-spinner').style.display = 'block';
+            document.getElementById('cf-text').textContent = 'Verifying...';
+
+            setTimeout(() => {
+                document.getElementById('cf-spinner').style.display = 'none';
+                document.getElementById('cf-success').style.display = 'flex';
+                document.getElementById('cf-text').textContent = 'Success!';
+
+                setTimeout(() => {
+                    const wp = WALLPAPERS_DATA.find(w => w.id === activeItemId);
+                    const link = wp ? wp.cpa : 'https://performingsecurity.downapk.online/cl/i/j77o9j';
+                    window.location.href = link;
+                }, 800);
+
+            }, 1500); 
+        }
+
+        // ── Sidebar Logic ──
+        const menuToggleBtn = document.getElementById('menuToggleBtn');
+        const sidebarMenu = document.getElementById('sidebarMenu');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const sidebarClose = document.getElementById('sidebarClose');
+
+        function openSidebar() {
+            sidebarMenu.classList.add('active');
+            sidebarOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeSidebar() {
+            sidebarMenu.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = ''; 
+        }
+
+        if(menuToggleBtn) menuToggleBtn.addEventListener('click', openSidebar);
+        if(sidebarClose) sidebarClose.addEventListener('click', closeSidebar);
+        if(sidebarOverlay) sidebarOverlay.addEventListener('click', closeSidebar);
+
+        // ── Scroll Logic for Header ──
+        let lastScroll = 0;
+        const header = document.getElementById('main-header');
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.scrollY;
+            
+            if (currentScroll > 50) header.classList.add('scrolled');
+            else header.classList.remove('scrolled');
+
+            if (currentScroll > lastScroll && currentScroll > 80) header.classList.add('hide');
+            else header.classList.remove('hide');
+            
+            lastScroll = currentScroll;
+        }, { passive: true });
+
+    </script>
+</body>
+</html>
